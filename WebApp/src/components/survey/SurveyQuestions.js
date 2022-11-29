@@ -1,45 +1,29 @@
 import React, {Component} from 'react';
-import * as Survey  from 'survey-react';
-import "survey-react/survey.css"
-import {questions} from './questions';
+import SurveyService from '../../services/SurveyService'
 
 class SurveyQuestions extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-    this.onCompleteComponent = this.onCompleteComponent.bind(this)
+  state = {
+    questions: [],
+}
 
-  }
-
-  onCompleteComponent = () =>
-  {
-    this.setState({
-      isCompleted: true
-    })
-  }
-  
+componentDidMount() {
+    SurveyService.getAll()
+        .then(res => {
+            this.setState({ questions: res.data.pages });
+            console.log(this.state.questions)
+        })
+}
     render() {
-
-      var surveyRender = !this.state.isCompleted ? (
-        <Survey.Survey
-          json={questions}
-          showCompletedPage={false}
-          onComplete={this.onCompleteComponent}
-        />
-      ) : null
-    
-      var onSurveyCompeltion = this.state.isCompleted ? (
-        <div>Completed</div>
-      ) : null;
-
         return (
            <div>
-              <div>
-              {surveyRender}
-              {onSurveyCompeltion}
-              </div>
+                {this.state.questions[0]?.questions[0].headings[0].heading}
+                <br></br>
+                {this.state.questions[0]?.questions[0].answers.choices.map(choice => <div className="col-md-auto text-center" key={choice.id}>
+                  {choice.text}
+                  </div>
+                  )}
+                {}
            </div>
         )
     }
