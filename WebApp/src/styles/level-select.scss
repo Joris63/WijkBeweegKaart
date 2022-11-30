@@ -1,0 +1,26 @@
+.level_button{
+    background-color: #92e9b3;
+    border: none;
+    align-items: center;
+    border-radius: 8px;
+    width: 200px;
+    height: 125px;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: 400;
+    font-size: 19px;
+    color: #000;
+}
+
+.level_status{
+    color: white;
+    font-size: 65px;
+}
+
+.level_reward_icon{
+    color: gold;
+}
+
+.element{
+    display: inline-block;
+    margin: 2px;
+}
