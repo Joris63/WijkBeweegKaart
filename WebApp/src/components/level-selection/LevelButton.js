@@ -1,6 +1,4 @@
-import React from "react";
-
-export default function LevelSelectionItem() {
+const LevelButton = () => {
   return (
     <div>
       <button className="level_button">
@@ -17,4 +15,6 @@ export default function LevelSelectionItem() {
       </button>
     </div>
   );
-}
+};
+
+export default LevelButton;
