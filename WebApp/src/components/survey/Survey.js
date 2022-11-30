@@ -1,3 +1,11 @@
+import React from "react";
+
+const Survey = () => {
+    return null;
+}
+
+export default Survey;
+
 /*
 import React, {Component} from 'react';
 import SurveyService from '../../services/SurveyService'
