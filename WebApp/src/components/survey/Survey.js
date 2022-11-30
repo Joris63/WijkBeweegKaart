@@ -1,3 +1,4 @@
+/*
 import React, {Component} from 'react';
 import SurveyService from '../../services/SurveyService'
 
@@ -80,3 +81,4 @@ handlePreviousPage = () =>
     }
 }
 export default SurveyQuestions
+*/

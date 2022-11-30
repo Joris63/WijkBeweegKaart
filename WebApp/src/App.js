@@ -1,23 +1,22 @@
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import SurveyQuestions from './components/survey/SurveyQuestions';
+import "./styles/index.scss";
 
 function App() {
   return (
-    <div >
-     <Router>   
-            <Routes>
-              <Route exact path='/' element={<SurveyQuestions/>}/>
-            </Routes>
-    </Router>
-
+    <div>
     </div>
   );
 }
 
 export default App;
+
+/*
+
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<SurveyQuestions />} />
+        </Routes>
+      </Router>
+
+      */
