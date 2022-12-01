@@ -1,11 +1,40 @@
+.center{
+    text-align: lef;
+}
+
+.top-bar{
+    background-color: #fe5c01;
+    height: 100px;
+    border-bottom-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 20px;
+    row-gap: 20px;
+    column-gap: 20px;
+}
+
+.finished{
+    background-color: gray;
+}
+
+.locked{
+    background-color: orange;
+}
+
+.unlocked{
+    background-color: green;
+}
+
 .level_button{
     background-color: #92e9b3;
     border: none;
-    align-items: center;
-    border-radius: 8px;
-    width: 200px;
-    height: 125px;
-    font-family: Arial,Helvetica,sans-serif;
+    border-radius: 10%;
+    width: 100%;
     font-weight: 400;
     font-size: 19px;
     color: #000;
@@ -14,6 +43,7 @@
 .level_status{
     color: white;
     font-size: 65px;
+    margin: 2px;
 }
 
 .level_reward_icon{

@@ -1,6 +1,18 @@
+import LevelButton from "./LevelButton";
 
 const LevelSelector = () => {
-    return null;
-}
+  return (
+    <div>
+      <div className="grid-container">
+        <LevelButton />
+        <LevelButton />
+        <LevelButton />
+        <LevelButton />
+        <LevelButton />
+        <LevelButton />
+      </div>
+    </div>
+  );
+};
 
 export default LevelSelector;

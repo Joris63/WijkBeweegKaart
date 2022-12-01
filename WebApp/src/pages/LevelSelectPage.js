@@ -1,6 +1,14 @@
+import LevelSelector from "../components/level-selection/LevelSelector";
 
 const LevelSelectPage = () => {
-    return null;
-}
+  return (
+    <div>
+      <div className="top-bar">
+        <h2 className="center">Level Selection</h2>
+      </div>
+      <LevelSelector />
+    </div>
+  );
+};
 
 export default LevelSelectPage;
