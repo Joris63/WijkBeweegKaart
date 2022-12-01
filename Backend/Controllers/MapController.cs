@@ -1,4 +1,5 @@
 ﻿using Backend.Logic;
+using Backend.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
@@ -13,9 +14,13 @@ namespace Backend.Controllers
             _logic = logic;
         }
 
-        public ActionResult Index() 
+        [HttpGet]
+        [Route("Buildings")]
+        public ActionResult GetBuildings() 
         {
-            return Ok(_logic.GetBuildings());
+            ICollection<BuildingViewModel> buildings = _logic.GetBuildings();
+
+            return Ok(buildings);
         }
     }
 }

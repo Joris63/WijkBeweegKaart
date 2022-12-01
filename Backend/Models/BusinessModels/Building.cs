@@ -2,14 +2,16 @@
 {
     public class Building
     {
-        private float rotation;
-        private int x, y, type;
+        public float rotation { get;  set; }
+        public int x { get; set; }
+        public int y { get; set; }
+        public int buildingType { get; set; }
 
-        public Building(int x, int y, int type, float rotation)
+        public Building(int x, int y, int buildingType, float rotation)
         {
             this.x = x;
             this.y = y;
-            this.type = type;
+            this.buildingType = buildingType;
             this.rotation = rotation;
         }
     }

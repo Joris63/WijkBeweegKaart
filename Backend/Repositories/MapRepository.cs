@@ -1,24 +1,20 @@
-﻿using Backend.Models.BusinessModels;
+﻿using Backend.Context;
+using Backend.Models.DTOModels;
 using Backend.Repositories.Interfaces;
 
 namespace Backend.Repositories
 {
     public class MapRepository : IMapRepository
     {
-        public List<Building> GetBuildings() 
+        private readonly MapContext _context;
+        public MapRepository(MapContext context)
         {
-            List<Building> list = new List<Building>();
+            _context = context;
+        }
 
-            for (int i = 0; i < 9; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    Building b = new Building(i, j, 2, 15.913f);
-                    list.Add(b);
-
-                }
-            }
-            return list;
+        public List<BuildingDTO> GetBuildings() 
+        {
+            return _context.Buildings.ToList();
         }
     }
 }

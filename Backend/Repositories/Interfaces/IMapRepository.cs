@@ -1,9 +1,9 @@
-﻿using Backend.Models.BusinessModels;
+﻿using Backend.Models.DTOModels;
 
 namespace Backend.Repositories.Interfaces
 {
     public interface IMapRepository
     {
-        public List<Building> GetBuildings();
+        public List<BuildingDTO> GetBuildings();
     }
 }
