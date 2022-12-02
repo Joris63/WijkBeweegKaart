@@ -5,11 +5,11 @@ using Backend.Models.DTOModels;
 
 namespace Backend.Profiles
 {
-    public class BuidlingProfile : Profile
+    public class BuildingProfile : Profile
     {
-        public BuidlingProfile()
+        public BuildingProfile()
         {
-            CreateMap<Building, BuildingViewModel>().ReverseMap();
+            CreateMap<BuildingViewModel, Building>().ReverseMap();
             CreateMap<BuildingDTO, Building>().ReverseMap();
         }
     }

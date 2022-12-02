@@ -15,12 +15,20 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("Buildings")]
-        public ActionResult GetBuildings() 
+        [Route("{Id}")]
+        public IActionResult GetMapById(int Id)
         {
-            ICollection<BuildingViewModel> buildings = _logic.GetBuildings();
+            try
+            {
+                MapViewModel map = _logic.GetMapById(Id);
 
-            return Ok(buildings);
+                return Ok(map);
+            }
+            catch
+            {
+                return NotFound();
+            }
+
         }
     }
 }

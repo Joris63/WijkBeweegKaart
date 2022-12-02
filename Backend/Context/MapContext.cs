@@ -11,5 +11,6 @@ namespace Backend.Context
         }
 
         public DbSet<BuildingDTO> Buildings { get; set; }
+        public DbSet<MapDTO> Maps { get; set; }
     }
 }

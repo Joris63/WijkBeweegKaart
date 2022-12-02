@@ -10,5 +10,8 @@ namespace Backend.Models.DTOModels
         public int x { get; set; }
         public int y { get; set; }
         public int buildingType { get; set; }
+
+        public MapDTO map { get; set; }
+
     }
 }
