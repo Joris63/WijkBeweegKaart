@@ -14,7 +14,36 @@ componentDidMount() {
     SurveyService.getAll()
         .then(res => {
             this.setState({ questions: res.data.pages });
-            console.log(this.state.questions)
+
+            for(let i=0; i < this.state.questions.length; i++)
+            {
+              let other = false;
+              let openEnded = false;
+              let inputType;
+              let inputFamily = this.state.questions[i]?.questions[0].family;           
+
+              switch(inputFamily)
+              {
+                  case"single_choice":
+                      inputType = "radio";
+                      break;
+                  case"multiple_choice":
+                      inputType = "checkbox";
+                      break;
+                  case"open_ended":
+                      openEnded = true;
+              }
+
+              if(this.state.questions[i]?.questions[0]?.answers?.other)
+              {
+                  other = true;
+              }  
+
+              this.state.selections.push({value:"", type:inputType, openEnded:openEnded, other:other,})   
+              
+            }
+            this.setState(this.state.selections)
+
         })
 }
 
@@ -29,35 +58,19 @@ handlePreviousPage = () =>
 }
 
 handleInput(value) {
-    this.setState({
-      value: value
-    });
+  this.state.selections[this.state.pageNumber].value = value;
+  this.setState(this.state.selections)
+  console.log(this.state.selections)
   }
 
+  handleTextboxInput(event) {
+    this.state.selections[this.state.pageNumber].value = event.target.value;
+    this.setState(this.state.selections)
+    }
+
     render() {
-        var inputType;
-        var other = false;
-        var openEnded = false;
-        var inputFamily = this.state.questions[this.state.pageNumber]?.questions[0].family;
 
-        var progress = 100 / this.state.questions.length * this.state.pageNumber
-
-        switch(inputFamily)
-        {
-            case"single_choice":
-                inputType = "radio";
-                break;
-            case"multiple_choice":
-                inputType = "checkbox";
-                break;
-            case"open_ended":
-                openEnded = true;
-        }
-
-        if(this.state.questions[this.state.pageNumber]?.questions[0]?.answers?.other)
-        {
-            other = true;
-        }   
+        let progress = 100 / this.state.questions.length * this.state.pageNumber
 
         return (
             <div className='container'>
@@ -71,20 +84,20 @@ handleInput(value) {
                 <label><h4>{question.headings[0].heading}</h4></label>
 
                 {question.answers?.choices.map(choice => <div className='form-group' key={choice.id}>
-                  <input checked={this.state.value === choice.id} onChange={() => this.handleInput(choice.id)} 
-                  className='m-1' type={inputType} name={question.id} value={choice.id}></input>
+                  <input checked={this.state.selections[this.state.pageNumber]?.value === choice.id} onChange={() => this.handleInput(choice.id)} 
+                  className='m-1' type={this.state.selections[this.state.pageNumber]?.type} name={question.id} value={choice.id}></input>
                   { choice.text}
                   </div>
                   )}
 
-                { openEnded === true ? 
+                { this.state.selections[this.state.pageNumber]?.openEnded === true ? 
                     <div className='form-group'>
-                    <input type='text'></input>                     
+                    <input value={this.state.selections[this.state.pageNumber]?.value} onChange={(e) => this.handleTextboxInput(e)}   type='text'></input>                     
                     </div> : null
                 }
 
                   <br></br>
-                  { other === true ? 
+                  { this.state.selections[this.state.pageNumber]?.other === true ? 
                   <div>
                   {question.answers.other.text}
                     <br></br>                  
