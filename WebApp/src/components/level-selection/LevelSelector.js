@@ -3,13 +3,15 @@ import LevelButton from "./LevelButton";
 const LevelSelector = () => {
   return (
     <div>
-      <div className="grid-container">
+      <div className="level_container">
+        <LevelButton />
+      </div>
+
+      <div className="level_container_small">
         <LevelButton />
         <LevelButton />
-        <LevelButton />
-        <LevelButton />
-        <LevelButton />
-        <LevelButton />
+        <LevelButton complete />
+        <LevelButton locked />
       </div>
     </div>
   );

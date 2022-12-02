@@ -1,13 +1,13 @@
-const LevelButton = () => {
+const LevelButton = ({ small = false, locked = false, complete = false }) => {
   return (
-    <button className="level_button">
-      <div className="level_name">Level name</div>
-      <i class="fa-regular fa-star level_status"></i>
-      <div className="level_reward_cointainer">
-        <div className="element">100</div>
-        <div className="level_reward_icon element">
-          <i class="fa-regular fa-coin"></i>
-        </div>
+    <button className={`level_button ${small ? "small" : ""}`}>
+      {(locked && <i class="fa-solid fa-lock locked_circle"></i>) ||
+        (complete && <i class="fa-solid fa-check complete_circle"></i>)}
+
+      <div>Link jouw email</div>
+      <div className="header_coins">
+        100
+        <i class="fa-duotone fa-coins"></i>
       </div>
     </button>
   );
