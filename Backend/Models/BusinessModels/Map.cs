@@ -7,6 +7,7 @@ namespace Backend.Models.BusinessModels
         public double latitude { get; set; }
         public double longitude { get; set; }
         public ICollection<Building> placedBuildings { get; set; }
+        public ICollection<Review> reviews { get; set; }
 
         public Map(double longitude, double latitude, ICollection<Building> placedBuildings)
         {
