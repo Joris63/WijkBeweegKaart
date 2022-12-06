@@ -28,10 +28,18 @@
 
 .level_container_small {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   row-gap: 20px;
   column-gap: 20px;
   padding: 15px;
+}
+
+.level_text_small{
+  margin:auto;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header_item {
@@ -66,22 +74,20 @@
   font-weight: 400;
   font-size: 16px;
   color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: relative;
   padding: 10px;
 }
 
-.level_button_small {
-  background-color: #92e9b3;
-  border: none;
-  border-radius: 10px;
-  width: 100;
-  font-weight: 400;
-  font-size: 19px;
-  color: #000;
+
+.small_complete {
+  background-color: rgba(172, 255, 47, 0.618);
 }
+
+.small_locked {
+  background-color: rgba(128, 128, 128, 0.585);
+}
+
+
 
 .locked_circle {
   background-color: gray;

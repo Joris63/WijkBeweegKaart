@@ -42,7 +42,7 @@ const LevelSelector = () => {
               key={`lvl-button-${lvl.id}/>`}
               name={lvl.name}
               locked={lvl.locked}
-              complet={lvl.complete}
+              complete={lvl.complete}
               reward={lvl.reward}
             />
           ))}
@@ -56,7 +56,7 @@ const LevelSelector = () => {
               key={`lvl-button-${lvl.id}/>`}
               name={lvl.name}
               locked={lvl.locked}
-              complet={lvl.complete}
+              complete={lvl.complete}
               reward={lvl.reward}
             />
           ))}
