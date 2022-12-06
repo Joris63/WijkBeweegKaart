@@ -2,6 +2,7 @@
 {
     public class BuildingViewModel
     {
+        public int Id { get; set; }
         public float rotation { get; set; }
         public int x { get; set; }
         public int y { get; set; }

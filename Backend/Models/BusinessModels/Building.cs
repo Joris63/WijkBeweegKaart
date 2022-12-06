@@ -2,6 +2,7 @@
 {
     public class Building
     {
+        public int Id { get; set; }
         public Map map { get; set; }
         public double rotation { get;  set; }
         public int x { get; set; }

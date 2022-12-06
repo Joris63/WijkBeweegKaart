@@ -2,6 +2,7 @@
 {
     public class UserLevel
     {
+        public int Id { get; set; }
         public User user { get; set; }
         public Level level { get; set; }
 

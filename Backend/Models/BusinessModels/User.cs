@@ -2,6 +2,7 @@
 {
     public class User
     {
+        public int Id { get; set; }
         public Map[] createdMaps { get; set; }
         public ICollection<Review> writtenReviews { get; set; }
         public string username { get; set; }

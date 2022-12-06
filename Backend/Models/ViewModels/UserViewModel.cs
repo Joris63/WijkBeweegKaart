@@ -2,6 +2,7 @@
 {
     public class UserViewModel
     {
+        public int Id { get; set; }
         public MapViewModel[] createdMaps { get; set; }
         public ICollection<ReviewViewModel> writtenReviews { get; set; }
         public string username { get; set; }

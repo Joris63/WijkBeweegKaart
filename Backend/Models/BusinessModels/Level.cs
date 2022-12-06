@@ -2,6 +2,7 @@
 {
     public class Level
     {
+        public int Id { get; set; }
         public int surveyId { get; set; }
         public string surveyName { get; set; }
         public int? previousSurveyId { get; set; }

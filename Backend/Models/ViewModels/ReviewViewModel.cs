@@ -2,6 +2,7 @@
 {
     public class ReviewViewModel
     {
+        public int Id { get; set; }
         public UserViewModel writer { get; set; }
         public MapViewModel reviewedMap { get; set; }
         public string review { get; set; }

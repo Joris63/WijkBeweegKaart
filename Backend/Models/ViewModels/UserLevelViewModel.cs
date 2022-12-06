@@ -2,6 +2,7 @@
 {
     public class UserLevelViewModel
     {
+        public int Id { get; set; }
         public UserViewModel user { get; set; }
         public LevelViewModel level { get; set; }
 
