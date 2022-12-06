@@ -7,8 +7,7 @@ namespace Backend.Repositories.Interfaces
         public UserDTO GetUserById(int id);
         public UserDTO LoginEmail(string email, string password);
         public UserDTO LoginUsername(string username, string password);
-        public UserDTO SaveUserEmail(string email, string password);
-        public UserDTO SaveUserUsername(string username, string password);
-        public UserDTO SaveFullUser(string username, string email, string password);
+        public UserDTO SaveUserEmail(int id, string email);
+        public UserDTO SaveUser(string username, string password);
     }
 }
