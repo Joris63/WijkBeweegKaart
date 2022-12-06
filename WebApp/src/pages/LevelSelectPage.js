@@ -11,7 +11,7 @@ const LevelSelectPage = () => {
         </div>
       </div>
       <div className="container">
-        <h3>Selecteer level</h3>
+        <h3 className="item">Selecteer level</h3>
       </div>
       <LevelSelector />
     </div>

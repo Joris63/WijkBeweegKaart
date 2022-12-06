@@ -1,12 +1,21 @@
-const LevelButton = ({ small = false, locked = false, complete = false }) => {
+const LevelButton = ({
+  id = 0,
+  name = "level name",
+  locked = false,
+  complete = false,
+  reward = 100,
+}) => {
   return (
-    <button className={`level_button ${small ? "small" : ""}`}>
-      {(locked && <i class="fa-solid fa-lock locked_circle"></i>) ||
-        (complete && <i class="fa-solid fa-check complete_circle"></i>)}
+    <button
+      id={id}
+      className={`level_button ${locked || complete ? "small" : ""}`}
+    >
+      {complete && <i class="fa-solid fa-check complete_circle"></i>}
+      {locked && <i class="fa-solid fa-lock locked_circle"></i>}
 
-      <div>Link jouw email</div>
+      <div>{name}</div>
       <div className="header_coins">
-        100
+        {reward}
         <i class="fa-duotone fa-coins"></i>
       </div>
     </button>

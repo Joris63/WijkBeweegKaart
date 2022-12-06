@@ -16,6 +16,10 @@
   justify-content: space-between;
 }
 
+.item{
+  align-self: flex flex-start;
+}
+
 .level_container {
   display: grid;
   grid-template-columns: auto;
@@ -72,7 +76,7 @@
 .level_button_small {
   background-color: #92e9b3;
   border: none;
-  border-radius: 10%;
+  border-radius: 10px;
   width: 100;
   font-weight: 400;
   font-size: 19px;
