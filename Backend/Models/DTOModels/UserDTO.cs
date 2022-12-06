@@ -1,5 +1,4 @@
-﻿using Backend.Models.BusinessModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Models.DTOModels
 {
@@ -10,7 +9,7 @@ namespace Backend.Models.DTOModels
         public string username { get; set; }
         public string password { get; set; }
         public string? email { get; set; }
-        public Map[] createdMaps { get; set; }
-        public ICollection<Review> writtenReviews { get; set; }
+        public MapDTO[] createdMaps { get; set; }
+        public ICollection<ReviewDTO> writtenReviews { get; set; }
     }
 }

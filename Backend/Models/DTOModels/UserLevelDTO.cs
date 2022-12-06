@@ -1,5 +1,4 @@
-﻿using Backend.Models.BusinessModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Models.DTOModels
 {

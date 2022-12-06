@@ -7,8 +7,8 @@ namespace Backend.Repositories
 {
     public class MapRepository : IMapRepository
     {
-        private readonly MapContext _context;
-        public MapRepository(MapContext context)
+        private readonly BackendContext _context;
+        public MapRepository(BackendContext context)
         {
             _context = context;
         }
@@ -20,6 +20,14 @@ namespace Backend.Repositories
         public List<BuildingDTO> GetBuildings() 
         {
             return _context.Buildings.ToList();
+        }
+
+        public MapDTO SaveMap(MapDTO map)
+        {
+            _context.Maps.Add(map);
+            _context.SaveChanges();
+
+            return map;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Backend.Logic;
 using Backend.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
@@ -28,7 +29,30 @@ namespace Backend.Controllers
             {
                 return NotFound();
             }
+        }
 
+        [HttpPost]
+        [Route("Save")]
+        public IActionResult SaveMap(MapViewModel Map)
+        {
+            try
+            {
+                _logic.SaveMap(Map);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, ex);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { Map, ex });
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(new { Map, ex });
+            }
+
+            return Ok(Map);
         }
     }
 }

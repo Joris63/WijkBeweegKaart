@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Backend.Migrations
 {
-    [DbContext(typeof(MapContext))]
+    [DbContext(typeof(BackendContext))]
     [Migration("20221202095705_MapClassAdded")]
     partial class MapClassAdded
     {
