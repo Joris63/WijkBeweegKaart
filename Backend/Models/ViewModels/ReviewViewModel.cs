@@ -1,6 +1,4 @@
-﻿using Backend.Models.ViewModels;
-
-namespace Backend.Models.BusinessModels
+﻿namespace Backend.Models.ViewModels
 {
     public class ReviewViewModel
     {

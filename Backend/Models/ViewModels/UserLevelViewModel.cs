@@ -1,4 +1,4 @@
-﻿namespace Backend.Models.BusinessModels
+﻿namespace Backend.Models.ViewModels
 {
     public class UserLevelViewModel
     {

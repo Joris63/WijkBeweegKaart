@@ -16,5 +16,10 @@ namespace Backend.Context
         public DbSet<LevelDTO> Levels { get; set; }
         public DbSet<UserLevelDTO> UserLevels { get; set; }
         public DbSet<ReviewDTO> Reviews { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserDTO>().HasMany(u => u.createdMaps).WithOne(m => m.mapCreator).OnDelete(DeleteBehavior.ClientCascade);
+        }
     }
 }
