@@ -11,5 +11,6 @@ namespace Backend.Models.DTOModels
         public string? email { get; set; }
         public MapDTO[] createdMaps { get; set; }
         public ICollection<ReviewDTO> writtenReviews { get; set; }
+        public int coins { get; set; }
     }
 }

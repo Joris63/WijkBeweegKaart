@@ -20,6 +20,7 @@ namespace Backend.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserDTO>().HasMany(u => u.createdMaps).WithOne(m => m.mapCreator).OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<UserDTO>().Property(u => u.coins).HasDefaultValue(0);
         }
     }
 }
