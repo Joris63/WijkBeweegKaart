@@ -35,11 +35,24 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("Overview")]
-        public IActionResult GetLevels()
+        public IActionResult GetLevels(int userId)
         {
             try
             {
                 List<LevelViewModel> levels = _logic.GetLevels();
+
+                List<UserLevelViewModel> completedlevels = _logic.GetCompletedLevels(userId);
+
+                foreach(UserLevelViewModel userLevelViewModel in completedlevels)
+                {
+                    for(int i = 0; i < levels.Count; i++)
+                    {
+                        if(userLevelViewModel.level.surveyId == levels[i].surveyId)
+                        {
+                            levels[i].completed = true;
+                        }
+                    }
+                }    
 
                 return Ok(levels);
             }

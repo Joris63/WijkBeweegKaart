@@ -31,9 +31,16 @@ namespace Backend.Logic
 
         public List<LevelViewModel> GetLevels()
         {
-            List<Building> levels = _mapper.Map<List<Building>>(_repo.GetLevels());
+            List<Level> levels = _mapper.Map<List<Level>>(_repo.GetLevels());
 
             return _mapper.Map<List<LevelViewModel>>(levels);
+        }
+
+        public List<UserLevelViewModel> GetCompletedLevels(int userId)
+        {
+            List<UserLevel> levels = _mapper.Map<List<UserLevel>>(_repo.GetCompletedLevels(userId));
+
+            return _mapper.Map<List<UserLevelViewModel>>(levels);
         }
 
         public LevelViewModel SaveLevel(LevelViewModel levelViewModel)

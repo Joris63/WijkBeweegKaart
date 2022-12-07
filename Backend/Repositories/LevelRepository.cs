@@ -19,6 +19,11 @@ namespace Backend.Repositories
             return _context.Levels.ToList();
         }
 
+        public List<UserLevelDTO> GetCompletedLevels(int userId)
+        {
+            return _context.UserLevels.Where(ul => ul.userId == userId).ToList();
+        }
+
         public LevelDTO SaveLevel(LevelDTO level)
         {
             LevelDTO newLevel = new LevelDTO()
