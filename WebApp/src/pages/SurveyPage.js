@@ -1,6 +1,7 @@
+import Survey from "../components/survey/Survey";
 
 const SurveyPage = () => {
-    return null;
-}
+  return <Survey />;
+};
 
 export default SurveyPage;

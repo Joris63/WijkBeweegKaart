@@ -1,7 +1,14 @@
+import ProgressBar from "./ProgressBar";
+import Question from "./Question";
 
 const Survey = () => {
-    return null;
-}
+  return (
+    <div className="survey_wrapper">
+      <ProgressBar progress={0.25} percentage />
+      <Question />
+    </div>
+  );
+};
 
 export default Survey;
 
