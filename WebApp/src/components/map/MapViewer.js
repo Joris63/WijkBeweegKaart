@@ -11,7 +11,9 @@ const MapViewer = () => {
   return (
     <>
       {!isLoaded && (
-        <p>Loading Application... {Math.round(loadingProgression * 100)}%</p>
+        <div className="map container">
+          <div className="bar"></div>
+        </div>
       )}
       <div className="map">
         <Unity
