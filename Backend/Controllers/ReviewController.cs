@@ -17,7 +17,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public IActionResult GetMapById(int Id)
+        public IActionResult GetReviewsByMapId(int Id)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Save")]
-        public IActionResult SaveMap(ReviewViewModel review)
+        public IActionResult SaveReview(ReviewViewModel review)
         {
             try
             {
