@@ -15,6 +15,7 @@ body{
     border-radius: 45px;
     box-shadow: 0 14px 28px rgb(109, 143, 175);
     background-color: #e2f1ff;
+    transition: all .225s ease-in-out;
 
     &.flipped {
         transform: rotateZ(-90deg);

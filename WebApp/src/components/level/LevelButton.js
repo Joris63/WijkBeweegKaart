@@ -5,11 +5,13 @@ const LevelButton = ({
   locked = false,
   complete = false,
 }) => {
+
   return (
     <div
       className={`level_button${small ? " small" : ""}${
         locked ? " locked" : ""
       }${complete ? " complete" : ""}`}
+      onClick={event =>  window.location.href='/map'}
     >
       <div className="level_button_title">{title}</div>
       <div className="level_button_reward">
