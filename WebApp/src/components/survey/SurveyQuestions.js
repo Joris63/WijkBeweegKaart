@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import SurveyService from '../../services/SurveyService'
-import { ProgressBar } from 'react-bootstrap';
+import ProgressBar from "./ProgressBar";
 
 class SurveyQuestions extends Component {
 
@@ -123,14 +123,14 @@ this.setState(this.state.selections)
 
     render() {
 
-        let progress = 100 / (this.state.questions.length -1) * this.state.pageNumber
+        let progress = 1 / (this.state.questions.length -1) * this.state.pageNumber
 
         return (
-            <div className='container'>
-            <div className='w-75 justify-content-center container'>
+            <div>
+            <div>
   
                 <br></br>
-                <ProgressBar striped variant='warning' now={progress} />
+                <ProgressBar progress={progress} percentage />
                 <br></br>
                 {this.state.questions[this.state.pageNumber]?.questions.map(question => <div key={question.id}>
 
@@ -178,15 +178,15 @@ this.setState(this.state.selections)
                   </div>
                   )}
             </div>
-            <div className='fixed-bottom p-5'>
+            <div className='actions'>
             {this.state.pageNumber !== 0 ?
-                  <button className='btn btn-warning' type="button" onClick={this.handlePreviousPage}>Terug</button>
+                  <button className='action_btn' type="button" onClick={this.handlePreviousPage}>Terug</button>
                   : null
                   }   
                   {this.state.pageNumber !== this.state.selections.length - 1 ?
-                <button style={{float: "right"}} className='btn btn-warning' type="button" onClick={this.handleNextPage}>Next</button> 
+                <button className='action_btn' type="button" onClick={this.handleNextPage}>Next</button> 
                 :
-                <button style={{float: "right"}} className='btn btn-warning' type="button" onClick={this.postSurvey}>Sumbit</button> 
+                <button className='action_btn' type="button" onClick={this.postSurvey}>Sumbit</button> 
                   }
             </div>
             </div>

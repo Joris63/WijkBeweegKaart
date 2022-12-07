@@ -15,4 +15,8 @@ const getSurvey = () => {
     return surveyMonkeyAxios.get("/v3/surveys/509691265/details");
 };
 
-export { getSurvey };
+const postSurvey = (data) => {
+  return surveyMonkeyAxios.post("collectors/448832583/responses", data)
+}
+
+export { getSurvey, postSurvey };

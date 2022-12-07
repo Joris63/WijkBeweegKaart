@@ -8,10 +8,12 @@ const defaultAnswers = ["Man", "Vrouw", "Vul ik liever niet in"];
 const Question = ({
   index = 1,
   type = "multiple",
+  subType = "",
   question = "Wat is uw geslacht?",
-  answers = defaultAnswers,
+  choices = defaultAnswers,
+  answer = "",
+  setAnswer = () => {}
 }) => {
-  const [answer, setAnswer] = useState("");
 
   const renderAnswerType = (answer, i) => {
     switch (type) {
@@ -44,21 +46,16 @@ const Question = ({
         );
     }
   };
-
   return (
     <div className="question_wrapper">
       <div className="question">
         {index}. {question}
       </div>
       <div className="answers">
-        {answers.length === 0 && type === "open" && (
+        {!choices && type === "open" && (
           <Textarea answer={answer} setAnswer={setAnswer} />
         )}
-        {answers.map((answer, i) => renderAnswerType(answer, i))}
-      </div>
-      <div className="actions">
-        <button className="action_btn">Terug</button>
-        <button className="action_btn">Volgende</button>
+        {choices?.map((answer, i) => renderAnswerType(answer, i))}
       </div>
     </div>
   );
