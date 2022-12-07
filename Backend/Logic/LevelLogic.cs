@@ -32,7 +32,7 @@ namespace Backend.Logic
         public List<LevelViewModel> GetLevels()
         {
             List<Building> levels = _mapper.Map<List<Building>>(_repo.GetLevels());
-            
+
             return _mapper.Map<List<LevelViewModel>>(levels);
         }
 
@@ -40,27 +40,24 @@ namespace Backend.Logic
         {
             Level level = _mapper.Map<Level>(levelViewModel);
 
-            if (level != null)
+            if (level == null)
             {
-                if (level.surveyId != 0)
-                {
-                    LevelDTO leveldto = _repo.SaveLevel(_mapper.Map<LevelDTO>(level));
-
-                    if (leveldto.Id > 0)
-                    {
-                        return _mapper.Map<LevelViewModel>(_mapper.Map<Level>(leveldto));
-                    }
-                    else
-                    {
-                        throw new DbUpdateException();
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
+                throw new ArgumentNullException();
             }
-            throw new ArgumentNullException();
+
+            if (level.surveyId == 0)
+            {
+                throw new InvalidOperationException();
+            }
+
+            LevelDTO leveldto = _repo.SaveLevel(_mapper.Map<LevelDTO>(level));
+
+            if (leveldto.Id == 0)
+            {
+                throw new DbUpdateException();
+            }
+
+            return _mapper.Map<LevelViewModel>(_mapper.Map<Level>(leveldto));
         }
     }
 }

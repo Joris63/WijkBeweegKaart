@@ -1,4 +1,5 @@
 ﻿using Backend.Logic;
+using Backend.Models.BusinessModels;
 using Backend.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("User")]
+    [Route("Users")]
     public class UserController : Controller
     {
         private readonly UserLogic _logic;
@@ -37,7 +38,9 @@ namespace Backend.Controllers
         {
             try
             {
-                _logic.SaveUser(user);
+                user = _logic.SaveUser(user);
+
+                return Ok(user);
             }
             catch (DbUpdateException ex)
             {
@@ -51,8 +54,6 @@ namespace Backend.Controllers
             {
                 return BadRequest(new { user, ex });
             }
-
-            return Ok(User);
         }
     }
 }

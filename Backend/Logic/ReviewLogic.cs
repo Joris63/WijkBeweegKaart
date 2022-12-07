@@ -33,27 +33,25 @@ namespace Backend.Logic
         {
             Review review = _mapper.Map<Review>(reviewViewModel);
 
-            if (review != null)
+            if (review == null)
             {
-                if (review.review != null)
-                {
-                    ReviewDTO reviewdto = _repo.SaveReview(_mapper.Map<ReviewDTO>(review));
-
-                    if (reviewdto.Id > 0)
-                    {
-                        return _mapper.Map<ReviewViewModel>(_mapper.Map<Review>(reviewdto));
-                    }
-                    else
-                    {
-                        throw new DbUpdateException();
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
+                throw new ArgumentNullException();
             }
-            throw new ArgumentNullException();
+
+            if (string.IsNullOrEmpty(review.review) || review.reviewedMap.Id == 0 || review.writer.Id == 0)
+            {
+                throw new InvalidOperationException();
+
+            }
+
+            ReviewDTO reviewdto = _repo.SaveReview(_mapper.Map<ReviewDTO>(review));
+
+            if (reviewdto.Id == 0)
+            {
+                throw new DbUpdateException();
+            }
+
+            return _mapper.Map<ReviewViewModel>(_mapper.Map<Review>(reviewdto));
         }
     }
 }

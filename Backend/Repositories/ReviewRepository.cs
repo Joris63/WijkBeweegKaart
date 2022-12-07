@@ -10,6 +10,11 @@ namespace Backend.Repositories
     {
         private readonly BackendContext _context;
 
+        public ReviewRepository(BackendContext context)
+        {
+            _context = context;
+        }
+
         public List<ReviewDTO> GetReviewsByMapId(int id)
         {
             return _context.Reviews.Where(r => r.reviewedMap.Id == id).ToList();

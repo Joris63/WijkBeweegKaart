@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("Level")]
+    [Route("Levels")]
     public class LevelController : Controller
     {
         private readonly LevelLogic _logic;

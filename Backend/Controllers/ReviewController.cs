@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("Review")]
+    [Route("Reviews")]
     public class ReviewController : Controller
     {
         private readonly ReviewLogic _logic;

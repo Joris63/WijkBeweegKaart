@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("Map")]
+    [Route("Maps")]
     public class MapController : Controller
     {
         private readonly MapLogic _logic;

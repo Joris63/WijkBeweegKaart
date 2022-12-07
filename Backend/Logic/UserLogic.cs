@@ -4,6 +4,7 @@ using Backend.Models.DTOModels;
 using Backend.Models.ViewModels;
 using Backend.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Logic
 {
@@ -38,7 +39,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (user.username == null || user.password == null)
+            if (string.IsNullOrEmpty(user.username) || string.IsNullOrEmpty(user.password))
             {
                 throw new InvalidOperationException();
             }
