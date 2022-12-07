@@ -1,6 +1,7 @@
+import MapViewer from "../components/map/MapViewer"
 
 const MapViewerPage = () => {
-    return null;
+    return <MapViewer />;
 }
 
 export default MapViewerPage;

@@ -18,10 +18,15 @@ import "./styles/phones.scss";
 import "./styles/auth.scss";
 import "./styles/level.scss";
 import "./styles/survey.scss";
+import MapViewerPage from "./pages/MapViewerPage";
 
 function App() {
   return (
-    <div className="iphone">
+    <div
+      className={`iphone${
+        window.location.pathname === "/map" ? " flipped" : ""
+      }`}
+    >
       <div className="iphone__inner">
         <div className="iphone__content">
           <div className="iphone__content__header">
@@ -44,6 +49,7 @@ function App() {
                 <Route path="*" element={<Navigate to="/" replace />} />
                 <Route element={<RequireAuth />}>
                   <Route path="/levels" element={<LevelSelectorPage />} />
+                  <Route path="/map" element={<MapViewerPage />} />
                 </Route>
               </Routes>
             </Router>
