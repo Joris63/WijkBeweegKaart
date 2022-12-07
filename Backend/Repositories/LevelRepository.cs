@@ -9,6 +9,11 @@ namespace Backend.Repositories
     {
         private readonly BackendContext _context;
 
+        public LevelRepository(BackendContext context)
+        {
+            _context = context;
+        }
+
         public LevelDTO GetLevelBySurveyId(int surveyId)
         {
             return _context.Levels.Where(l => l.surveyId == surveyId).FirstOrDefault();
