@@ -8,14 +8,17 @@
         public string username { get; set; }
         public string password { get; set; }
         public string? email { get; set; }
+        public int coins { get; set; }
 
-        public UserViewModel(MapViewModel[] createdMaps, ICollection<ReviewViewModel> writtenReviews, string username, string password, string? email)
+        public UserViewModel(int id, MapViewModel[] createdMaps, ICollection<ReviewViewModel> writtenReviews, string username, string password, string? email, int coins)
         {
-            this.createdMaps = createdMaps ?? new MapViewModel[2];
+            Id = id;
+            this.createdMaps = createdMaps;
             this.writtenReviews = writtenReviews;
             this.username = username;
             this.password = password;
             this.email = email;
+            this.coins = coins;
         }
 
         public bool HasCreatedMap
