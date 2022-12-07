@@ -19,9 +19,9 @@ namespace Backend.Logic
 
         public List<BuildingViewModel> GetBuildings()
         {
-            List<Building> Buildings = _mapper.Map<List<Building>>(_repo.GetBuildings());
+            List<Building> buildings = _mapper.Map<List<Building>>(_repo.GetBuildings());
             //magic
-            return _mapper.Map<List<BuildingViewModel>>(Buildings);
+            return _mapper.Map<List<BuildingViewModel>>(buildings);
         }
 
         public List<MapViewModel> GetMapsFromUser(int userId)

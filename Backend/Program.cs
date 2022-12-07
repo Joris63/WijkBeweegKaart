@@ -32,6 +32,9 @@ builder.Services.AddScoped<ReviewLogic>();
 builder.Services.AddScoped<IUserLevelRepository, UserLevelRepository>();
 builder.Services.AddScoped<UserLevelLogic>();
 
+builder.Services.AddScoped<ILevelRepository, LevelRepository>();
+builder.Services.AddScoped<LevelLogic>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddDbContext<BackendContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Connectionstring")));
