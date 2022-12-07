@@ -6,6 +6,7 @@ import Textarea from "./answer-types/Textarea";
 const defaultAnswers = ["Man", "Vrouw", "Vul ik liever niet in"];
 
 const Question = ({
+  id,
   index = 1,
   type = "multiple",
   subType = "",
@@ -15,33 +16,36 @@ const Question = ({
   setAnswer = () => {}
 }) => {
 
-  const renderAnswerType = (answer, i) => {
+  const renderAnswerType = (choice, i) => {
     switch (type) {
       default:
         return (
           <RadioButton
-            key={`${index}-answer-${i}`}
+            key={`${index}-choice-${i}`}
             index={i}
+            choice={choice}
             answer={answer}
-            setAnswer={setAnswer}
+            setAnswer={(data) => setAnswer(id, data)}
           />
         );
       case "single":
         return (
           <RadioButton
-            key={`${index}-answer-${i}`}
+            key={`${index}-choice-${i}`}
             index={i}
+            choice={choice}
             answer={answer}
-            setAnswer={setAnswer}
+            setAnswer={(data) => setAnswer(id, data)}
           />
         );
       case "multiple":
         return (
           <Checkbox
-            key={`${index}-answer-${i}`}
+            key={`${index}-choice-${i}`}
             index={i}
+            choice={choice}
             answer={answer}
-            setAnswer={setAnswer}
+            setAnswer={(data) => setAnswer(id, data)}
           />
         );
     }
@@ -53,9 +57,9 @@ const Question = ({
       </div>
       <div className="answers">
         {!choices && type === "open" && (
-          <Textarea answer={answer} setAnswer={setAnswer} />
+          <Textarea answer={answer} setAnswer={(data) => setAnswer(id, data)} />
         )}
-        {choices?.map((answer, i) => renderAnswerType(answer, i))}
+        {choices?.map((choice, i) => renderAnswerType(choice, i))}
       </div>
     </div>
   );
