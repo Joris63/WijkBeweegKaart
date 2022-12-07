@@ -33,7 +33,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Save")]
-        public IActionResult SaveReview(ReviewViewModel review)
+        public IActionResult SaveReview(ReviewMapViewModel review)
         {
             try
             {

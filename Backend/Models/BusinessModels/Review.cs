@@ -7,6 +7,10 @@
         public Map reviewedMap { get; set; }
         public string review { get; set; }
 
+        public Review()
+        {
+
+        }
         public Review(User writer, Map reviewedMap, string review)
         {
             this.writer = writer;

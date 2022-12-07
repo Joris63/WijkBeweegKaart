@@ -23,8 +23,8 @@ namespace Backend.Repositories
             ReviewDTO newReview = new ReviewDTO()
             {
                 review = review.review,
-                writer = review.writer,
-                reviewedMap = review.reviewedMap
+                userId = review.userId,
+                mapId = review.mapId
             };
 
             _context.Reviews.Add(newReview);

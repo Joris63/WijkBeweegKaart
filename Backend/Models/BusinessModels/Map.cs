@@ -11,6 +11,10 @@ namespace Backend.Models.BusinessModels
         public ICollection<Building> placedBuildings { get; set; }
         public ICollection<Review> reviews { get; set; }
 
+        public Map()
+        {
+
+        }
         public Map(int id, double latitude, double longitude, int userId, ICollection<Building> placedBuildings, ICollection<Review> reviews)
         {
             Id = id;

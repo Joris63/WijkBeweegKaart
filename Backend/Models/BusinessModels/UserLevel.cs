@@ -6,6 +6,10 @@
         public User user { get; set; }
         public Level level { get; set; }
 
+        public UserLevel()
+        {
+
+        }
         public UserLevel(User user, Level level)
         {
             this.user = user;

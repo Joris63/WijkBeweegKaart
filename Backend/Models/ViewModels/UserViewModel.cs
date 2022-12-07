@@ -13,7 +13,7 @@
         public UserViewModel(int id, MapViewModel[] createdMaps, ICollection<ReviewViewModel> writtenReviews, string username, string password, string? email, int coins)
         {
             Id = id;
-            this.createdMaps = createdMaps;
+            this.createdMaps = createdMaps ?? new MapViewModel[2];
             this.writtenReviews = writtenReviews;
             this.username = username;
             this.password = password;

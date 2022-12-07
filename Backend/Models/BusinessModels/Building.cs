@@ -9,6 +9,10 @@
         public int y { get; set; }
         public int buildingType { get; set; }
 
+        public Building()
+        {
+
+        }
         public Building(int x, int y, int buildingType, float rotation)
         {
             this.x = x;

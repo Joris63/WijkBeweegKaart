@@ -10,6 +10,10 @@
         public string? email { get; set; }
         public int coins { get; set; }
 
+        public User()
+        {
+
+        }
         public User(int id, Map[] createdMaps, ICollection<Review> writtenReviews, string username, string password, string? email, int coins)
         {
             Id = id;

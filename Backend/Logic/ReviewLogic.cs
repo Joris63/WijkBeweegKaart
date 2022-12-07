@@ -29,7 +29,7 @@ namespace Backend.Logic
             return _mapper.Map<List<ReviewViewModel>>(review);
         }
 
-        public ReviewViewModel SaveReview(ReviewViewModel reviewViewModel)
+        public ReviewViewModel SaveReview(ReviewMapViewModel reviewViewModel)
         {
             Review review = _mapper.Map<Review>(reviewViewModel);
 
