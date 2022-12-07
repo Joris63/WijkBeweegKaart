@@ -45,11 +45,11 @@ namespace Backend.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(new { User, ex });
+                return BadRequest(new { user, ex });
             }
             catch (ArgumentNullException ex)
             {
-                return BadRequest(new { User, ex });
+                return BadRequest(new { user, ex });
             }
 
             return Ok(User);

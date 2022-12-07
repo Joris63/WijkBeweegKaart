@@ -33,27 +33,24 @@ namespace Backend.Logic
         {
             User user = _mapper.Map<User>(userViewModel);
 
-            if (user != null)
+            if (user == null)
             {
-                if (user.username != null && user.password != null)
-                {
-                    UserDTO userdto = _repo.SaveUser(_mapper.Map<UserDTO>(user));
-
-                    if (userdto.Id > 0)
-                    {
-                        return _mapper.Map<UserViewModel>(_mapper.Map<User>(userdto));
-                    }
-                    else
-                    {
-                        throw new DbUpdateException();
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
+                throw new ArgumentNullException();
             }
-            throw new ArgumentNullException();
+
+            if (user.username == null || user.password == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            UserDTO userdto = _repo.SaveUser(_mapper.Map<UserDTO>(user));
+
+            if (userdto.Id == 0)
+            {
+                throw new DbUpdateException();
+            }
+
+            return _mapper.Map<UserViewModel>(_mapper.Map<User>(userdto));
         }
     }
 }

@@ -23,6 +23,19 @@ namespace Backend.Logic
             //magic
             return _mapper.Map<List<BuildingViewModel>>(Buildings);
         }
+
+        public List<MapViewModel> GetMapsFromUser(int userId)
+        {
+            if(userId !> 0)
+            {
+                throw new ArgumentException();
+            }
+
+            List<Map> maps = _mapper.Map<List<Map>>(_repo.GetMapsFromUser(userId));
+
+            return _mapper.Map<List<MapViewModel>>(maps);
+        }
+
         public MapViewModel GetMapById(int id)
         {
             Map map = _mapper.Map<Map>(_repo.GetMapById(id));
@@ -39,27 +52,24 @@ namespace Backend.Logic
         {
             Map map = _mapper.Map<Map>(mapViewModel);
 
-            if (map != null)
+            if (map == null)
             {
-                if (map.longitude != 0 && map.latitude != 0 && map.placedBuildings.Count > 0)
-                {
-                    MapDTO mapdto = _repo.SaveMap(_mapper.Map<MapDTO>(map));
-
-                    if (mapdto.Id > 0)
-                    {
-                        return _mapper.Map<MapViewModel>(_mapper.Map<Map>(mapdto));
-                    }
-                    else
-                    {
-                        throw new DbUpdateException();
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
+                throw new ArgumentNullException();
             }
-            throw new ArgumentNullException();
+
+            if (map.longitude == 0 || map.latitude == 0 || map.placedBuildings.Count == 0)
+            {
+                throw new InvalidOperationException();
+            }
+
+            MapDTO mapdto = _repo.SaveMap(_mapper.Map<MapDTO>(map));
+
+            if (mapdto.Id == 0)
+            {
+                throw new DbUpdateException();
+            }
+
+            return _mapper.Map<MapViewModel>(_mapper.Map<Map>(mapdto));
         }
     }
 }
