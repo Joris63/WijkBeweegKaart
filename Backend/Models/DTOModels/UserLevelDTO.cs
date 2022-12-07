@@ -4,9 +4,9 @@ namespace Backend.Models.DTOModels
 {
     public class UserLevelDTO
     {
-        [Key]
-        public int Id { get; set; }
-        public UserDTO user { get; set; }
-        public LevelDTO level { get; set; }
+        public int userId { get; set; }
+        public int levelId { get; set; }
+        public UserDTO user { get; private set; }
+        public LevelDTO level { get; private set; }
     }
 }

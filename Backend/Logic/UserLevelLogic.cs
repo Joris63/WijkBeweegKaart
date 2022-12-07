@@ -45,7 +45,7 @@ namespace Backend.Logic
 
             UserLevelDTO userLeveldto = _repo.SaveUserLevel(_mapper.Map<UserLevelDTO>(userLevel));
 
-            if (userLeveldto.Id == 0)
+            if (userLeveldto.user.Id == 0)
             {
                 throw new DbUpdateException();
             }
