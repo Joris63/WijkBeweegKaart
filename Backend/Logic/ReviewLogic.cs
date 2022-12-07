@@ -19,7 +19,7 @@ namespace Backend.Logic
 
         public List<ReviewViewModel> GetReviewsByMapId(int id)
         {
-            Review review = _mapper.Map<Review>(_repo.GetReviewsByMapId(id));
+            List<Review> review = _mapper.Map<List<Review>>(_repo.GetReviewsByMapId(id));
 
             if (review == null)
             {
