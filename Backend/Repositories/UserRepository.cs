@@ -10,6 +10,11 @@ namespace Backend.Repositories
     {
         private readonly BackendContext _context;
 
+        public UserRepository(BackendContext context)
+        {
+            _context = context;
+        }
+
         public UserDTO GetUserById(int id)
         {
             return _context.Users.Where(u => u.Id == id).FirstOrDefault();
@@ -27,10 +32,17 @@ namespace Backend.Repositories
 
         public UserDTO SaveUser(UserDTO user)
         {
-            _context.Users.Add(user);
+            UserDTO newUser = new UserDTO()
+            {
+                username = user.username,
+                password = user.password,
+                email = user.email
+            };
+
+            _context.Users.Add(newUser);
             _context.SaveChanges();
 
-            return user;
+            return newUser;
         }
 
         public UserDTO SaveUserEmail(int id, string email)

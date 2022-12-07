@@ -17,6 +17,11 @@ namespace Backend.Repositories
             return _context.Maps.Where(m => m.Id == id).Include(m => m.placedBuildings).FirstOrDefault();
         }
 
+        public List<MapDTO> GetMapsFromUser(int userId)
+        {
+            return _context.Maps.Where(m => m.userId == userId).ToList();
+        }
+
         public List<BuildingDTO> GetBuildings() 
         {
             return _context.Buildings.ToList();

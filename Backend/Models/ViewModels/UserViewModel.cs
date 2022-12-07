@@ -11,7 +11,7 @@
 
         public UserViewModel(MapViewModel[] createdMaps, ICollection<ReviewViewModel> writtenReviews, string username, string password, string? email)
         {
-            this.createdMaps = createdMaps;
+            this.createdMaps = createdMaps ?? new MapViewModel[2];
             this.writtenReviews = writtenReviews;
             this.username = username;
             this.password = password;
@@ -20,7 +20,7 @@
 
         public bool HasCreatedMap
         {
-            get { return createdMaps.Any(); }
+            get { return createdMaps.Any(m => m != null); }
         }
     }
 }

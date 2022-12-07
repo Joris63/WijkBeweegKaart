@@ -31,13 +31,26 @@ namespace Backend.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("Save")]
-        public IActionResult SaveMap(MapViewModel Map)
+        [HttpGet]
+        public IActionResult GetMapsFromUser(int userId)
         {
             try
             {
-                _logic.SaveMap(Map);
+                return Ok(_logic.GetMapsFromUser(userId));
+            }
+            catch(ArgumentException ex) 
+            {
+                return BadRequest(new { userId, ex });
+            }
+        }
+
+        [HttpPost]
+        [Route("Save")]
+        public IActionResult SaveMap(MapViewModel map)
+        {
+            try
+            {
+                map = _logic.SaveMap(map);
             }
             catch (DbUpdateException ex)
             {
@@ -45,14 +58,14 @@ namespace Backend.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(new { Map, ex });
+                return BadRequest(new { map, ex });
             }
             catch (ArgumentNullException ex)
             {
-                return BadRequest(new { Map, ex });
+                return BadRequest(new { map, ex });
             }
 
-            return Ok(Map);
+            return Ok(map);
         }
     }
 }
