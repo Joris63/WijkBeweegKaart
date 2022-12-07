@@ -1,8 +1,6 @@
 ﻿using Backend.Context;
-using Backend.Models.BusinessModels;
 using Backend.Models.DTOModels;
 using Backend.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repositories
 {

@@ -1,8 +1,6 @@
 ﻿using Backend.Context;
-using Backend.Models.BusinessModels;
 using Backend.Models.DTOModels;
 using Backend.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repositories
 {
@@ -22,10 +20,17 @@ namespace Backend.Repositories
 
         public ReviewDTO SaveReview(ReviewDTO review)
         {
-            _context.Reviews.Add(review);
+            ReviewDTO newReview = new ReviewDTO()
+            {
+                review = review.review,
+                writer = review.writer,
+                reviewedMap = review.reviewedMap
+            };
+
+            _context.Reviews.Add(newReview);
             _context.SaveChanges();
 
-            return review;
+            return newReview;
         }
     }
 }

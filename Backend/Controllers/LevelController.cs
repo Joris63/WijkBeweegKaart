@@ -10,9 +10,11 @@ namespace Backend.Controllers
     public class LevelController : Controller
     {
         private readonly LevelLogic _logic;
-        public LevelController(LevelLogic logic)
+        private readonly UserLevelLogic _userLevelLogic;
+        public LevelController(LevelLogic logic, UserLevelLogic userLevelLogic)
         {
             _logic = logic;
+            _userLevelLogic = userLevelLogic;
         }
 
         [HttpGet]

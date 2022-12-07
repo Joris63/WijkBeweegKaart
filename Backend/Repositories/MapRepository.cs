@@ -29,10 +29,17 @@ namespace Backend.Repositories
 
         public MapDTO SaveMap(MapDTO map)
         {
-            _context.Maps.Add(map);
+            MapDTO newMap = new MapDTO()
+            {
+                latitude = map.latitude,
+                longitude = map.longitude,
+                placedBuildings = map.placedBuildings
+            };
+
+            _context.Maps.Add(newMap);
             _context.SaveChanges();
 
-            return map;
+            return newMap;
         }
     }
 }
