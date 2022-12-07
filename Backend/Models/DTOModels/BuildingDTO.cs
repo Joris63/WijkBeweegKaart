@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models.DTOModels
 {
@@ -10,6 +11,8 @@ namespace Backend.Models.DTOModels
         public int x { get; set; }
         public int y { get; set; }
         public int buildingType { get; set; }
+        [ForeignKey("map")]
+        public int mapId { get; set; }
 
         public MapDTO map { get; set; }
 
