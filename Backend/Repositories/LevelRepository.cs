@@ -1,4 +1,5 @@
 ﻿using Backend.Context;
+using Backend.Models.BusinessModels;
 using Backend.Models.DTOModels;
 using Backend.Repositories.Interfaces;
 
@@ -15,12 +16,22 @@ namespace Backend.Repositories
 
         public List<LevelDTO> GetLevels()
         {
-            throw new NotImplementedException();
+            return _context.Levels.ToList();
         }
 
-        public LevelDTO SaveLevel(int surveyId, string surveyName, int? previousSurvey)
+        public LevelDTO SaveLevel(LevelDTO level)
         {
-            throw new NotImplementedException();
+            LevelDTO newLevel = new LevelDTO()
+            {
+                surveyId = level.surveyId,
+                surveyName = level.surveyName,
+                previousSurveyId = level.previousSurveyId
+            };
+
+            _context.Levels.Add(newLevel);
+            _context.SaveChanges();
+
+            return newLevel;
         }
     }
 }
