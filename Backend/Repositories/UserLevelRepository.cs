@@ -1,4 +1,5 @@
 ﻿using Backend.Context;
+using Backend.Models.BusinessModels;
 using Backend.Models.DTOModels;
 using Backend.Repositories.Interfaces;
 
@@ -20,7 +21,16 @@ namespace Backend.Repositories
 
         public UserLevelDTO SaveUserLevel(UserLevelDTO userLevel)
         {
-            throw new NotImplementedException();
+            UserLevelDTO newLevel = new UserLevelDTO()
+            {
+                userId = userLevel.userId,
+                levelId = userLevel.levelId,
+            };
+
+            _context.UserLevels.Add(newLevel);
+            _context.SaveChanges();
+
+            return newLevel;
         }
     }
 }
