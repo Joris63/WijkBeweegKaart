@@ -90,13 +90,13 @@ const Survey = ({ surveyId = null }) => {
     <div className="survey_wrapper">
       {loading ? (
         <div className="container">
-          <div class="bar"></div>
+          <div className="bar"></div>
         </div>
       ) : (
         <>
           {questionNumber < questions.length && (
             <ProgressBar
-              progress={(1 / (questions.length)) * questionNumber}
+              progress={(1 / questions.length) * questionNumber}
               percentage
             />
           )}

@@ -1,10 +1,19 @@
+import { useNavigate } from "react-router-dom";
+
 const Register = () => {
+  const navigate = useNavigate();
+
+  const routeChange = () => {
+    let path = "levels";
+    navigate(path);
+  };
+
   return (
     <div className="auth_wrapper">
       <div className="auth_title">Registreer je nu en ontvang je punten</div>
       <div className="auth_form">
-        <div class="input-field">
-          <label for="email">E-mailadres of gebruikersnaam</label>
+        <div className="input-field">
+          <label htmlFor="email">E-mailadres of gebruikersnaam</label>
           <input
             type="email"
             placeholder="example@example.com"
@@ -12,8 +21,8 @@ const Register = () => {
             name="email"
           />
         </div>
-        <div class="input-field">
-          <label for="password">Wachtwoord</label>
+        <div className="input-field">
+          <label htmlFor="password">Wachtwoord</label>
           <input
             type="password"
             placeholder="********"
@@ -21,17 +30,17 @@ const Register = () => {
             name="password"
           />
         </div>
-        <div class="input-field">
-          <label for="password">Herhaal wachtword</label>
+        <div className="input-field">
+          <label htmlFor="password">Herhaal wachtword</label>
           <input
             type="password"
             placeholder="********"
-            id="password"
-            name="password"
+            id="v-password"
+            name="v-password"
           />
         </div>
-        <div class="action">
-          <button id="btn" class="btn">
+        <div className="action">
+          <button id="btn" className="btn" onClick={routeChange}>
             Registreer nu
           </button>
         </div>

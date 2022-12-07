@@ -3,8 +3,8 @@ const Login = () => {
     <div className="auth_wrapper">
       <div className="auth_title">Login om meer punten te verdienen</div>
       <div className="auth_form">
-        <div class="input-field">
-          <label for="email">E-mailadres of gebruikersnaam</label>
+        <div className="input-field">
+          <label htmlFor="email">E-mailadres of gebruikersnaam</label>
           <input
             type="email"
             placeholder="example@example.com"
@@ -12,8 +12,8 @@ const Login = () => {
             name="email"
           />
         </div>
-        <div class="input-field">
-          <label for="password">Wachtwoord</label>
+        <div className="input-field">
+          <label htmlFor="password">Wachtwoord</label>
           <input
             type="password"
             placeholder="********"
@@ -21,8 +21,8 @@ const Login = () => {
             name="password"
           />
         </div>
-        <div class="action">
-          <button id="btn" class="btn">
+        <div className="action">
+          <button id="btn" className="btn">
             Inloggen
           </button>
         </div>
