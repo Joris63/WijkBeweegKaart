@@ -20,7 +20,7 @@
 
         public bool HasCreatedMap
         {
-            get { return createdMaps.Any(); }
+            get { return createdMaps.Any(m => m != null); }
         }
     }
 }
