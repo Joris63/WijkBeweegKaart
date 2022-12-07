@@ -1,0 +1,80 @@
+.auth_wrapper {
+    padding: 24px 0;
+}
+
+.auth_title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 0 15%;
+}
+
+.auth_form {
+    margin-top: 24px;
+    padding: 12px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+label {
+    font-size: 13px;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background: hsl(210, 38%, 95%);
+    line-height: 17px;
+    outline: none;
+}
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-bottom: 1px solid orange;
+    /*   border-radius:5px; */
+}
+
+.action {
+    align-items: center;
+    border-color: hsl(214, 32%, 91%);
+    color: hsl(220, 26%, 14%);
+    display: flex;
+    gap: normal;
+    justify-content: flex-end;
+    line-height: 24px;
+    margin-top: 24px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #fd9644;
+    border-radius: 4px;
+    border: none;
+    box-shadow: hsla(0, 0%, 0%, 0.1) 0px 4px 6px -1px, hsl(0, 0%, 100%);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    line-height: 25px;
+    padding: 8px 16px;
+    text-align: center;
+    text-transform: uppercase;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #fa8231;
+}
