@@ -1,0 +1,18 @@
+﻿namespace Backend.Models.ViewModels
+{
+    public class LevelViewModel
+    {
+        public int Id { get; set; }
+        public int surveyId { get; set; }
+        public string surveyName { get; set; }
+        public int? previousSurveyId { get; set; }
+        public bool completed { get; set; }
+
+        public LevelViewModel(int surveyId, string surveyName, int? previousSurveyId)
+        {
+            this.surveyId = surveyId;
+            this.surveyName = surveyName;
+            this.previousSurveyId = previousSurveyId;
+        }
+    }
+}
