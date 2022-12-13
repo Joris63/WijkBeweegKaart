@@ -14,12 +14,12 @@ namespace Backend.Repositories
         }
         public MapDTO GetMapById(int id)
         {
-            return _context.Maps.Where(m => m.Id == id).Include(m => m.placedBuildings).FirstOrDefault();
+            return _context.Maps.Where(m => m.Id == id).Include(m => m.PlacedBuildings).FirstOrDefault();
         }
 
         public List<MapDTO> GetMapsFromUser(int userId)
         {
-            return _context.Maps.Where(m => m.userId == userId).ToList();
+            return _context.Maps.Where(m => m.UserId == userId).ToList();
         }
 
         public List<BuildingDTO> GetBuildings() 
@@ -31,10 +31,10 @@ namespace Backend.Repositories
         {
             MapDTO newMap = new MapDTO()
             {
-                latitude = map.latitude,
-                longitude = map.longitude,
-                placedBuildings = map.placedBuildings,
-                userId = map.userId
+                Latitude = map.Latitude,
+                Longitude = map.Longitude,
+                PlacedBuildings = map.PlacedBuildings,
+                UserId = map.UserId
             };
 
             _context.Maps.Add(newMap);

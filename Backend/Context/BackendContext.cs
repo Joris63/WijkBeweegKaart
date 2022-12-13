@@ -21,13 +21,13 @@ namespace Backend.Context
         {
             modelBuilder.Entity<UserDTO>()
                 .HasMany(u => u.CreatedMaps)
-                .WithOne(m => m.mapCreator)
+                .WithOne(m => m.MapCreator)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<UserDTO>().Property(u => u.Coins).HasDefaultValue(0);
 
             modelBuilder.Entity<UserDTO>().HasMany(u => u.Levels)
-                .WithMany(l => l.users)
+                .WithMany(l => l.Users)
                 .UsingEntity<UserLevelDTO>(
                 ul => ul.HasOne(ul => ul.level)
                 .WithMany().HasForeignKey(ul => ul.levelId),

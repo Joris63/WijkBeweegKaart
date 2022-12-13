@@ -16,8 +16,8 @@ namespace Backend.Profiles
 
             CreateMap<ReviewViewModel, Review>().ReverseMap();
             CreateMap<ReviewDTO, Review>().ReverseMap()
-                .ForMember(dest => dest.userId, act => act.MapFrom(source => source.writer.Id))
-                .ForMember(dest => dest.mapId, act => act.MapFrom(source => source.reviewedMap.Id));
+                .ForMember(dest => dest.UserId, act => act.MapFrom(source => source.writer.Id))
+                .ForMember(dest => dest.MapId, act => act.MapFrom(source => source.reviewedMap.Id));
         }
     }
 }

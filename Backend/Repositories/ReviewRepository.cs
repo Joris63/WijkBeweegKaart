@@ -15,16 +15,16 @@ namespace Backend.Repositories
 
         public List<ReviewDTO> GetReviewsByMapId(int id)
         {
-            return _context.Reviews.Where(r => r.reviewedMap.Id == id).ToList();
+            return _context.Reviews.Where(r => r.ReviewedMap.Id == id).ToList();
         }
 
         public ReviewDTO SaveReview(ReviewDTO review)
         {
             ReviewDTO newReview = new ReviewDTO()
             {
-                review = review.review,
-                userId = review.userId,
-                mapId = review.mapId
+                Review = review.Review,
+                UserId = review.UserId,
+                MapId = review.MapId
             };
 
             _context.Reviews.Add(newReview);

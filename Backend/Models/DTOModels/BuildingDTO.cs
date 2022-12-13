@@ -7,14 +7,13 @@ namespace Backend.Models.DTOModels
     {
         [Key]
         public int Id { get; set; }
-        public float rotation { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
-        public int buildingType { get; set; }
-        [ForeignKey("map")]
-        public int mapId { get; set; }
-
-        public MapDTO map { get; set; }
+        public float Rotation { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int BuildingType { get; set; }
+        [ForeignKey("Map")]
+        public int MapId { get; set; }
+        public MapDTO Map { get; set; }
 
     }
 }

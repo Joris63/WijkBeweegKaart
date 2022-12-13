@@ -16,7 +16,7 @@ namespace Backend.Repositories
 
         public LevelDTO GetLevelBySurveyId(int surveyId)
         {
-            return _context.Levels.Where(l => l.surveyId == surveyId).FirstOrDefault();
+            return _context.Levels.Where(l => l.SurveyId == surveyId).FirstOrDefault();
         }
 
         public List<LevelDTO> GetLevels()
@@ -33,9 +33,9 @@ namespace Backend.Repositories
         {
             LevelDTO newLevel = new LevelDTO()
             {
-                surveyId = level.surveyId,
-                surveyName = level.surveyName,
-                previousSurveyId = level.previousSurveyId
+                SurveyId = level.SurveyId,
+                SurveyName = level.SurveyName,
+                PreviousSurveyId = level.PreviousSurveyId
             };
 
             _context.Levels.Add(newLevel);

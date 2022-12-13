@@ -7,12 +7,12 @@ namespace Backend.Models.DTOModels
     {
         [Key]
         public int Id { get; set; }
-        public double longitude { get; set; }
-        public double latitude { get; set; }
-        [ForeignKey("mapCreator")]
-        public int userId { get; set; }
-        public UserDTO mapCreator { get; set; }
-        public ICollection<BuildingDTO> placedBuildings { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+        [ForeignKey("MapCreator")]
+        public int UserId { get; set; }
+        public UserDTO MapCreator { get; set; }
+        public ICollection<BuildingDTO> PlacedBuildings { get; set; }
 
     }
 }

@@ -3,11 +3,11 @@
     public class Building
     {
         public int Id { get; set; }
-        public Map map { get; set; }
-        public double rotation { get;  set; }
-        public int x { get; set; }
-        public int y { get; set; }
-        public int buildingType { get; set; }
+        public Map Map { get; set; }
+        public double Rotation { get;  set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int BuildingType { get; set; }
 
         public Building()
         {
@@ -15,10 +15,10 @@
         }
         public Building(int x, int y, int buildingType, float rotation)
         {
-            this.x = x;
-            this.y = y;
-            this.buildingType = buildingType;
-            this.rotation = rotation;
+            this.X = x;
+            this.Y = y;
+            this.BuildingType = buildingType;
+            this.Rotation = rotation;
         }
     }
 }

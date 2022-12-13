@@ -7,12 +7,12 @@ namespace Backend.Models.DTOModels
     {
         [Key]
         public int Id { get; set; }
-        public string review { get; set; }
-        [ForeignKey("writer")]
-        public int userId { get; set; }
-        public UserDTO writer { get; set; }
-        [ForeignKey("reviewedMap")]
-        public int mapId { get; set; }
-        public MapDTO reviewedMap { get; set; }
+        public string Review { get; set; }
+        [ForeignKey("Writer")]
+        public int UserId { get; set; }
+        public UserDTO Writer { get; set; }
+        [ForeignKey("ReviewedMap")]
+        public int MapId { get; set; }
+        public MapDTO ReviewedMap { get; set; }
     }
 }
