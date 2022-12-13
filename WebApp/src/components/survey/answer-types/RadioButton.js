@@ -5,8 +5,8 @@ const RadioButton = ({ index, choice, answer, setAnswer }) => {
         id={`r-${index}`}
         type="radio"
         name="radio"
-        checked={choice.text === answer}
-        onChange={(e) => setAnswer(choice.text)}
+        checked={choice.id === answer}
+        onChange={(e) => setAnswer(choice.id)}
       />
       <label htmlFor={`r-${index}`}>{choice.text}</label>
     </div>

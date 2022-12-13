@@ -1,6 +1,6 @@
-import _ from "lodash";
+import _, { indexOf } from "lodash";
 import { Fragment, useEffect, useState } from "react";
-import { getSurvey } from "../../api/survey";
+import { getSurvey, postSurvey } from "../../api/survey";
 import ProgressBar from "./ProgressBar";
 import Question from "./Question";
 import Register from "../auth/Register";
@@ -9,7 +9,6 @@ const Survey = ({ surveyId = null }) => {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [questionNumber, setQuestionNumber] = useState(0);
-  const [json, setJson] = useState({ pages: [] });
 
   useEffect(() => {
     getSurvey().then((res) => {
@@ -64,7 +63,6 @@ const Survey = ({ surveyId = null }) => {
 
     if (Array.isArray(foundQuestion.answer)) {
       let answer = foundQuestion.answer.find((ans) => ans === data);
-
       if (answer) {
         let answers = foundQuestion.answer;
         answers.splice(answers.indexOf(answer), 1);
@@ -74,7 +72,6 @@ const Survey = ({ surveyId = null }) => {
     } else {
       foundQuestion.answer = data;
     }
-
     setQuestions(updatedQuestions);
   }
 
@@ -85,6 +82,36 @@ const Survey = ({ surveyId = null }) => {
   const handlePreviousPage = () => {
     setQuestionNumber(questionNumber - 1);
   };
+
+  function handlePostSurvey()
+  {
+    let surveyJson = { pages: [] }
+    questions.forEach((question, index) => {
+      surveyJson.pages.push({"id" : question.pageId, "questions":[{"id": question.id, "answers":[]}]})
+  
+      switch(question.type)
+      {
+        case "single": 
+        surveyJson.pages[index].questions[0].answers.push({"choice_id": question.answer})
+        break;
+        case"multiple":
+        question.answer.forEach(answer =>
+          {
+            surveyJson.pages[index].questions[0].answers.push({"choice_id": answer})
+          })
+        break;
+        case"open":
+        surveyJson.pages[index].questions[0].answers.push({"text": question.answer})
+      }
+    })
+    console.log(surveyJson)
+  
+    postSurvey(surveyJson)
+    .then(res => {
+      console.log(res)
+      handleNextPage();
+    }).catch((error) => {console.log(error)});
+  }
 
   return (
     <div className="survey_wrapper">
@@ -125,7 +152,7 @@ const Survey = ({ surveyId = null }) => {
                 Terug
               </button>
             )}
-            {questionNumber <= questions.length - 1 &&
+            {questionNumber <= questions.length - 2 &&
               questions[questionNumber]?.answer && (
                 <button
                   className="action_btn"
@@ -134,12 +161,12 @@ const Survey = ({ surveyId = null }) => {
                 >
                   Volgende
                 </button>
-              )}
-            {questionNumber === questions.length - 1 && surveyId !== null && (
+              ) }
+            {questionNumber === questions.length - 1 && (
               <button
                 className="action_btn"
                 style={{ float: "right" }}
-                onClick={handleNextPage}
+                onClick={handlePostSurvey}
               >
                 Voltooien
               </button>

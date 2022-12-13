@@ -4,8 +4,8 @@ const Checkbox = ({ index, choice, answer, setAnswer }) => {
       <input
         id={`c-${index}`}
         type="checkbox"
-        checked={answer.includes(choice.text)}
-        onChange={(e) => setAnswer(choice.text)}
+        checked={answer.includes(choice.id)}
+        onChange={(e) => setAnswer(choice.id)}
       />
       <label htmlFor={`c-${index}`}>{choice.text}</label>
     </div>
