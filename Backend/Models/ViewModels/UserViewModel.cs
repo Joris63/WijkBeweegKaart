@@ -3,27 +3,28 @@
     public class UserViewModel
     {
         public int Id { get; set; }
-        public MapViewModel[] createdMaps { get; set; }
-        public ICollection<ReviewViewModel> writtenReviews { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string? email { get; set; }
-        public int coins { get; set; }
+        public MapViewModel[] CreatedMaps { get; set; }
+        public ICollection<ReviewViewModel> WrittenReviews { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string? Email { get; set; }
+        public int Coins { get; set; }
+        public Roles Role { get; set; }
 
         public UserViewModel(int id, MapViewModel[] createdMaps, ICollection<ReviewViewModel> writtenReviews, string username, string password, string? email, int coins)
         {
             Id = id;
-            this.createdMaps = createdMaps ?? new MapViewModel[2];
-            this.writtenReviews = writtenReviews;
-            this.username = username;
-            this.password = password;
-            this.email = email;
-            this.coins = coins;
+            this.CreatedMaps = createdMaps ?? new MapViewModel[2];
+            this.WrittenReviews = writtenReviews;
+            this.Username = username;
+            this.Password = password;
+            this.Email = email;
+            this.Coins = coins;
         }
 
         public bool HasCreatedMap
         {
-            get { return createdMaps.Any(m => m != null); }
+            get { return CreatedMaps.Any(m => m != null); }
         }
     }
 }

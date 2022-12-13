@@ -20,13 +20,13 @@ namespace Backend.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserDTO>()
-                .HasMany(u => u.createdMaps)
+                .HasMany(u => u.CreatedMaps)
                 .WithOne(m => m.mapCreator)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
-            modelBuilder.Entity<UserDTO>().Property(u => u.coins).HasDefaultValue(0);
+            modelBuilder.Entity<UserDTO>().Property(u => u.Coins).HasDefaultValue(0);
 
-            modelBuilder.Entity<UserDTO>().HasMany(u => u.levels)
+            modelBuilder.Entity<UserDTO>().HasMany(u => u.Levels)
                 .WithMany(l => l.users)
                 .UsingEntity<UserLevelDTO>(
                 ul => ul.HasOne(ul => ul.level)

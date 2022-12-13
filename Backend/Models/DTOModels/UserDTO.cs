@@ -6,12 +6,13 @@ namespace Backend.Models.DTOModels
     {
         [Key]
         public int Id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string? email { get; set; }
-        public int coins { get; set; }
-        public MapDTO[] createdMaps { get; set; }
-        public ICollection<ReviewDTO> writtenReviews { get; set; }
-        public ICollection<LevelDTO> levels { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string? Email { get; set; }
+        public int Coins { get; set; }
+        public MapDTO[] CreatedMaps { get; set; }
+        public Roles Role { get; set; }
+        public ICollection<ReviewDTO> WrittenReviews { get; set; }
+        public ICollection<LevelDTO> Levels { get; set; }
     }
 }

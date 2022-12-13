@@ -47,7 +47,7 @@ namespace Backend.Controllers
                 {
                     for(int i = 0; i < levels.Count; i++)
                     {
-                        if(userLevelViewModel.level.surveyId == levels[i].surveyId)
+                        if(userLevelViewModel.Level.surveyId == levels[i].surveyId)
                         {
                             levels[i].completed = true;
                         }

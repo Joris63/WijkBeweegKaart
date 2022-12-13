@@ -39,7 +39,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (string.IsNullOrEmpty(user.username) || string.IsNullOrEmpty(user.password))
+            if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password))
             {
                 throw new InvalidOperationException();
             }

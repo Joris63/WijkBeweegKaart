@@ -32,9 +32,9 @@ namespace Backend.Repositories
         {
             UserDTO newUser = new UserDTO()
             {
-                username = user.username,
-                password = user.password,
-                email = user.email
+                Username = user.Username,
+                Password = user.Password,
+                Email = user.Email
             };
 
             _context.Users.Add(newUser);

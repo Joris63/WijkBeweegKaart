@@ -3,31 +3,33 @@
     public class User
     {
         public int Id { get; set; }
-        public Map[] createdMaps { get; set; }
-        public ICollection<Review> writtenReviews { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string? email { get; set; }
-        public int coins { get; set; }
+        public Map[] CreatedMaps { get; set; }
+        public ICollection<Review> WrittenReviews { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string? Email { get; set; }
+        public int Coins { get; set; }
+        public Roles Role { get; set; }
 
         public User()
         {
 
         }
-        public User(int id, Map[] createdMaps, ICollection<Review> writtenReviews, string username, string password, string? email, int coins)
+        public User(int id, Map[] createdMaps, ICollection<Review> writtenReviews, string username, string password, string? email, int coins, Roles role)
         {
             Id = id;
-            this.createdMaps = createdMaps;
-            this.writtenReviews = writtenReviews;
-            this.username = username;
-            this.password = password;
-            this.email = email;
-            this.coins = coins;
+            this.CreatedMaps = createdMaps;
+            this.WrittenReviews = writtenReviews;
+            this.Username = username;
+            this.Password = password;
+            this.Email = email;
+            this.Coins = coins;
+            this.Role = role;
         }
 
         public bool HasCreatedMap
         {
-            get { return createdMaps.Any(); }
+            get { return CreatedMaps.Any(); }
         }
     }
 }
