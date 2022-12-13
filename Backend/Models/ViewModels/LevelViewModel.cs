@@ -3,16 +3,16 @@
     public class LevelViewModel
     {
         public int Id { get; set; }
-        public int surveyId { get; set; }
-        public string surveyName { get; set; }
-        public int? previousSurveyId { get; set; }
-        public bool completed { get; set; }
+        public int SurveyId { get; set; }
+        public string SurveyName { get; set; }
+        public int? PreviousSurveyId { get; set; }
+        public bool Completed { get; set; }
 
         public LevelViewModel(int surveyId, string surveyName, int? previousSurveyId)
         {
-            this.surveyId = surveyId;
-            this.surveyName = surveyName;
-            this.previousSurveyId = previousSurveyId;
+            this.SurveyId = surveyId;
+            this.SurveyName = surveyName;
+            this.PreviousSurveyId = previousSurveyId;
         }
     }
 }

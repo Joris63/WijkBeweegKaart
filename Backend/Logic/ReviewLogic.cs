@@ -38,7 +38,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (string.IsNullOrEmpty(review.review) || review.reviewedMap.Id == 0 || review.writer.Id == 0)
+            if (string.IsNullOrEmpty(review.ReviewText) || review.ReviewedMap.Id == 0 || review.Writer.Id == 0)
             {
                 throw new InvalidOperationException();
 

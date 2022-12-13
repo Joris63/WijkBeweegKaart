@@ -52,7 +52,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (level.surveyId == 0)
+            if (level.SurveyId == 0)
             {
                 throw new InvalidOperationException();
             }

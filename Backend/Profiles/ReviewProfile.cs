@@ -10,14 +10,14 @@ namespace Backend.Profiles
         public ReviewProfile()
         {
             CreateMap<ReviewMapViewModel, Review>()
-                .ForPath(dest => dest.writer.Id, act => act.MapFrom(source => source.userId))
-                .ForPath(dest => dest.reviewedMap.Id, act => act.MapFrom(source => source.mapId))
-                .ForMember(dest => dest.review, act => act.MapFrom(source => source.review));
+                .ForPath(dest => dest.Writer.Id, act => act.MapFrom(source => source.UserId))
+                .ForPath(dest => dest.ReviewedMap.Id, act => act.MapFrom(source => source.MapId))
+                .ForMember(dest => dest.ReviewText, act => act.MapFrom(source => source.Review));
 
             CreateMap<ReviewViewModel, Review>().ReverseMap();
             CreateMap<ReviewDTO, Review>().ReverseMap()
-                .ForMember(dest => dest.UserId, act => act.MapFrom(source => source.writer.Id))
-                .ForMember(dest => dest.MapId, act => act.MapFrom(source => source.reviewedMap.Id));
+                .ForMember(dest => dest.UserId, act => act.MapFrom(source => source.Writer.Id))
+                .ForMember(dest => dest.MapId, act => act.MapFrom(source => source.ReviewedMap.Id));
         }
     }
 }

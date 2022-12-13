@@ -3,8 +3,8 @@
     public class UserLevel
     {
         public int Id { get; set; }
-        public User user { get; set; }
-        public Level level { get; set; }
+        public User User { get; set; }
+        public Level Level { get; set; }
 
         public UserLevel()
         {
@@ -12,8 +12,8 @@
         }
         public UserLevel(User user, Level level)
         {
-            this.user = user;
-            this.level = level;
+            this.User = user;
+            this.Level = level;
         }
     }
 }

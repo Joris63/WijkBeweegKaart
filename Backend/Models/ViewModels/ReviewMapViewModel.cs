@@ -2,9 +2,9 @@
 {
     public class ReviewMapViewModel
     {
-        public int userId { get; set; }
-        public int mapId { get; set; }
-        public string review { get; set; }
+        public int UserId { get; set; }
+        public int MapId { get; set; }
+        public string Review { get; set; }
         public ReviewMapViewModel()
         {
 

@@ -3,9 +3,9 @@
     public class Level
     {
         public int Id { get; set; }
-        public int surveyId { get; set; }
-        public string surveyName { get; set; }
-        public int? previousSurveyId { get; set; }
+        public int SurveyId { get; set; }
+        public string SurveyName { get; set; }
+        public int? PreviousSurveyId { get; set; }
 
         public Level()
         {
@@ -13,9 +13,9 @@
         }
         public Level(int surveyId, string surveyName, int? previousSurveyId)
         {
-            this.surveyId = surveyId;
-            this.surveyName = surveyName;
-            this.previousSurveyId = previousSurveyId;
+            this.SurveyId = surveyId;
+            this.SurveyName = surveyName;
+            this.PreviousSurveyId = previousSurveyId;
         }
     }
 }

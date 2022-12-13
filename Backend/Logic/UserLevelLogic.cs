@@ -38,7 +38,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (userLevel.user == null || userLevel.level == null)
+            if (userLevel.User == null || userLevel.Level == null)
             {
                 throw new InvalidOperationException();
             }
