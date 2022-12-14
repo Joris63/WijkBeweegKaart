@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "https://localhost:5001/api/";
+export const BASE_URL = "https://localhost:7264";
 
 export default axios.create({
   baseURL: BASE_URL,
@@ -14,3 +14,9 @@ export const axiosPrivate = axios.create({
   },
   withCredentials: true,
 });
+
+const register = (data) => {
+  return axiosPrivate.post("/Users/Save", data);
+};
+
+export { register };

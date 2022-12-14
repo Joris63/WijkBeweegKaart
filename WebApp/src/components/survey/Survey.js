@@ -103,14 +103,13 @@ const Survey = ({ surveyId = null }) => {
         case"open":
         surveyJson.pages[index].questions[0].answers.push({"text": question.answer})
       }
-    })
-    console.log(surveyJson)
-  
-    postSurvey(surveyJson)
-    .then(res => {
-      console.log(res)
-      handleNextPage();
-    }).catch((error) => {console.log(error)});
+    })  
+    handleNextPage();
+    // postSurvey(surveyJson)
+    // .then(res => {
+    //   console.log(res)
+    //   handleNextPage();
+    // }).catch((error) => {console.log(error)});
   }
 
   return (
