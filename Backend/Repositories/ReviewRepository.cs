@@ -13,18 +13,18 @@ namespace Backend.Repositories
             _context = context;
         }
 
-        public List<ReviewDTO> GetReviewsByMapId(int id)
+        public List<DonationDTO> GetDonationsByBuildingId(int id)
         {
-            return _context.Reviews.Where(r => r.ReviewedMap.Id == id).ToList();
+            return _context.Reviews.Where(r => r.BuildingId == id).ToList();
         }
 
-        public ReviewDTO SaveReview(ReviewDTO review)
+        public DonationDTO SaveDonation(DonationDTO review)
         {
-            ReviewDTO newReview = new ReviewDTO()
+            DonationDTO newReview = new DonationDTO()
             {
-                Review = review.Review,
+                Amount = review.Amount,
                 UserId = review.UserId,
-                MapId = review.MapId
+                BuildingId = review.BuildingId
             };
 
             _context.Reviews.Add(newReview);

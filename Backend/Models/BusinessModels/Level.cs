@@ -11,11 +11,5 @@
         {
 
         }
-        public Level(int surveyId, string surveyName, int? previousSurveyId)
-        {
-            this.SurveyId = surveyId;
-            this.SurveyName = surveyName;
-            this.PreviousSurveyId = previousSurveyId;
-        }
     }
 }

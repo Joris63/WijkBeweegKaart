@@ -20,7 +20,7 @@ namespace Backend.Logic
         public List<BuildingViewModel> GetBuildings()
         {
             List<Building> buildings = _mapper.Map<List<Building>>(_repo.GetBuildings());
-            //magic
+
             return _mapper.Map<List<BuildingViewModel>>(buildings);
         }
 

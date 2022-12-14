@@ -11,6 +11,7 @@ namespace Backend.Models.DTOModels
         public int X { get; set; }
         public int Y { get; set; }
         public int BuildingType { get; set; }
+        public int CoinAmount { get; set; }
         [ForeignKey("Map")]
         public int MapId { get; set; }
         public MapDTO Map { get; set; }

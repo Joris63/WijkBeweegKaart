@@ -9,15 +9,15 @@ namespace Backend.Profiles
     {
         public ReviewProfile()
         {
-            CreateMap<ReviewMapViewModel, Review>()
-                .ForPath(dest => dest.Writer.Id, act => act.MapFrom(source => source.UserId))
-                .ForPath(dest => dest.ReviewedMap.Id, act => act.MapFrom(source => source.MapId))
-                .ForMember(dest => dest.ReviewText, act => act.MapFrom(source => source.Review));
+            CreateMap<BuildingDonationViewModel, Donation>()
+                .ForPath(dest => dest.User.Id, act => act.MapFrom(source => source.UserId))
+                .ForPath(dest => dest.Building.Id, act => act.MapFrom(source => source.BuildingId))
+                .ForMember(dest => dest.Amount, act => act.MapFrom(source => source.Amount));
 
-            CreateMap<ReviewViewModel, Review>().ReverseMap();
-            CreateMap<ReviewDTO, Review>().ReverseMap()
-                .ForMember(dest => dest.UserId, act => act.MapFrom(source => source.Writer.Id))
-                .ForMember(dest => dest.MapId, act => act.MapFrom(source => source.ReviewedMap.Id));
+            CreateMap<DonationViewModel, Donation>().ReverseMap();
+            CreateMap<DonationDTO, Donation>().ReverseMap()
+                .ForMember(dest => dest.UserId, act => act.MapFrom(source => source.User.Id))
+                .ForMember(dest => dest.BuildingId, act => act.MapFrom(source => source.Building.Id));
         }
     }
 }

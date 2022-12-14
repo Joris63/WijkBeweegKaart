@@ -8,17 +8,17 @@
         public int X { get; set; }
         public int Y { get; set; }
         public int BuildingType { get; set; }
+        public int CoinAmount { get; set; }
+        public int Level { get; set; }
 
         public Building()
         {
-
+            CalculateLevel();
         }
-        public Building(int x, int y, int buildingType, float rotation)
+
+        private void CalculateLevel()
         {
-            this.X = x;
-            this.Y = y;
-            this.BuildingType = buildingType;
-            this.Rotation = rotation;
+            Level = (int)Math.Floor((decimal)(CoinAmount / 50));
         }
     }
 }

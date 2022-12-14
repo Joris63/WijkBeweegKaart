@@ -17,41 +17,41 @@ namespace Backend.Logic
             _mapper = mapper;
         }
 
-        public List<ReviewViewModel> GetReviewsByMapId(int id)
+        public List<DonationViewModel> GetDonationsByBuildingId(int id)
         {
-            List<Review> review = _mapper.Map<List<Review>>(_repo.GetReviewsByMapId(id));
+            List<Donation> review = _mapper.Map<List<Donation>>(_repo.GetDonationsByBuildingId(id));
 
             if (review == null)
             {
                 throw new KeyNotFoundException();
             }
 
-            return _mapper.Map<List<ReviewViewModel>>(review);
+            return _mapper.Map<List<DonationViewModel>>(review);
         }
 
-        public ReviewViewModel SaveReview(ReviewMapViewModel reviewViewModel)
+        public DonationViewModel SaveDonation(BuildingDonationViewModel reviewViewModel)
         {
-            Review review = _mapper.Map<Review>(reviewViewModel);
+            Donation review = _mapper.Map<Donation>(reviewViewModel);
 
             if (review == null)
             {
                 throw new ArgumentNullException();
             }
 
-            if (string.IsNullOrEmpty(review.ReviewText) || review.ReviewedMap.Id == 0 || review.Writer.Id == 0)
+            if (review.Amount == 0 || review.Building.Id == 0 || review.User.Id == 0)
             {
                 throw new InvalidOperationException();
 
             }
 
-            ReviewDTO reviewdto = _repo.SaveReview(_mapper.Map<ReviewDTO>(review));
+            DonationDTO reviewdto = _repo.SaveDonation(_mapper.Map<DonationDTO>(review));
 
             if (reviewdto.Id == 0)
             {
                 throw new DbUpdateException();
             }
 
-            return _mapper.Map<ReviewViewModel>(_mapper.Map<Review>(reviewdto));
+            return _mapper.Map<DonationViewModel>(_mapper.Map<Donation>(reviewdto));
         }
     }
 }

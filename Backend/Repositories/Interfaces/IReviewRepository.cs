@@ -4,7 +4,7 @@ namespace Backend.Repositories.Interfaces
 {
     public interface IReviewRepository
     {
-        public List<ReviewDTO> GetReviewsByMapId(int id);
-        public ReviewDTO SaveReview(ReviewDTO review);
+        public List<DonationDTO> GetDonationsByBuildingId(int id);
+        public DonationDTO SaveDonation(DonationDTO review);
     }
 }

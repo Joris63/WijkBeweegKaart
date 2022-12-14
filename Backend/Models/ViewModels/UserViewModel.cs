@@ -4,14 +4,14 @@
     {
         public int Id { get; set; }
         public MapViewModel[] CreatedMaps { get; set; }
-        public ICollection<ReviewViewModel> WrittenReviews { get; set; }
+        public ICollection<DonationViewModel> WrittenReviews { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string? Email { get; set; }
         public int Coins { get; set; }
         public Roles Role { get; set; }
 
-        public UserViewModel(int id, MapViewModel[] createdMaps, ICollection<ReviewViewModel> writtenReviews, string username, string password, string? email, int coins)
+        public UserViewModel(int id, MapViewModel[] createdMaps, ICollection<DonationViewModel> writtenReviews, string username, string password, string? email, int coins)
         {
             Id = id;
             this.CreatedMaps = createdMaps ?? new MapViewModel[2];

@@ -7,21 +7,21 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("Reviews")]
-    public class ReviewController : Controller
+    public class DonationController : Controller
     {
         private readonly ReviewLogic _logic;
-        public ReviewController(ReviewLogic logic)
+        public DonationController(ReviewLogic logic)
         {
             _logic = logic;
         }
 
         [HttpGet]
         [Route("{Id}")]
-        public IActionResult GetReviewsByMapId(int Id)
+        public IActionResult GetDonationsByBuildingId(int Id)
         {
             try
             {
-                List<ReviewViewModel> reviews = _logic.GetReviewsByMapId(Id);
+                List<DonationViewModel> reviews = _logic.GetDonationsByBuildingId(Id);
 
                 return Ok(reviews);
             }
@@ -33,11 +33,11 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Save")]
-        public IActionResult SaveReview(ReviewMapViewModel review)
+        public IActionResult SaveDonation(BuildingDonationViewModel review)
         {
             try
             {
-                _logic.SaveReview(review);
+                _logic.SaveDonation(review);
             }
             catch (DbUpdateException ex)
             {

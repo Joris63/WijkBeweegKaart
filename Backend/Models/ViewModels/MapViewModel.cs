@@ -7,7 +7,7 @@
         public double Longitude { get; set; }
         public int UserId { get; set; }
         public ICollection<BuildingViewModel> PlacedBuildings { get; set; }
-        public ICollection<ReviewViewModel>? Reviews { get; set; }
+        public ICollection<DonationViewModel>? Reviews { get; set; }
 
         public MapViewModel(double longitude, double latitude, ICollection<BuildingViewModel> placedBuildings)
         {
