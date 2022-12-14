@@ -14,13 +14,5 @@
         {
 
         }
-
-        public BuildingViewModel(float rotation, int x, int y, int buildingType)
-        {
-            this.Rotation = rotation;
-            this.X = x;
-            this.Y = y;
-            this.BuildingType = buildingType;
-        }
     }
 }

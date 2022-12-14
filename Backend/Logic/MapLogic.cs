@@ -45,6 +45,11 @@ namespace Backend.Logic
                 throw new KeyNotFoundException();
             }
 
+            foreach (Building building in map.PlacedBuildings)
+            {
+                building.CalculateLevel();
+            }
+
             return _mapper.Map<MapViewModel>(map);
         }
 
