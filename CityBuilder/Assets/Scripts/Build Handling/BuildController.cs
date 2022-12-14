@@ -10,18 +10,15 @@ public class BuildController : MonoBehaviour
     private List<(Renderer, Color)> buildingRenderers = new List<(Renderer, Color)>();
     private bool currentValidity = true;
 
-    private void Update()
+
+
+    private void LateUpdate()
     {
         if (currentBuilding)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit))
             {
-                // Get mouse position in world space
-                Vector3 rayPoint = ray.GetPoint(hit.distance);
-                rayPoint.y = 0f;
-
-                currentBuilding.position = rayPoint;
+                currentBuilding.position = hit.point;
 
                 bool placementValidity = hit.transform.parent == buildableRegions;
                 if ((placementValidity && !currentValidity) || (!placementValidity && currentValidity))
@@ -52,6 +49,20 @@ public class BuildController : MonoBehaviour
             {
                 buildingRenderers.Add((renderer, renderer.material.color));
             }
+        }
+    }
+
+    public void RotateBuilding(bool isRight)
+    {
+        Quaternion rotation = currentBuilding.transform.rotation;
+        if (isRight)
+        {
+            currentBuilding.eulerAngles += new Vector3(0, 22.5f, 0);
+        }
+
+        if (!isRight)
+        {
+            currentBuilding.eulerAngles += new Vector3(0, -22.5f, 0);
         }
     }
 }
