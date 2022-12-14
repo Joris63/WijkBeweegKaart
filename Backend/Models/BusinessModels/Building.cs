@@ -13,10 +13,10 @@
 
         public Building()
         {
-            CalculateLevel();
+
         }
 
-        private void CalculateLevel()
+        public void CalculateLevel()
         {
             Level = (int)Math.Floor((decimal)(CoinAmount / 50));
         }

@@ -10,7 +10,8 @@ namespace Backend.Profiles
         public BuildingProfile()
         {
             CreateMap<BuildingViewModel, Building>().ReverseMap();
-            CreateMap<BuildingDTO, Building>().ReverseMap();
+            CreateMap<BuildingDTO, Building>().ReverseMap()
+                .AfterMap((src, dest) => src.CalculateLevel());
         }
     }
 }

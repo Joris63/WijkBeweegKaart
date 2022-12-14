@@ -52,7 +52,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("MapId");
 
-                    b.ToTable("Buildings");
+                    b.ToTable("Buildings", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.DTOModels.DonationDTO", b =>
@@ -78,7 +78,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.DTOModels.LevelDTO", b =>
@@ -101,7 +101,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Levels");
+                    b.ToTable("Levels", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.DTOModels.MapDTO", b =>
@@ -125,7 +125,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Maps");
+                    b.ToTable("Maps", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.DTOModels.UserDTO", b =>
@@ -157,7 +157,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.DTOModels.UserLevelDTO", b =>
@@ -172,7 +172,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("levelId");
 
-                    b.ToTable("UserLevels");
+                    b.ToTable("UserLevels", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.DTOModels.BuildingDTO", b =>

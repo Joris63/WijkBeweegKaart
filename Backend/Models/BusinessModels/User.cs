@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public Map[] CreatedMaps { get; set; }
-        public ICollection<Donation> WrittenReviews { get; set; }
+        public ICollection<Donation> MadeDonations { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string? Email { get; set; }

@@ -12,7 +12,7 @@ namespace Backend.Models.DTOModels
         public int Coins { get; set; }
         public MapDTO[] CreatedMaps { get; set; }
         public Roles Role { get; set; }
-        public ICollection<DonationDTO> WrittenReviews { get; set; }
+        public ICollection<DonationDTO> MadeDonations { get; set; }
         public ICollection<LevelDTO> Levels { get; set; }
     }
 }
