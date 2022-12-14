@@ -30,6 +30,11 @@ namespace Backend.Repositories
 
         public UserDTO SaveUser(UserDTO user)
         {
+            if(_context.Users.Where(u => u.Username == user.Username).Any())
+            {
+                throw new ArgumentException();
+            }
+
             UserDTO newUser = new UserDTO()
             {
                 Username = user.Username,
