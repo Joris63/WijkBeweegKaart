@@ -19,6 +19,7 @@ import "./styles/auth.scss";
 import "./styles/level.scss";
 import "./styles/survey.scss";
 import MapViewerPage from "./pages/MapViewerPage";
+import LoginRegisterPage from "./pages/LoginRegisterPage";
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
           <div className="iphone__content__wrapper">
             <Router>
               <Routes>
-                <Route path="/" element={<SurveyPage />} />
+                <Route path="/survey" element={<SurveyPage />} />
+                <Route path="/" element={<LoginRegisterPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />

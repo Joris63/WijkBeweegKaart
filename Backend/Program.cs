@@ -43,7 +43,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsDevelopment", builder =>
     {
-        builder.WithOrigins("http://localhost:3000");
+        builder.WithOrigins("http://localhost:3000")
+             .AllowAnyHeader()
+             .AllowAnyMethod()
+             .AllowCredentials();
     });
 });
 
@@ -59,10 +62,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
+app.UseCors("CorsDevelopment");
+
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.UseCors("CorsDevelopment");
 
 app.Run();

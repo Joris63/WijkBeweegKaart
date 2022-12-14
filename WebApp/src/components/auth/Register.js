@@ -1,24 +1,62 @@
 import { useNavigate } from "react-router-dom";
+import { register } from "../../api/axios";
+import { useState } from "react";
 
 const Register = () => {
   const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password,setPassword] = useState("");
+  const [confirmPassword,setConfirmPassword] = useState("");
 
   const routeChange = () => {
     let path = "levels";
     navigate(path);
   };
 
+  const handleInputChange = (e) => {
+    const {id , value} = e.target;
+    switch(id)
+    {
+      case "username":
+        setUsername(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      case "v-password":
+        setConfirmPassword(value);
+        break;
+    }
+
+}
+
+  function handlePostSurvey()
+  {
+    if(password === confirmPassword)
+    {
+      let registerJson = { username:username, password:password }    
+      console.log(registerJson)
+      register(registerJson)
+      .then(res => {
+        console.log(res)
+        routeChange();
+      }).catch((error) => {console.log(error)});
+    }
+  }
+
   return (
     <div className="auth_wrapper">
       <div className="auth_title">Registreer je nu en ontvang je punten</div>
       <div className="auth_form">
         <div className="input-field">
-          <label htmlFor="email">E-mailadres of gebruikersnaam</label>
+          <label htmlFor="username">Gebruikersnaam</label>
           <input
             type="email"
-            placeholder="example@example.com"
-            id="email"
-            name="email"
+            id="username"
+            name="username"
+            value={username}
+            onChange = {(e) => handleInputChange(e)}
           />
         </div>
         <div className="input-field">
@@ -28,6 +66,8 @@ const Register = () => {
             placeholder="********"
             id="password"
             name="password"
+            value={password}
+            onChange = {(e) => handleInputChange(e)}
           />
         </div>
         <div className="input-field">
@@ -37,10 +77,12 @@ const Register = () => {
             placeholder="********"
             id="v-password"
             name="v-password"
+            value={confirmPassword}
+            onChange = {(e) => handleInputChange(e)}
           />
         </div>
         <div className="action">
-          <button id="btn" className="btn" onClick={routeChange}>
+          <button id="btn" className="btn" onClick={handlePostSurvey}>
             Registreer nu
           </button>
         </div>
