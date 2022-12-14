@@ -56,7 +56,7 @@ namespace Backend.Controllers
             }
             catch (ArgumentException ex)
             {
-                return BadRequest(new { user, ex });
+                return Conflict(new { user, ex });
             }
         }
     }
