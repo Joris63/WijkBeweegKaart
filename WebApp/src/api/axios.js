@@ -19,4 +19,9 @@ const register = (data) => {
   return axiosPrivate.post("/Users/Save", data);
 };
 
+const getLevels = () =>
+{
+  return axiosPrivate.get("/Levels/Overview?userId=1")
+}
+
 export { register };

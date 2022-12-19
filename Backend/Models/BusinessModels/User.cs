@@ -20,5 +20,10 @@
         {
             get { return CreatedMaps.Any(); }
         }
+
+        public void HashPassword()
+        {
+            Password = BCrypt.Net.BCrypt.HashPassword(Password);
+        }
     }
 }

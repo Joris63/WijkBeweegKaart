@@ -57,7 +57,7 @@ namespace Backend.Logic
                 throw new InvalidOperationException();
             }
 
-            LevelDTO leveldto = _repo.SaveLevel(_mapper.Map<LevelDTO>(levelViewModel));
+            LevelDTO leveldto = _repo.SaveLevel(_mapper.Map<LevelDTO>(level));
 
             if (leveldto.Id == 0)
             {

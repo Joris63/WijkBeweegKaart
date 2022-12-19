@@ -4,6 +4,7 @@ using Backend.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Backend.Context;
 using System.Text.Json.Serialization;
+using Backend.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,8 @@ builder.Services.AddScoped<UserLevelLogic>();
 
 builder.Services.AddScoped<ILevelRepository, LevelRepository>();
 builder.Services.AddScoped<LevelLogic>();
+
+builder.Services.AddScoped<JwtService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

@@ -30,9 +30,10 @@ namespace Backend.Logic
             return _mapper.Map<UserViewModel>(user);
         }
 
-        public UserViewModel SaveUser(UserViewModel userViewModel)
+        public RegisterLoginViewModel SaveUser(RegisterLoginViewModel vm)
         {
-            User user = _mapper.Map<User>(userViewModel);
+            User user = _mapper.Map<User>(vm);
+            user.HashPassword();
 
             if (user == null)
             {
@@ -51,7 +52,21 @@ namespace Backend.Logic
                 throw new DbUpdateException();
             }
 
-            return _mapper.Map<UserViewModel>(_mapper.Map<User>(userdto));
+            return _mapper.Map<RegisterLoginViewModel>(_mapper.Map<User>(userdto));
         }
+
+        public UserViewModel GetUserByUsername(string username)
+        {
+            User user = _mapper.Map<User>(_repo.GetUserByUsername(username));
+
+            if (user == null)
+            {
+                throw new KeyNotFoundException();
+            }
+
+            return _mapper.Map<UserViewModel>(user);
+        }
+
+
     }
 }

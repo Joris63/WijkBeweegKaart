@@ -1,6 +1,7 @@
 ﻿using Backend.Context;
 using Backend.Models.DTOModels;
 using Backend.Repositories.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace Backend.Repositories
 {
@@ -16,16 +17,6 @@ namespace Backend.Repositories
         public UserDTO GetUserById(int id)
         {
             return _context.Users.Where(u => u.Id == id).FirstOrDefault();
-        }
-
-        public UserDTO LoginEmail(string email, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public UserDTO LoginUsername(string username, string password)
-        {
-            throw new NotImplementedException();
         }
 
         public UserDTO SaveUser(UserDTO user)
@@ -51,6 +42,11 @@ namespace Backend.Repositories
         public UserDTO SaveUserEmail(int id, string email)
         {
             throw new NotImplementedException();
+        }
+
+        public UserDTO GetUserByUsername(string username)
+        {
+            return _context.Users.FirstOrDefault(u => u.Username == username);
         }
     }
 }

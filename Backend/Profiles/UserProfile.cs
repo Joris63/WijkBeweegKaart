@@ -11,6 +11,8 @@ namespace Backend.Profiles
         {
             CreateMap<UserViewModel, User>().ReverseMap();
             CreateMap<UserDTO, User>().ReverseMap();
+            CreateMap<RegisterLoginViewModel, User>().ReverseMap();
+
         }
     }
 }

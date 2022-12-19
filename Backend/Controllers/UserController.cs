@@ -1,4 +1,5 @@
-﻿using Backend.Logic;
+﻿using Backend.Helpers;
+using Backend.Logic;
 using Backend.Models.BusinessModels;
 using Backend.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,11 @@ namespace Backend.Controllers
     public class UserController : Controller
     {
         private readonly UserLogic _logic;
-        public UserController(UserLogic logic)
+        private readonly JwtService _jwtService;
+        public UserController(UserLogic logic, JwtService jwtService)
         {
             _logic = logic;
+            _jwtService = jwtService;
         }
 
         [HttpGet]
@@ -34,7 +37,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Save")]
-        public IActionResult SaveUser(UserViewModel user)
+        public IActionResult SaveUser(RegisterLoginViewModel user)
         {
             try
             {
@@ -58,6 +61,31 @@ namespace Backend.Controllers
             {
                 return Conflict(new { user, ex });
             }
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Login(RegisterLoginViewModel vm)
+        {
+            UserViewModel user = _logic.GetUserByUsername(vm.Username);
+            if(user == null)
+            {
+                return BadRequest(new { message = "Invalid credentials" });
+            }
+
+            if(!BCrypt.Net.BCrypt.Verify(vm.Password, user.Password))
+            {
+                return BadRequest(new { message = "Invalid credentials" });
+            }
+
+            var jwt = _jwtService.Generate(user.Id);
+
+            Response.Cookies.Append("jwt", jwt, new CookieOptions
+            {
+                HttpOnly = true
+            });
+
+            return Ok(new {message = "succes"});
         }
     }
 }
