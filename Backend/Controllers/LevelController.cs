@@ -61,6 +61,28 @@ namespace Backend.Controllers
                 return NotFound();
             }
         }
+        [HttpPost]
+        [Route("Complete")]
+        public IActionResult CompleteLevel(CompleteLevelViewModel level)
+        {
+            try
+            {
+                _userLevelLogic.SaveUserLevel(level);
+                return RedirectToAction("GetLevels", level.UserId);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, ex);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { level, ex });
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(new { level, ex });
+            }
+        }
 
         [HttpPost]
         [Route("Save")]

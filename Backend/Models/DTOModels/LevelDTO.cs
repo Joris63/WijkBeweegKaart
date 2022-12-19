@@ -8,7 +8,7 @@ namespace Backend.Models.DTOModels
         public int Id { get; set; }
         public int SurveyId { get; set; }
         public string SurveyName { get; set; }
-        public int? PreviousSurveyId { get; set; }
+        public int? PreviousLevelId { get; set; }
         public ICollection<UserDTO> Users { get; set; }
     }
 }
