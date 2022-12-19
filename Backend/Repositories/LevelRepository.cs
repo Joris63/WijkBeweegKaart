@@ -34,7 +34,7 @@ namespace Backend.Repositories
             {
                 SurveyId = level.SurveyId,
                 SurveyName = level.SurveyName,
-                PreviousSurveyId = level.PreviousSurveyId
+                PreviousLevelId = level.PreviousLevelId
             };
 
             _context.Levels.Add(newLevel);

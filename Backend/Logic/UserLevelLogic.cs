@@ -29,9 +29,9 @@ namespace Backend.Logic
             return _mapper.Map<List<UserLevelViewModel>>(userLevel);
         }
 
-        public UserLevelViewModel SaveUserLevel(UserLevelViewModel userLevelViewModel)
+        public UserLevelViewModel SaveUserLevel(CompleteLevelViewModel completeLevelViewModel)
         {
-            UserLevel userLevel = _mapper.Map<UserLevel>(userLevelViewModel);
+            UserLevel userLevel = _mapper.Map<UserLevel>(completeLevelViewModel);
 
             if (userLevel == null)
             {
@@ -45,7 +45,7 @@ namespace Backend.Logic
 
             UserLevelDTO userLeveldto = _repo.SaveUserLevel(_mapper.Map<UserLevelDTO>(userLevel));
 
-            if (userLeveldto.user.Id == 0)
+            if (userLeveldto.userId == 0 && userLeveldto.levelId == 0)
             {
                 throw new DbUpdateException();
             }
