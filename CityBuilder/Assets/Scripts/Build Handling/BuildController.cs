@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BuildController : MonoBehaviour
 {
+    [SerializeField] private float rotationAmount = 22.5f;
     [SerializeField] private Transform buildableRegions;
     [SerializeField] private Color invalidPlacementColor = Color.red;
 
@@ -10,10 +11,18 @@ public class BuildController : MonoBehaviour
     private List<(Renderer, Color)> buildingRenderers = new List<(Renderer, Color)>();
     private bool currentValidity = true;
 
+    private bool isBuilding = false;
+    private HUDInitializer hUDInitializer;
 
+    private void Awake()
+    {
+        hUDInitializer = FindObjectOfType<HUDInitializer>();
+    }
 
     private void LateUpdate()
     {
+        hUDInitializer.SetMenueActive(isBuilding);
+
         if (currentBuilding)
         {
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit))
@@ -29,18 +38,13 @@ public class BuildController : MonoBehaviour
                     }
                 }
                 currentValidity = placementValidity;
-
-                if (Input.GetMouseButtonDown(0) && currentValidity)
-                {
-                    buildingRenderers.Clear();
-                    currentBuilding = null;
-                }
             }
         }
     }
 
     public void StartBuilding(GameObject buildingPrefab)
     {
+        isBuilding = true;
         if (!currentBuilding)
         {
             currentBuilding = Instantiate(buildingPrefab).transform;
@@ -52,17 +56,35 @@ public class BuildController : MonoBehaviour
         }
     }
 
+    public void StopBuilding()
+    {
+        isBuilding = false;
+        buildingRenderers.Clear();
+        Destroy(currentBuilding.gameObject); 
+        currentBuilding = null;
+    }
+
+    public void PlaceBuilding()
+    {
+        if (currentValidity)
+        {
+        isBuilding = false;
+        buildingRenderers.Clear();
+        currentBuilding = null;
+        }
+    }
+
     public void RotateBuilding(bool isRight)
     {
         Quaternion rotation = currentBuilding.transform.rotation;
         if (isRight)
         {
-            currentBuilding.eulerAngles += new Vector3(0, 22.5f, 0);
+            currentBuilding.eulerAngles += new Vector3(0, rotationAmount, 0);
         }
 
         if (!isRight)
         {
-            currentBuilding.eulerAngles += new Vector3(0, -22.5f, 0);
+            currentBuilding.eulerAngles += new Vector3(0, -rotationAmount, 0);
         }
     }
 }

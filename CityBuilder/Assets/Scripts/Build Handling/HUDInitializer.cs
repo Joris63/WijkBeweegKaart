@@ -15,6 +15,7 @@ public class HUDInitializer : MonoBehaviour
     [SerializeField] private RectTransform buttonsContainer;
     [SerializeField] private GameObject buildingButtonPrefab;
     [SerializeField] private List<Building> buildings = new List<Building>();
+    [SerializeField] private GameObject placementMenu;
 
     private BuildController buildController;
 
@@ -34,5 +35,11 @@ public class HUDInitializer : MonoBehaviour
         GridLayoutGroup grid = buttonsContainer.GetComponent<GridLayoutGroup>();
         float extraSize = buildings.Count * grid.cellSize.y + (buildings.Count - 1) * grid.spacing.y - buttonsContainer.rect.height;
         if (extraSize > 0) buttonsContainer.offsetMin = new Vector2(buttonsContainer.offsetMin.x, -extraSize);
+    }
+
+    public void SetMenueActive(bool isActive)
+    {
+
+        placementMenu.SetActive(isActive);
     }
 }
