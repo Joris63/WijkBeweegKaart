@@ -7,11 +7,9 @@
         public BuildingViewModel Building { get; set; }
         public int Amount { get; set; }
 
-        public DonationViewModel(UserViewModel user, BuildingViewModel Building, int amount)
+        public DonationViewModel()
         {
-            this.User = user;
-            this.Building = Building;
-            this.Amount = amount;
+
         }
     }
 }

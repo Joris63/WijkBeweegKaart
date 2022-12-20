@@ -15,7 +15,7 @@ namespace Backend.Context
         public DbSet<UserDTO> Users { get; set; }
         public DbSet<LevelDTO> Levels { get; set; }
         public DbSet<UserLevelDTO> UserLevels { get; set; }
-        public DbSet<DonationDTO> Reviews { get; set; }
+        public DbSet<DonationDTO> Donations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

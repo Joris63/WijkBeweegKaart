@@ -5,12 +5,11 @@ using Backend.Models.DTOModels;
 
 namespace Backend.Profiles
 {
-    public class ReviewProfile : Profile
+    public class DonationProfile : Profile
     {
-        public ReviewProfile()
+        public DonationProfile()
         {
             CreateMap<BuildingDonationViewModel, Donation>()
-                .ForPath(dest => dest.User.Id, act => act.MapFrom(source => source.UserId))
                 .ForPath(dest => dest.Building.Id, act => act.MapFrom(source => source.BuildingId))
                 .ForMember(dest => dest.Amount, act => act.MapFrom(source => source.Amount));
 

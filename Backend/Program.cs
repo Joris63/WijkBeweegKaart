@@ -27,8 +27,8 @@ builder.Services.AddScoped<MapLogic>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserLogic>();
 
-builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
-builder.Services.AddScoped<ReviewLogic>();
+builder.Services.AddScoped<IDonationRepository, DonationRepository>();
+builder.Services.AddScoped<DonationLogic>();
 
 builder.Services.AddScoped<IUserLevelRepository, UserLevelRepository>();
 builder.Services.AddScoped<UserLevelLogic>();

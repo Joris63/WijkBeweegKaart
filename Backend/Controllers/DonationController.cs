@@ -2,6 +2,7 @@
 using Backend.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace Backend.Controllers
 {
@@ -9,8 +10,8 @@ namespace Backend.Controllers
     [Route("Reviews")]
     public class DonationController : Controller
     {
-        private readonly ReviewLogic _logic;
-        public DonationController(ReviewLogic logic)
+        private readonly DonationLogic _logic;
+        public DonationController(DonationLogic logic)
         {
             _logic = logic;
         }
@@ -33,11 +34,11 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Save")]
-        public IActionResult SaveDonation(BuildingDonationViewModel review)
+        public IActionResult DonateToMap(MapDonationViewModel review)
         {
             try
             {
-                _logic.SaveDonation(review);
+                _logic.SaveDonations(review);
             }
             catch (DbUpdateException ex)
             {

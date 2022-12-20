@@ -6,6 +6,7 @@
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public int UserId { get; set; }
+        public string Name { get; set; }
         public ICollection<BuildingViewModel> PlacedBuildings { get; set; }
 
         public MapViewModel(double longitude, double latitude, ICollection<BuildingViewModel> placedBuildings)
