@@ -1,16 +1,14 @@
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Navigate, Routes, Route, useNavigate } from "react-router-dom";
 import RequireAuth from "./components/auth/RequireAuth";
+import { getSurvey } from "./api/survey";
+import { useState, useEffect } from "react";
 
 // Import pages
 import LevelSelectorPage from "./pages/LevelSelectorPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import SurveyPage from "./pages/SurveyPage";
+import MapViewerPage from "./pages/MapViewerPage";
 
 // Import stylesheets
 import "./styles/index.scss";
@@ -18,9 +16,53 @@ import "./styles/phones.scss";
 import "./styles/auth.scss";
 import "./styles/level.scss";
 import "./styles/survey.scss";
-import MapViewerPage from "./pages/MapViewerPage";
 
 function App() {
+  const [survey, setSurvey] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const navigate = useNavigate();
+
+  function FormatSurvey(data) {
+    let entireSurvey = data.map((page) => ({
+      id: page.id,
+      title: page.title,
+      description: page.description,
+      questions: page.questions.map((question) => {
+        let questionType = question.family.split("_");
+
+        return {
+          id: question.id,
+          type: questionType[0],
+          header: question.headings[0].heading,
+          subType: question.subtype,
+          answer: questionType[0] === "multiple" ? [] : "",
+          choices:
+            question.answers?.choices?.length > 0
+              ? question.answers.choices.map((choice) => ({
+                  id: choice.id,
+                  text: choice.text,
+                }))
+              : null,
+        };
+      }),
+    }));
+
+    setSurvey(entireSurvey);
+  }
+
+  function LoadSurvey(pageId) {
+    setPageNumber(survey.findIndex((page) => page.id === pageId));
+
+    navigate("/");
+  }
+
+  useEffect(() => {
+    getSurvey().then((res) => {
+      FormatSurvey(res.data.pages);
+    });
+  }, []);
+
   return (
     <div
       className={`iphone${
@@ -41,18 +83,27 @@ function App() {
             <div className="iphone_header_bottom">survey.nl</div>
           </div>
           <div className="iphone__content__wrapper">
-            <Router>
-              <Routes>
-                <Route path="/" element={<SurveyPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-                <Route element={<RequireAuth />}>
-                  <Route path="/levels" element={<LevelSelectorPage />} />
-                  <Route path="/map" element={<MapViewerPage />} />
-                </Route>
-              </Routes>
-            </Router>
+            <Routes>
+              <Route
+                path="/"
+                element={<SurveyPage survey={survey} pageNumber={pageNumber} />}
+              />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route element={<RequireAuth />}>
+                <Route
+                  path="/levels"
+                  element={
+                    <LevelSelectorPage
+                      survey={survey}
+                      loadSurvey={LoadSurvey}
+                    />
+                  }
+                />
+                <Route path="/map" element={<MapViewerPage />} />
+              </Route>
+            </Routes>
           </div>
         </div>
         <div className="iphone-header-button">

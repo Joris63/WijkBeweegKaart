@@ -1,9 +1,9 @@
 import LevelSelector from "../components/level/LevelSelector";
 
-const LevelSelectorPage = () => {
+const LevelSelectorPage = (props) => {
   return (
-    <div>
-      <LevelSelector />
+    <div style={{ height: "100%" }}>
+      <LevelSelector {...props} />
     </div>
   );
 };

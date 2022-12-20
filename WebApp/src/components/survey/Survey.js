@@ -1,56 +1,25 @@
 import _ from "lodash";
-import { Fragment, useEffect, useState } from "react";
-import { getSurvey } from "../../api/survey";
+import { useEffect, useState } from "react";
 import ProgressBar from "./ProgressBar";
 import Question from "./Question";
 import Register from "../auth/Register";
+import { useNavigate } from "react-router-dom";
 
-const Survey = ({ surveyId = null }) => {
+const Survey = ({ survey = null, pageNumber = 0 }) => {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [questionNumber, setQuestionNumber] = useState(0);
   const [json, setJson] = useState({ pages: [] });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getSurvey().then((res) => {
-      setLoading(false);
-      FormatQuestions(res.data.pages);
-    });
-  }, []);
+    setLoading(survey === null || _.isEmpty(survey));
 
-  function FormatQuestions(data) {
-    let allQuestions = [];
-
-    data.forEach((page) => {
-      if (page.questions.length > 0) {
-        let formattedQuestions = [];
-
-        page.questions.forEach((question) => {
-          let questionType = question.family.split("_");
-          let formattedQuestion = {
-            id: question.id,
-            pageId: page.id,
-            type: questionType[0],
-            header: question.headings[0].heading,
-            subType: question.subtype,
-            answer: questionType[0] === "multiple" ? [] : "",
-            choices:
-              question.answers?.choices?.length > 0
-                ? question.answers.choices.map((choice) => ({
-                    id: choice.id,
-                    text: choice.text,
-                  }))
-                : null,
-          };
-
-          formattedQuestions.push(formattedQuestion);
-        });
-
-        allQuestions.push(...formattedQuestions);
-      }
-    });
-    setQuestions(allQuestions);
-  }
+    if (survey !== null) {
+      setQuestions(survey[pageNumber]?.questions);
+    }
+  }, [survey, pageNumber]);
 
   function OnChangeAnswer(questionId, data) {
     let updatedQuestions = _.cloneDeep(questions);
@@ -78,11 +47,11 @@ const Survey = ({ surveyId = null }) => {
     setQuestions(updatedQuestions);
   }
 
-  const handleNextPage = () => {
+  const handleNextQuestion = () => {
     setQuestionNumber(questionNumber + 1);
   };
 
-  const handlePreviousPage = () => {
+  const handlePrevQuestion = () => {
     setQuestionNumber(questionNumber - 1);
   };
 
@@ -94,16 +63,16 @@ const Survey = ({ surveyId = null }) => {
         </div>
       ) : (
         <>
-          {questionNumber < questions.length && (
+          {questionNumber < questions?.length && (
             <ProgressBar
-              progress={(1 / questions.length) * questionNumber}
+              progress={(1 * questionNumber) / questions?.length + 1}
               percentage
             />
           )}
-          {surveyId === null && questionNumber === questions.length && (
+          {pageNumber === 0 && questionNumber === questions?.length && (
             <Register />
           )}
-          {questionNumber < questions.length && (
+          {questionNumber < questions?.length && (
             <Question
               id={questions[questionNumber]?.id}
               index={questionNumber + 1}
@@ -120,30 +89,32 @@ const Survey = ({ surveyId = null }) => {
               <button
                 className="action_btn"
                 style={{ float: "left" }}
-                onClick={handlePreviousPage}
+                onClick={handlePrevQuestion}
               >
                 Terug
               </button>
             )}
-            {questionNumber <= questions.length - 1 &&
+            {(questionNumber < questions?.length - 1 || pageNumber === 0) &&
               questions[questionNumber]?.answer && (
                 <button
                   className="action_btn"
                   style={{ float: "right" }}
-                  onClick={handleNextPage}
+                  onClick={handleNextQuestion}
                 >
                   Volgende
                 </button>
               )}
-            {questionNumber === questions.length - 1 && surveyId !== null && (
-              <button
-                className="action_btn"
-                style={{ float: "right" }}
-                onClick={handleNextPage}
-              >
-                Voltooien
-              </button>
-            )}
+            {questionNumber === questions?.length - 1 &&
+              pageNumber !== 0 &&
+              questions[questionNumber]?.answer && (
+                <button
+                  className="action_btn"
+                  style={{ float: "right" }}
+                  onClick={() => navigate("/levels")}
+                >
+                  Voltooien
+                </button>
+              )}
           </div>
         </>
       )}
