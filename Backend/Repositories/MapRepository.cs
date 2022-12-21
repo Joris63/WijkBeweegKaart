@@ -34,7 +34,8 @@ namespace Backend.Repositories
                 Latitude = map.Latitude,
                 Longitude = map.Longitude,
                 PlacedBuildings = map.PlacedBuildings,
-                UserId = map.UserId
+                UserId = map.UserId,
+                Name = map.Name
             };
 
             _context.Maps.Add(newMap);

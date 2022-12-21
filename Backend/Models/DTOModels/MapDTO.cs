@@ -9,6 +9,7 @@ namespace Backend.Models.DTOModels
         public int Id { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+        public string Name { get; set; }
         [ForeignKey("MapCreator")]
         public int UserId { get; set; }
         public UserDTO MapCreator { get; set; }

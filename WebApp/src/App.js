@@ -5,6 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import RequireAuth from "./components/auth/RequireAuth";
+import { setAuthToken } from "./api/axios"
 
 // Import pages
 import LevelSelectorPage from "./pages/LevelSelectorPage";
@@ -22,6 +23,12 @@ import MapViewerPage from "./pages/MapViewerPage";
 import LoginRegisterPage from "./pages/LoginRegisterPage";
 
 function App() {
+
+  const token = localStorage.getItem("token");
+  if (token) {
+      setAuthToken(token);
+  }
+
   return (
     <div
       className={`iphone${
