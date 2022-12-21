@@ -78,14 +78,14 @@ namespace Backend.Controllers
                 return BadRequest(new { message = "Invalid credentials" });
             }
 
-            var jwt = _jwtService.Generate(user.Id);
+            var jwt = _jwtService.Generate(user);
 
             Response.Cookies.Append("jwt", jwt, new CookieOptions
             {
                 HttpOnly = true
             });
 
-            return Ok(new {message = "succes"});
+            return Ok(jwt);
         }
     }
 }

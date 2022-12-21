@@ -1,5 +1,6 @@
 ﻿using Backend.Logic;
 using Backend.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("{Id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetMapById(int Id)
         {
             try

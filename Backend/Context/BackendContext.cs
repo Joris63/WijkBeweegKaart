@@ -1,4 +1,5 @@
-﻿using Backend.Models.DTOModels;
+﻿using Backend.Models;
+using Backend.Models.DTOModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Context
@@ -19,6 +20,8 @@ namespace Backend.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserDTO>().Property(u => u.Role).HasDefaultValue(Roles.User);
+
             modelBuilder.Entity<UserDTO>()
                 .HasMany(u => u.CreatedMaps)
                 .WithOne(m => m.MapCreator)
