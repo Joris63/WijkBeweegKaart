@@ -14,6 +14,7 @@ namespace Backend.Models.DTOModels
         public int UserId { get; set; }
         public UserDTO MapCreator { get; set; }
         public ICollection<BuildingDTO> PlacedBuildings { get; set; }
+        public ICollection<RegionDTO> Regions { get; set; }
 
     }
 }

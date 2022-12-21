@@ -1,4 +1,5 @@
-﻿using Backend.Models.DTOModels;
+﻿using Backend.Models;
+using Backend.Models.DTOModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Context
@@ -16,6 +17,8 @@ namespace Backend.Context
         public DbSet<LevelDTO> Levels { get; set; }
         public DbSet<UserLevelDTO> UserLevels { get; set; }
         public DbSet<DonationDTO> Donations { get; set; }
+        public DbSet<RegionDTO> Regions { get; set; }
+        public DbSet<PointDTO> Points { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
