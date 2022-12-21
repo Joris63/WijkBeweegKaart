@@ -31,12 +31,11 @@ const Register = () => {
 
 }
 
-  function handlePostSurvey()
+  function handleRegister()
   {
     if(password === confirmPassword)
     {
       let registerJson = { username:username, password:password }    
-      console.log(registerJson)
       register(registerJson)
       .then(res => {
         console.log(res)
@@ -82,7 +81,7 @@ const Register = () => {
           />
         </div>
         <div className="action">
-          <button id="btn" className="btn" onClick={handlePostSurvey}>
+          <button id="btn" className="btn" onClick={handleRegister}>
             Registreer nu
           </button>
         </div>
