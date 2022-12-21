@@ -6,9 +6,10 @@ public class RegionLoader : MonoBehaviour
     {
         PolygonTriangulator polygonTriangulator = FindObjectOfType<PolygonTriangulator>();
 
-        if (RegionSaver.main && polygonTriangulator)
+        /*
+        if (DataController.main && polygonTriangulator)
         {
-            foreach (Vector3[] vertices in RegionSaver.main.savedRegions)
+            foreach (Vector3[] vertices in DataController.main.savedRegions)
             {
                 bool success = polygonTriangulator.CreateTriangles(vertices, out int[] triangles);
 
@@ -19,5 +20,6 @@ public class RegionLoader : MonoBehaviour
                 }
             }
         }
+        */
     }
 }

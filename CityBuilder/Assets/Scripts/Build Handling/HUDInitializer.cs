@@ -9,7 +9,7 @@ public class HUDInitializer : MonoBehaviour
     private class Building
     {
         public string name;
-        public GameObject prefab;
+        public string prefabName;
     }
 
     [SerializeField] private RectTransform buttonsContainer;
@@ -29,7 +29,7 @@ public class HUDInitializer : MonoBehaviour
             GameObject buttonClone = Instantiate(buildingButtonPrefab, buttonsContainer);
             buttonClone.GetComponent<RectTransform>().GetChild(0).GetComponent<TextMeshProUGUI>().text = building.name;
 
-            buttonClone.GetComponent<Button>().onClick.AddListener(delegate { buildController.StartBuilding(building.prefab); });
+            buttonClone.GetComponent<Button>().onClick.AddListener(delegate { buildController.StartBuilding(building.prefabName); });
         }
 
         GridLayoutGroup grid = buttonsContainer.GetComponent<GridLayoutGroup>();
@@ -39,7 +39,6 @@ public class HUDInitializer : MonoBehaviour
 
     public void SetMenueActive(bool isActive)
     {
-
         placementMenu.SetActive(isActive);
     }
 }

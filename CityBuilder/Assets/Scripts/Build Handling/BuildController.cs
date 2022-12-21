@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BuildController : MonoBehaviour
 {
-    [SerializeField] private float rotationAmount = 22.5f;
+    [SerializeField] private float rotateAmount = 22.5f;
     [SerializeField] private Transform buildableRegions;
     [SerializeField] private Color invalidPlacementColor = Color.red;
 
@@ -11,19 +11,16 @@ public class BuildController : MonoBehaviour
     private List<(Renderer, Color)> buildingRenderers = new List<(Renderer, Color)>();
     private bool currentValidity = true;
 
-    private bool isBuilding = false;
-    private HUDInitializer hUDInitializer;
+    private HUDInitializer hudInitializer;
 
     private void Awake()
     {
-        hUDInitializer = FindObjectOfType<HUDInitializer>();
+        hudInitializer = FindObjectOfType<HUDInitializer>();
     }
 
     private void LateUpdate()
     {
-        hUDInitializer.SetMenueActive(isBuilding);
-
-        if (currentBuilding)
+       if (currentBuilding)
         {
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit))
             {
@@ -42,25 +39,29 @@ public class BuildController : MonoBehaviour
         }
     }
 
-    public void StartBuilding(GameObject buildingPrefab)
+    public void StartBuilding(string prefabName)
     {
-        isBuilding = true;
         if (!currentBuilding)
         {
+            GameObject buildingPrefab = Resources.Load<GameObject>("Buildings/"+prefabName);
+            if (!buildingPrefab) return;
             currentBuilding = Instantiate(buildingPrefab).transform;
 
             foreach (Renderer renderer in currentBuilding.GetComponentsInChildren<Renderer>())
             {
                 buildingRenderers.Add((renderer, renderer.material.color));
             }
+
+            hudInitializer.SetMenueActive(true);
         }
     }
 
     public void StopBuilding()
     {
-        isBuilding = false;
+        hudInitializer.SetMenueActive(false);
         buildingRenderers.Clear();
-        Destroy(currentBuilding.gameObject); 
+        currentValidity = true;
+        Destroy(currentBuilding.gameObject);
         currentBuilding = null;
     }
 
@@ -68,23 +69,14 @@ public class BuildController : MonoBehaviour
     {
         if (currentValidity)
         {
-        isBuilding = false;
-        buildingRenderers.Clear();
-        currentBuilding = null;
+            hudInitializer.SetMenueActive(false);
+            buildingRenderers.Clear();
+            currentBuilding = null;
         }
     }
 
     public void RotateBuilding(bool isRight)
     {
-        Quaternion rotation = currentBuilding.transform.rotation;
-        if (isRight)
-        {
-            currentBuilding.eulerAngles += new Vector3(0, rotationAmount, 0);
-        }
-
-        if (!isRight)
-        {
-            currentBuilding.eulerAngles += new Vector3(0, -rotationAmount, 0);
-        }
+        currentBuilding.eulerAngles += new Vector3(0, isRight ? rotateAmount : -rotateAmount, 0);
     }
 }
