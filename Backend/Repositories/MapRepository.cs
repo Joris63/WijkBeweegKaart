@@ -33,8 +33,7 @@ namespace Backend.Repositories
         {
             MapDTO newMap = new MapDTO()
             {
-                Latitude = map.Latitude,
-                Longitude = map.Longitude,
+                Location = map.Location,
                 PlacedBuildings = map.PlacedBuildings,
                 UserId = map.UserId,
                 Name = map.Name

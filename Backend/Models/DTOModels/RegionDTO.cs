@@ -6,8 +6,8 @@ namespace Backend.Models.DTOModels
     {
         public int Id { get; set; }
         public ICollection<PointDTO> Points { get; set; }
-        [ForeignKey("Map")]
-        public int MapId { get; set; }
-        public MapDTO Map { get; set; }
+        [ForeignKey("Location")]
+        public int LocationId { get; set; }
+        public LocationDTO Location { get; set; }
     }
 }

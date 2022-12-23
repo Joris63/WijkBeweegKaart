@@ -19,6 +19,7 @@ namespace Backend.Context
         public DbSet<DonationDTO> Donations { get; set; }
         public DbSet<RegionDTO> Regions { get; set; }
         public DbSet<PointDTO> Points { get; set; }
+        public DbSet<LocationDTO> Locations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

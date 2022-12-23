@@ -62,7 +62,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (map.Longitude == 0 || map.Latitude == 0 || map.PlacedBuildings.Count == 0)
+            if (map.Location.Longitude == 0 || map.Location.Latitude == 0 || map.PlacedBuildings.Count == 0)
             {
                 throw new InvalidOperationException();
             }
