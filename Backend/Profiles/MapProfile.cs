@@ -10,6 +10,8 @@ namespace Backend.Profiles
         public MapProfile()
         {
             CreateMap<MapViewModel, Map>().ReverseMap();
+            CreateMap<SaveMapViewModel, Map>()
+                .ForPath(dest => dest.Location.Id, act => act.MapFrom(s => s.LocationId));
             CreateMap<Map, MapDTO>().ReverseMap()
                 .AfterMap((s, d) => 
                 { 

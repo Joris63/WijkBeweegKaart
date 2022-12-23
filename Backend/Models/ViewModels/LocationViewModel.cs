@@ -7,5 +7,10 @@
         public double Latitude { get; set; }
         public string Name { get; set; }
         public ICollection<RegionViewModel> Regions { get; set; }
+
+        public LocationViewModel()
+        {
+
+        }
     }
 }

@@ -61,6 +61,7 @@ namespace Backend.Controllers
                 return NotFound();
             }
         }
+
         [HttpPost]
         [Route("Complete")]
         public IActionResult CompleteLevel(CompleteLevelViewModel level)

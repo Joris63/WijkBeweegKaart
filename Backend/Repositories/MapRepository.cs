@@ -33,9 +33,9 @@ namespace Backend.Repositories
         {
             MapDTO newMap = new MapDTO()
             {
-                Location = map.Location,
+                Location = _context.Locations.FirstOrDefault(l => l.Id == map.LocationId),
                 PlacedBuildings = map.PlacedBuildings,
-                UserId = map.UserId,
+                MapCreator = _context.Users.FirstOrDefault(u => u.Id == map.UserId),
                 Name = map.Name
             };
 

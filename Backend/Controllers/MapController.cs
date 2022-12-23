@@ -49,11 +49,11 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Save")]
-        public IActionResult SaveMap(MapViewModel map)
+        public IActionResult SaveMap(SaveMapViewModel map)
         {
             try
             {
-                map = _logic.SaveMap(map);
+                MapViewModel newMap = _logic.SaveMap(map);
             }
             catch (DbUpdateException ex)
             {
