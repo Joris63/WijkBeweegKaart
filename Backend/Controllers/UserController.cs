@@ -89,12 +89,35 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("Coins")]
-        public IActionResult SaveCoins(int coins)
+        [Route("Email")]
+        public IActionResult SaveEmail(EmailViewModel vm)
         {
+            try
+            {
+                UserViewModel user = _logic.SaveUserEmail(vm);
 
+                return Ok(user);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
 
-            return Ok(newAmount);
+        [HttpPost]
+        [Route("Coins")]
+        public IActionResult EditUserCoins(CoinViewModel vm)
+        {
+            try
+            {
+                UserViewModel user = _logic.EditUserCoins(vm);
+
+                return Ok(user);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
     }
