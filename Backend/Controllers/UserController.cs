@@ -88,5 +88,14 @@ namespace Backend.Controllers
             return Ok(jwt);
         }
 
+        [HttpPost]
+        [Route("Coins")]
+        public IActionResult SaveCoins(int coins)
+        {
+
+
+            return Ok(newAmount);
+        }
+
     }
 }

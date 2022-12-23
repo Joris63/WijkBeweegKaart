@@ -67,6 +67,28 @@ namespace Backend.Logic
             return _mapper.Map<UserViewModel>(user);
         }
 
+        public UserViewModel SaveUserEmail(EmailViewModel vm)
+        {
+            User user = _mapper.Map<User>(_repo.SaveUserEmail(vm.Id, vm.Email));
 
+            if (user == null)
+            {
+                throw new DbUpdateException();
+            }
+
+            return _mapper.Map<UserViewModel>(user);
+        }
+
+        public UserViewModel EditUserCoins(CoinViewModel vm)
+        {
+            User user = _mapper.Map<User>(_repo.CoinChange(vm.Id, vm.Coins));
+
+            if (user == null)
+            {
+                throw new DbUpdateException();
+            }
+
+            return _mapper.Map<UserViewModel>(user);
+        }
     }
 }

@@ -41,12 +41,35 @@ namespace Backend.Repositories
 
         public UserDTO SaveUserEmail(int id, string email)
         {
-            throw new NotImplementedException();
+            var result = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (result == null)
+            {
+                throw new ArgumentException();
+            }
+
+            result.Email = email;
+            _context.SaveChanges();
+            return result;
         }
 
         public UserDTO GetUserByUsername(string username)
         {
             return _context.Users.FirstOrDefault(u => u.Username == username);
+        }
+
+        public UserDTO CoinChange(int id, int coinAmount)
+        {
+            var result = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (result == null)
+            {
+                throw new ArgumentException();
+            }
+
+            result.Coins += coinAmount;
+            _context.SaveChanges();
+            return result;
         }
     }
 }
