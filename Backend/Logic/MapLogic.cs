@@ -26,7 +26,7 @@ namespace Backend.Logic
 
         public List<MapViewModel> GetMapsFromUser(int userId)
         {
-            if(userId !> 0)
+            if(!(userId > 0))
             {
                 throw new ArgumentException();
             }

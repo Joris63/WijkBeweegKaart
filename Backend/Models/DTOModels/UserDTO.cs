@@ -10,7 +10,7 @@ namespace Backend.Models.DTOModels
         public string Password { get; set; }
         public string? Email { get; set; }
         public int Coins { get; set; }
-        public MapDTO[] CreatedMaps { get; set; }
+        public ICollection<MapDTO> CreatedMaps { get; set; }
         public Roles Role { get; set; }
         public ICollection<DonationDTO> MadeDonations { get; set; }
         public ICollection<LevelDTO> Levels { get; set; }

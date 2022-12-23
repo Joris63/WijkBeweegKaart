@@ -10,7 +10,14 @@ namespace Backend.Profiles
         public MapProfile()
         {
             CreateMap<MapViewModel, Map>().ReverseMap();
-            CreateMap<Map, MapDTO>().ReverseMap();
+            CreateMap<Map, MapDTO>().ReverseMap()
+                .AfterMap((s, d) => 
+                { 
+                    foreach (Building building in d.PlacedBuildings)
+                    {
+                        building.CalculateLevel();
+                    }
+                });
         }
     }
 }

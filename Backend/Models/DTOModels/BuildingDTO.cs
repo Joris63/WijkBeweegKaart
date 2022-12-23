@@ -16,6 +16,6 @@ namespace Backend.Models.DTOModels
         [ForeignKey("Map")]
         public int MapId { get; set; }
         public MapDTO Map { get; set; }
-
+        public ICollection<DonationDTO> Donations { get; set; }
     }
 }

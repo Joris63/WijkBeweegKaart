@@ -45,7 +45,7 @@ namespace Backend.Logic
         {
             List<Region> regions = _mapper.Map<List<Region>>(regionsViewModel.Regions);
 
-            for (int i = regions.Count -1; i >= 0; i--)
+            for (int i = regions.Count - 1; i >= 0; i--)
             {
                 regions[i].MapId = regionsViewModel.MapId;
                 if (regions[i] == null)

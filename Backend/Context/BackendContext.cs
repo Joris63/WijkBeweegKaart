@@ -34,10 +34,10 @@ namespace Backend.Context
             modelBuilder.Entity<UserDTO>().HasMany(u => u.Levels)
                 .WithMany(l => l.Users)
                 .UsingEntity<UserLevelDTO>(
-                ul => ul.HasOne(ul => ul.level)
-                .WithMany().HasForeignKey(ul => ul.levelId),
-                ul => ul.HasOne(ul => ul.user)
-                .WithMany().HasForeignKey(ul => ul.userId));
+                    ul => ul.HasOne(ul => ul.level)
+                    .WithMany().HasForeignKey(ul => ul.levelId),
+                    ul => ul.HasOne(ul => ul.user)
+                    .WithMany().HasForeignKey(ul => ul.userId));
 
             modelBuilder.Entity<UserLevelDTO>()
                 .HasKey(x => new { x.userId, x.levelId });

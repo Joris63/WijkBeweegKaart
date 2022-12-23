@@ -7,6 +7,5 @@
         public double Y { get; set; }
         public double Z { get; set; }
         public int RegionId { get; set; }
-        public Region Region { get; set; }
     }
 }

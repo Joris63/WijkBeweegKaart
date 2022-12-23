@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-
-namespace Backend.Models.BusinessModels
+﻿namespace Backend.Models.BusinessModels
 {
     public class Map
     {
@@ -10,7 +8,8 @@ namespace Backend.Models.BusinessModels
         public int UserId { get; set; }
         public string Name { get; set; }
         public ICollection<Building> PlacedBuildings { get; set; }
-        public ICollection<Donation> Reviews { get; set; }
+        public ICollection<Donation> Donations { get; set; }
+        public ICollection<Region> Regions { get; set; }
 
         public Map()
         {

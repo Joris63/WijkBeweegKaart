@@ -8,6 +8,7 @@
         public int UserId { get; set; }
         public string Name { get; set; }
         public ICollection<BuildingViewModel> PlacedBuildings { get; set; }
+        public ICollection<RegionViewModel> Regions { get; set; }
 
         public MapViewModel(double longitude, double latitude, ICollection<BuildingViewModel> placedBuildings)
         {

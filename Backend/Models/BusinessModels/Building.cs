@@ -11,6 +11,7 @@
         public int CoinAmount { get; set; }
         public int Level { get; set; }
         public string Name { get; set; }
+        public ICollection<Donation> Donations { get; set; }
 
         public Building()
         {
