@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(PolygonTriangulator))]
 public class RegionCreator : MonoBehaviour
 {
     [Min(0.1f)]
@@ -36,8 +37,7 @@ public class RegionCreator : MonoBehaviour
 
     private void Awake()
     {
-        polygonTriangulator = FindObjectOfType<PolygonTriangulator>();
-        if (!polygonTriangulator) Debug.LogWarning("No Polygon Triangulator present in scene.");
+        polygonTriangulator = GetComponent<PolygonTriangulator>();
         dataController = FindObjectOfType<DataController>();
         if (!dataController) Debug.LogWarning("No Data Controller present in scene.");
         eventSystem = FindObjectOfType<EventSystem>();
@@ -46,7 +46,7 @@ public class RegionCreator : MonoBehaviour
 
     private void Update()
     {
-        if (!polygonTriangulator || !dataController) return;
+        if (!dataController) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))

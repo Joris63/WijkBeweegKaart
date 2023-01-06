@@ -1,82 +1,160 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
+using static DataController;
 
 public class BuildController : MonoBehaviour
 {
-    [SerializeField] private float rotateAmount = 22.5f;
+    [SerializeField] private float rotateAmount = 0.2f;
     [SerializeField] private Transform buildableRegions;
     [SerializeField] private Color invalidPlacementColor = Color.red;
+    [SerializeField] private Color selectedColor = Color.yellow;
+    [SerializeField] private LayerMask buildable;
+    [SerializeField] private GameObject buildingObjectPrefab;
+
+    [Space(12)]
+    [SerializeField] private GameObject placementMenu;
+
+    private DataController dataController;
 
     private Transform currentBuilding;
-    private List<(Renderer, Color)> buildingRenderers = new List<(Renderer, Color)>();
+    private Image currentImage;
     private bool currentValidity = true;
+    private List<Transform> createdBuildings = new List<Transform>();
 
-    private HUDInitializer hudInitializer;
+    private Transform selectedBuilding;
+    private Image selectedImage;
 
     private void Awake()
     {
-        hudInitializer = FindObjectOfType<HUDInitializer>();
+        dataController = FindObjectOfType<DataController>();
+        if (!dataController) Debug.LogWarning("No Data Controller present in scene.");
     }
 
     private void LateUpdate()
     {
+        if (!dataController) return;
+
        if (currentBuilding)
         {
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 100f, buildable))
             {
-                currentBuilding.position = hit.point;
+                currentBuilding.position = new Vector3(hit.point.x, 0.01f, hit.point.z);
 
                 bool placementValidity = hit.transform.parent == buildableRegions;
-                if ((placementValidity && !currentValidity) || (!placementValidity && currentValidity))
-                {
-                    foreach ((Renderer, Color) data in buildingRenderers)
-                    {
-                        data.Item1.material.color = placementValidity ? data.Item2 : invalidPlacementColor;
-                    }
-                }
+                currentImage.color = placementValidity ? Color.white : invalidPlacementColor;
                 currentValidity = placementValidity;
+            }
+        }
+       else if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f) && hit.transform.parent == transform)
+            {
+                if (selectedBuilding) selectedImage.color = Color.white;
+
+                selectedBuilding = hit.transform;
+                selectedImage = selectedBuilding.GetChild(0).GetChild(0).GetComponent<Image>();
+                selectedImage.color = selectedColor;
             }
         }
     }
 
-    public void StartBuilding(string prefabName)
+    public void StartBuilding(string imageName)
     {
         if (!currentBuilding)
         {
-            GameObject buildingPrefab = Resources.Load<GameObject>("Buildings/"+prefabName);
-            if (!buildingPrefab) return;
-            currentBuilding = Instantiate(buildingPrefab).transform;
-
-            foreach (Renderer renderer in currentBuilding.GetComponentsInChildren<Renderer>())
+            if (selectedBuilding)
             {
-                buildingRenderers.Add((renderer, renderer.material.color));
+                selectedImage.color = Color.white;
+                selectedBuilding = null;
             }
 
-            hudInitializer.SetMenueActive(true);
+            Texture2D text = LoadTexture(imageName);
+            if (text == null) return;
+
+            Sprite buildingSprite = Sprite.Create(text, new Rect(0, 0, text.width, text.height), Vector2.zero, 100f);
+
+            currentBuilding = Instantiate(buildingObjectPrefab).transform;
+            currentImage = currentBuilding.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            currentImage.sprite = buildingSprite;
+            currentBuilding.parent = transform;
+            currentBuilding.name = imageName;
+
+            placementMenu.SetActive(true);
         }
+    }
+
+    private Texture2D LoadTexture(string imageName)
+    {
+        string path = Application.streamingAssetsPath+"/Buildings/" + imageName + ".png";
+        if (File.Exists(path))
+        {
+            Texture2D text = new Texture2D(1, 1);
+            if (text.LoadImage(File.ReadAllBytes(path)))
+            {
+                return text;
+            }
+        }
+        return null;
     }
 
     public void StopBuilding()
     {
-        hudInitializer.SetMenueActive(false);
-        buildingRenderers.Clear();
-        currentValidity = true;
-        Destroy(currentBuilding.gameObject);
-        currentBuilding = null;
+        if (currentBuilding)
+        {
+            placementMenu.SetActive(false);
+
+            currentValidity = true;
+            Destroy(currentBuilding.gameObject);
+            currentBuilding = null;
+        }
     }
 
     public void PlaceBuilding()
     {
-        if (currentValidity)
+        if (currentBuilding && currentValidity)
         {
-            hudInitializer.SetMenueActive(false);
-            buildingRenderers.Clear();
+            placementMenu.SetActive(false);
+            createdBuildings.Add(currentBuilding);
             currentBuilding = null;
         }
     }
 
     public void RotateBuilding(bool isRight)
     {
-        currentBuilding.eulerAngles += new Vector3(0, isRight ? rotateAmount : -rotateAmount, 0);
+        if (currentBuilding) currentBuilding.eulerAngles += new Vector3(0, isRight ? rotateAmount : -rotateAmount, 0);
+    }
+
+    public void RemoveBuilding()
+    {
+        if (selectedBuilding)
+        {
+            createdBuildings.Remove(selectedBuilding);
+            Destroy(selectedBuilding.gameObject);
+            selectedBuilding = null;
+        }
+    }
+
+    public void SaveBuildings()
+    {
+        if (dataController && createdBuildings.Count > 0)
+        {
+            List<PlacedBuilding> buildings = new List<PlacedBuilding>();
+
+            foreach (Transform building in createdBuildings)
+            {
+                buildings.Add(new PlacedBuilding()
+                {
+                    name = building.name,
+                    position = building.position,
+                    rotation = building.eulerAngles,
+                    totalPoints = 0
+                });
+            }
+
+            dataController.SaveBuildings(buildings);
+        }
     }
 }

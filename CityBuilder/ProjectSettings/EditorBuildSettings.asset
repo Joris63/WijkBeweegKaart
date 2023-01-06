@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/CommunicationTest.unity
-    guid: 3312c759d68212542a8506890050045e
-  - enabled: 1
     path: Assets/Scenes/AdminScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/BuildingScene.unity
     guid: 5f9f325689a4a0342b29182f353f35ec
+  - enabled: 1
+    path: Assets/Scenes/RatingScene.unity
+    guid: 03c967a7244276f449400e68b9008c98
   m_configObjects: {}

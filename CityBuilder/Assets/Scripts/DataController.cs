@@ -1,10 +1,17 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DataController : MonoBehaviour
 {
-    public class Building
+    public class AvailableBuilding
+    {
+        public string name;
+        public string imageName;
+    }
+
+    public class PlacedBuilding
     {
         public string name;
         public Vector3 position;
@@ -12,19 +19,37 @@ public class DataController : MonoBehaviour
         public int totalPoints;
     }
 
+    public UnityEvent onDataRetrieved;
+
+    // ---------- DTOs ----------
     private class RegionDTO { public List<Vector3[]> regions; }
-    private class BuildingDTO { public List<Building> buildings; }
+    private class BuildingDTO { public List<PlacedBuilding> buildings; }
+
+    // ---------- DATA ----------
+    private List<AvailableBuilding> availableBuildings = new List<AvailableBuilding>();
+    public List<AvailableBuilding> AvailableBuildings { get { return availableBuildings; } }
 
     private List<Vector3[]> savedRegions = new List<Vector3[]>();
-    [HideInInspector] public List<Vector3[]> SavedRegions { get { return savedRegions; } }
+    public List<Vector3[]> SavedRegions { get { return savedRegions; } }
 
-    private List<Building> savedBuildings = new List<Building>();
-    [HideInInspector] public List<Building> SavedBuildings { get { return savedBuildings; } }
+    private List<PlacedBuilding> savedBuildings = new List<PlacedBuilding>();
+    public List<PlacedBuilding> SavedBuildings { get { return savedBuildings; } }
 
-    public void InitializeData(string regions, string buildings)
+    // ---------- LOGIC ----------
+    private void Start()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        UnityInitialized();
+#endif
+    }
+
+    public void InitializeData(string regions, string placedBuildings, List<AvailableBuilding> availableBuildings)
     {
         if (!string.IsNullOrEmpty(regions)) savedRegions = JsonUtility.FromJson<RegionDTO>(regions).regions;
-        if (!string.IsNullOrEmpty(buildings)) savedBuildings = JsonUtility.FromJson<BuildingDTO>(buildings).buildings;
+        if (!string.IsNullOrEmpty(placedBuildings)) savedBuildings = JsonUtility.FromJson<BuildingDTO>(placedBuildings).buildings;
+        if (availableBuildings != null) this.availableBuildings = availableBuildings;
+
+        onDataRetrieved.Invoke();
     }
 
     public void SaveRegions(List<Vector3[]> regions)
@@ -34,25 +59,27 @@ public class DataController : MonoBehaviour
         SendRegionsData(data);
 #endif
 
-        // Mock
+        // Debugging
 #if UNITY_EDITOR
         savedRegions = regions;
 #endif
     }
 
-    public void SaveBuildings(List<Building> buildings)
+    public void SaveBuildings(List<PlacedBuilding> buildings)
     {
         string data = JsonUtility.ToJson(new BuildingDTO() { buildings = buildings });
 #if UNITY_WEBGL && !UNITY_EDITOR
         SendBuildingsData(data);
 #endif
 
-        // Mock
+        // Debugging
 #if UNITY_EDITOR
         savedBuildings = buildings;
 #endif
     }
 
+    [DllImport("__Internal")]
+    private static extern void UnityInitialized();
     [DllImport("__Internal")]
     private static extern void SendRegionsData(string data);
     [DllImport("__Internal")]
