@@ -9,7 +9,6 @@ const Survey = ({ survey = null, pageNumber = 0 }) => {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [questionNumber, setQuestionNumber] = useState(0);
-  const [json, setJson] = useState({ pages: [] });
 
   const navigate = useNavigate();
 
@@ -54,6 +53,44 @@ const Survey = ({ survey = null, pageNumber = 0 }) => {
   const handlePrevQuestion = () => {
     setQuestionNumber(questionNumber - 1);
   };
+
+  function handlePostSurvey() {
+    let surveyJson = { pages: [] };
+    questions.forEach((question, index) => {
+      surveyJson.pages.push({
+        id: question.pageId,
+        questions: [{ id: question.id, answers: [] }],
+      });
+
+      switch (question.type) {
+        default:
+          break;
+        case "single":
+          surveyJson.pages[index].questions[0].answers.push({
+            choice_id: question.answer,
+          });
+          break;
+        case "multiple":
+          question.answer.forEach((answer) => {
+            surveyJson.pages[index].questions[0].answers.push({
+              choice_id: answer,
+            });
+          });
+          break;
+        case "open":
+          surveyJson.pages[index].questions[0].answers.push({
+            text: question.answer,
+          });
+      }
+    });
+
+    navigate("/levels");
+    // postSurvey(surveyJson)
+    // .then(res => {
+    //   console.log(res)
+    //   handleNextPage();
+    // }).catch((error) => {console.log(error)});
+  }
 
   return (
     <div className="survey_wrapper">
@@ -110,7 +147,7 @@ const Survey = ({ survey = null, pageNumber = 0 }) => {
                 <button
                   className="action_btn"
                   style={{ float: "right" }}
-                  onClick={() => navigate("/levels")}
+                  onClick={handlePostSurvey}
                 >
                   Voltooien
                 </button>
