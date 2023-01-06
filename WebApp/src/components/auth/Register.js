@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api/axios";
 import { useState } from "react";
+import useAuth from "./../../hooks/useAuth";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +13,7 @@ const Register = () => {
 
   const routeChange = () => {
     let path = "levels";
-    
+
     navigate(path);
   };
 
@@ -21,6 +23,8 @@ const Register = () => {
       register(registerJson)
         .then((res) => {
           console.log(res);
+
+          setAuth({ user: registerJson });
           routeChange();
         })
         .catch((error) => {

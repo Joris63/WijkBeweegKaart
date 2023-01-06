@@ -1,20 +1,25 @@
 import { login } from "../../api/axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "./../../hooks/useAuth";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   function handleLogin() {
     let loginJson = { username: username, password: password };
     login(loginJson)
       .then((res) => {
         console.log(res);
+
         const token = res.data.jwt;
         localStorage.setItem("token", token);
+
+        setAuth({ user: loginJson });
 
         navigate("/levels");
       })
