@@ -1,43 +1,13 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import LevelButton from "./LevelButton";
-
-/*
-const levels = [
-  {
-    id: 1,
-    title: "Creer jouw account",
-    reward: 100,
-    complete: true,
-    locked: false,
-  },
-  {
-    id: 2,
-    title: "Link jouw email",
-    reward: 50,
-    complete: false,
-    locked: false,
-  },
-  {
-    id: 3,
-    title: "Richt je eigen sportpark in",
-    reward: 150,
-    complete: false,
-    locked: false,
-  },
-  {
-    id: 4,
-    title: "Waardeer anderen sportparken en daarna doe dit",
-    reward: 100,
-    complete: false,
-    locked: true,
-  },
-];
-*/
 
 const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
   const [levels, setLevels] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   function FormatLevels() {
     // get all survey levels
@@ -46,13 +16,33 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
       .map((page, i) => ({
         nr: i,
         id: page.id,
-        title: `level ${i + 1}`,
+        title: page.title ? page.title : `level ${i + 1}`,
         reward: 100,
         complete: false,
-        locked: false,
+        locked: i > 0,
+        custom: false,
       }));
 
+    console.log(survey);
+
     // add custom levels
+    allLevels.push({
+      id: "create-park",
+      title: "Eigen park",
+      reward: 150,
+      complete: true,
+      to: "/map",
+      custom: true,
+    });
+
+    allLevels.push({
+      id: "rate-park",
+      title: "Beoordeel park",
+      reward: 55,
+      complete: true,
+      to: "/rate",
+      custom: true,
+    });
 
     setLevels(allLevels);
   }
@@ -78,11 +68,34 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
           <div className="bar"></div>
         </div>
       ) : (
-        <>
+        <div className="level_wrapper">
+          <div className="level_container">
+            {levels
+              .filter((lvl) => lvl.custom && lvl.complete)
+              .map((lvl) => (
+                <LevelButton
+                  key={`lvl-button-${lvl.id}`}
+                  title={lvl.title}
+                  onClick={() => navigate(lvl.to)}
+                />
+              ))}
+          </div>
           <h3 className="level_selector_title">Selecteer level</h3>
           <div className="level_container">
             {levels
-              .filter((lvl) => !lvl.complete && !lvl.locked)
+              .filter((lvl) => lvl.custom && !lvl.complete)
+              .map((lvl) => (
+                <LevelButton
+                  key={`lvl-button-${lvl.id}`}
+                  title={lvl.title}
+                  reward={lvl.reward}
+                  onClick={() => navigate(lvl.to)}
+                />
+              ))}
+          </div>
+          <div className="level_container">
+            {levels
+              .filter((lvl) => !lvl.complete && !lvl.locked && !lvl.custom)
               .map((lvl) => (
                 <LevelButton
                   key={`lvl-button-${lvl.id}`}
@@ -96,7 +109,7 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
           </div>
           <div className="level_container small">
             {levels
-              .filter((lvl) => lvl.complete || lvl.locked)
+              .filter((lvl) => (lvl.complete || lvl.locked) && !lvl.custom)
               .sort((a, b) => {
                 if (a.locked && b.complete) return -1;
 
@@ -116,7 +129,7 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
                 />
               ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

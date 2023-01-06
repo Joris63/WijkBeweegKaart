@@ -1,4 +1,3 @@
-import { useState } from "react";
 import RadioButton from "./answer-types/RadioButton";
 import Checkbox from "./answer-types/Checkbox";
 import Textarea from "./answer-types/Textarea";

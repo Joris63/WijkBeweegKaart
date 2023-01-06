@@ -13,11 +13,18 @@ const LevelButton = ({
       }${complete ? " complete" : ""}`}
       onClick={onClick}
     >
-      <div className="level_button_title">{title}</div>
-      <div className="level_button_reward">
-        {reward}
-        <i className="fa-duotone fa-coins"></i>
+      <div
+        style={{ lineHeight: reward === 0 ? "45px" : null }}
+        className="level_button_title"
+      >
+        {title}
       </div>
+      {reward !== 0 && (
+        <div className="level_button_reward">
+          {reward}
+          <i className="fa-duotone fa-coins"></i>
+        </div>
+      )}
     </div>
   );
 };

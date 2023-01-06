@@ -10,6 +10,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import SurveyPage from "./pages/SurveyPage";
 import MapViewerPage from "./pages/MapViewerPage";
+import LoginRegisterPage from "./pages/LoginRegisterPage";
 
 // Import stylesheets
 import "./styles/index.scss";
@@ -17,22 +18,17 @@ import "./styles/phones.scss";
 import "./styles/auth.scss";
 import "./styles/level.scss";
 import "./styles/survey.scss";
-import MapViewerPage from "./pages/MapViewerPage";
-import LoginRegisterPage from "./pages/LoginRegisterPage";
-
-function App() {
-
-  const token = localStorage.getItem("token");
-  if (token) {
-      setAuthToken(token);
-  }
-
 
 function App() {
   const [survey, setSurvey] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
 
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  if (token) {
+      setAuthToken(token);
+  }
 
   function FormatSurvey(data) {
     let entireSurvey = data.map((page) => ({

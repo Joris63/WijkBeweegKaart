@@ -29,6 +29,7 @@
 
 h3.level_selector_title {
     margin: 12px;
+    margin-top: 0;
 }
 
 .level_container {
@@ -37,7 +38,7 @@ h3.level_selector_title {
     row-gap: 8px;
     height: auto;
     padding: 0 12px;
-    margin-top: 8px;
+    margin-bottom: 12px;
 
     &.small {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -49,11 +50,12 @@ h3.level_selector_title {
 .level_button {
     position: relative;
     height: 70px;
+    //background-color: hsl(0, 0%, 99%);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    box-shadow: rgb(0 0 0 / 5%) 0px 1px 5px 0px, rgb(0 0 0 / 6%) 0px 0px 0px 1px;
     padding: 12px 4px;
     text-align: center;
-    transition: all .225s ease;
+    transition: all 0.225s ease;
     transform: scale(1);
 
     &:hover {
@@ -148,4 +150,27 @@ h3.level_selector_title {
         margin: 0 5px;
         color: #fa8231;
     }
+}
+
+.level_wrapper {
+    height: calc(100% - 100px);
+    overflow-y: auto;
+    padding-top: 12px;
+}
+
+.level_wrapper::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+.level_wrapper::-webkit-scrollbar {
+    width: 6px;
+    background-color: #f5f5f5;
+}
+
+.level_wrapper::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
 }
