@@ -83,27 +83,35 @@ const Survey = ({ surveyId = null }) => {
     setQuestionNumber(questionNumber - 1);
   };
 
-  function handlePostSurvey()
-  {
-    let surveyJson = { pages: [] }
+  function handlePostSurvey() {
+    let surveyJson = { pages: [] };
     questions.forEach((question, index) => {
-      surveyJson.pages.push({"id" : question.pageId, "questions":[{"id": question.id, "answers":[]}]})
-  
-      switch(question.type)
-      {
-        case "single": 
-        surveyJson.pages[index].questions[0].answers.push({"choice_id": question.answer})
-        break;
-        case"multiple":
-        question.answer.forEach(answer =>
-          {
-            surveyJson.pages[index].questions[0].answers.push({"choice_id": answer})
-          })
-        break;
-        case"open":
-        surveyJson.pages[index].questions[0].answers.push({"text": question.answer})
+      surveyJson.pages.push({
+        id: question.pageId,
+        questions: [{ id: question.id, answers: [] }],
+      });
+
+      switch (question.type) {
+        default: 
+          break;
+        case "single":
+          surveyJson.pages[index].questions[0].answers.push({
+            choice_id: question.answer,
+          });
+          break;
+        case "multiple":
+          question.answer.forEach((answer) => {
+            surveyJson.pages[index].questions[0].answers.push({
+              choice_id: answer,
+            });
+          });
+          break;
+        case "open":
+          surveyJson.pages[index].questions[0].answers.push({
+            text: question.answer,
+          });
       }
-    })  
+    });
     handleNextPage();
     // postSurvey(surveyJson)
     // .then(res => {
@@ -160,7 +168,7 @@ const Survey = ({ surveyId = null }) => {
                 >
                   Volgende
                 </button>
-              ) }
+              )}
             {questionNumber === questions.length - 1 && (
               <button
                 className="action_btn"

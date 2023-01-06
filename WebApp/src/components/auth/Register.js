@@ -6,41 +6,26 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
-  const [password,setPassword] = useState("");
-  const [confirmPassword,setConfirmPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const routeChange = () => {
     let path = "levels";
+    
     navigate(path);
   };
 
-  const handleInputChange = (e) => {
-    const {id , value} = e.target;
-    switch(id)
-    {
-      case "username":
-        setUsername(value);
-        break;
-      case "password":
-        setPassword(value);
-        break;
-      case "v-password":
-        setConfirmPassword(value);
-        break;
-    }
-
-}
-
-  function handleRegister()
-  {
-    if(password === confirmPassword)
-    {
-      let registerJson = { username:username, password:password }    
+  function handleRegister() {
+    if (password === confirmPassword) {
+      let registerJson = { username: username, password: password };
       register(registerJson)
-      .then(res => {
-        console.log(res)
-        routeChange();
-      }).catch((error) => {console.log(error)});
+        .then((res) => {
+          console.log(res);
+          routeChange();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 
@@ -55,7 +40,7 @@ const Register = () => {
             id="username"
             name="username"
             value={username}
-            onChange = {(e) => handleInputChange(e)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="input-field">
@@ -66,7 +51,7 @@ const Register = () => {
             id="password"
             name="password"
             value={password}
-            onChange = {(e) => handleInputChange(e)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="input-field">
@@ -77,7 +62,7 @@ const Register = () => {
             id="v-password"
             name="v-password"
             value={confirmPassword}
-            onChange = {(e) => handleInputChange(e)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
         <div className="action">

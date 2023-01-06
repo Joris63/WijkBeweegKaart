@@ -3,35 +3,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    switch (id) {
-      case "username":
-        setUsername(value);
-        break;
-      case "password":
-        setPassword(value);
-        break;
-    }
-  }
-
   function handleLogin() {
-    let loginJson = { username: username, password: password }
+    let loginJson = { username: username, password: password };
     login(loginJson)
-      .then(res => {
-        console.log(res)
-        const token  =  res.data.jwt;
+      .then((res) => {
+        console.log(res);
+        const token = res.data.jwt;
         localStorage.setItem("token", token);
 
-        navigate("/levels")
-
-      }).catch((error) => { console.log(error) });
+        navigate("/levels");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
@@ -45,7 +34,7 @@ const Login = () => {
             id="username"
             name="username"
             value={username}
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="input-field">
@@ -56,11 +45,11 @@ const Login = () => {
             id="password"
             name="password"
             value={password}
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="action">
-          <button id="btn" className="btn"  onClick={handleLogin}>
+          <button id="btn" className="btn" onClick={handleLogin}>
             Inloggen
           </button>
         </div>
