@@ -6,6 +6,7 @@ using static DataController;
 
 public class BuildController : MonoBehaviour
 {
+    [SerializeField] private int buildingSizeMultiplier = 1;
     [SerializeField] private float rotateAmount = 0.2f;
     [SerializeField] private Transform buildableRegions;
     [SerializeField] private Color invalidPlacementColor = Color.red;
@@ -32,31 +33,37 @@ public class BuildController : MonoBehaviour
         if (!dataController) Debug.LogWarning("No Data Controller present in scene.");
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (!dataController) return;
 
-       if (currentBuilding)
-        {
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 100f, buildable))
-            {
-                currentBuilding.position = new Vector3(hit.point.x, 0.01f, hit.point.z);
-
-                bool placementValidity = hit.transform.parent == buildableRegions;
-                currentImage.color = placementValidity ? Color.white : invalidPlacementColor;
-                currentValidity = placementValidity;
-            }
-        }
-       else if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !currentBuilding)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f) && hit.transform.parent == transform)
+            if (Physics.Raycast(ray, out RaycastHit hit, 200f) && hit.transform.parent == transform)
             {
                 if (selectedBuilding) selectedImage.color = Color.white;
 
                 selectedBuilding = hit.transform;
                 selectedImage = selectedBuilding.GetChild(0).GetChild(0).GetComponent<Image>();
                 selectedImage.color = selectedColor;
+            }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (!dataController) return;
+
+        if (currentBuilding)
+        {
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 200f, buildable))
+            {
+                currentBuilding.position = new Vector3(hit.point.x, 0.01f, hit.point.z);
+
+                bool placementValidity = hit.transform.parent == buildableRegions;
+                currentImage.color = placementValidity ? Color.white : invalidPlacementColor;
+                currentValidity = placementValidity;
             }
         }
     }
@@ -81,6 +88,7 @@ public class BuildController : MonoBehaviour
             currentImage.sprite = buildingSprite;
             currentBuilding.parent = transform;
             currentBuilding.name = imageName;
+            currentBuilding.localScale *= buildingSizeMultiplier;
 
             placementMenu.SetActive(true);
         }

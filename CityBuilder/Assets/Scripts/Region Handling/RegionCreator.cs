@@ -49,7 +49,7 @@ public class RegionCreator : MonoBehaviour
         if (!dataController) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 200f))
         {
             // If user has selected a region and is not placing vertices
             if (Input.GetMouseButtonDown(0) && !eventSystem.IsPointerOverGameObject() && hit.transform.parent == transform && !pointBlueprint && !lineBlueprint)
