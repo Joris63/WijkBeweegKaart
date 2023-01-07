@@ -10,12 +10,7 @@ public class RegionLoader : MonoBehaviour
     {
         polygonTriangulator = GetComponent<PolygonTriangulator>();
         dataController = FindObjectOfType<DataController>();
-        if (dataController) dataController.onDataRetrieved.AddListener(OnDataRetrieved);
-
-        // Debugging
-#if UNITY_EDITOR
-        OnDataRetrieved();
-#endif
+        if (dataController) OnDataRetrieved();
     }
 
     private void OnDataRetrieved()

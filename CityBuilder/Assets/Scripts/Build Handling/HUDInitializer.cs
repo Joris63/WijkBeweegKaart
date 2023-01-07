@@ -16,12 +16,7 @@ public class HUDInitializer : MonoBehaviour
     {
         buildController = FindObjectOfType<BuildController>();
         dataController = FindObjectOfType<DataController>();
-        if (buildController && dataController) dataController.onDataRetrieved.AddListener(InitializeHUD);
-
-        // Debugging
-#if UNITY_EDITOR
-        InitializeHUD();
-#endif
+        if (buildController && dataController) InitializeHUD();
     }
 
     private void InitializeHUD()
@@ -31,10 +26,10 @@ public class HUDInitializer : MonoBehaviour
 #else
         // Debugging
         List<AvailableBuilding> buildings = new List<AvailableBuilding>() {
-            new AvailableBuilding() { name = "Voetbal", imageName = "Football" },
-            new AvailableBuilding() { name = "Basketbal", imageName = "Basketball" },
+            new AvailableBuilding() { name = "Football", imageName = "Football" },
+            new AvailableBuilding() { name = "Basketball", imageName = "Basketball" },
             new AvailableBuilding() { name = "Tennis", imageName = "Tennis" },
-            new AvailableBuilding() { name = "Volleybal", imageName = "Volleyball" }
+            new AvailableBuilding() { name = "Volleyball", imageName = "Volleyball" }
         };
 #endif
 

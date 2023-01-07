@@ -26,6 +26,9 @@ public class DataController : MonoBehaviour
     private class BuildingDTO { public List<PlacedBuilding> buildings; }
 
     // ---------- DATA ----------
+    private string mode;
+    public string Mode { get { return mode; } }
+
     private List<AvailableBuilding> availableBuildings = new List<AvailableBuilding>();
     public List<AvailableBuilding> AvailableBuildings { get { return availableBuildings; } }
 
@@ -36,6 +39,11 @@ public class DataController : MonoBehaviour
     public List<PlacedBuilding> SavedBuildings { get { return savedBuildings; } }
 
     // ---------- LOGIC ----------
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -43,8 +51,9 @@ public class DataController : MonoBehaviour
 #endif
     }
 
-    public void InitializeData(string regions, string placedBuildings, List<AvailableBuilding> availableBuildings)
+    public void InitializeData(string mode, string regions, string placedBuildings, List<AvailableBuilding> availableBuildings)
     {
+        if (!string.IsNullOrEmpty(mode)) this.mode = mode;
         if (!string.IsNullOrEmpty(regions)) savedRegions = JsonUtility.FromJson<RegionDTO>(regions).regions;
         if (!string.IsNullOrEmpty(placedBuildings)) savedBuildings = JsonUtility.FromJson<BuildingDTO>(placedBuildings).buildings;
         if (availableBuildings != null) this.availableBuildings = availableBuildings;

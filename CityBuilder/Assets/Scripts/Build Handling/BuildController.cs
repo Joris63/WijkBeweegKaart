@@ -30,7 +30,6 @@ public class BuildController : MonoBehaviour
     private void Awake()
     {
         dataController = FindObjectOfType<DataController>();
-        if (!dataController) Debug.LogWarning("No Data Controller present in scene.");
     }
 
     private void Update()

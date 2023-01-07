@@ -23,14 +23,8 @@ public class RatingController : MonoBehaviour
     private void Awake()
     {
         dataController = FindObjectOfType<DataController>();
-        if (dataController) dataController.onDataRetrieved.AddListener(OnDataRetrieved);
-        if (!dataController) Debug.LogWarning("No Data Controller present in scene.");
+        if (dataController) OnDataRetrieved();
         infoText = ratingMenu.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-
-        // Debugging
-#if UNITY_EDITOR
-        OnDataRetrieved();
-#endif
     }
 
     private void Update()

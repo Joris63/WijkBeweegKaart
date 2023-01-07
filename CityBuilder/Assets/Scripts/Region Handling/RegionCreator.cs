@@ -39,7 +39,6 @@ public class RegionCreator : MonoBehaviour
     {
         polygonTriangulator = GetComponent<PolygonTriangulator>();
         dataController = FindObjectOfType<DataController>();
-        if (!dataController) Debug.LogWarning("No Data Controller present in scene.");
         eventSystem = FindObjectOfType<EventSystem>();
         defaultEdgeColor = pointPrefab.GetComponent<Renderer>().sharedMaterial.color;
     }
