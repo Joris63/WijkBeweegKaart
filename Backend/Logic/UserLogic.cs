@@ -59,11 +59,6 @@ namespace Backend.Logic
         {
             User user = _mapper.Map<User>(_repo.GetUserByUsername(username));
 
-            if (user == null)
-            {
-                throw new KeyNotFoundException();
-            }
-
             return _mapper.Map<UserViewModel>(user);
         }
 

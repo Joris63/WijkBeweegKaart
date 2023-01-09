@@ -85,7 +85,7 @@ namespace Backend.Controllers
                 HttpOnly = true
             });
 
-            return Ok(jwt);
+            return Ok(new { jwt });
         }
 
         [HttpPost]

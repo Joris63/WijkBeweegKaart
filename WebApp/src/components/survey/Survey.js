@@ -105,11 +105,11 @@ const Survey = ({ surveyId = null }) => {
       }
     })  
     handleNextPage();
-    // postSurvey(surveyJson)
-    // .then(res => {
-    //   console.log(res)
-    //   handleNextPage();
-    // }).catch((error) => {console.log(error)});
+    postSurvey(surveyJson)
+    .then(res => {
+      console.log(res)
+      handleNextPage();
+    }).catch((error) => {console.log(error)});
   }
 
   return (
