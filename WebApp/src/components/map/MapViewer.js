@@ -1,11 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 
+const availableBuildings = [
+  { name: "Football", imageName: "Football" },
+  { name: "Basketball", imageName: "Basketball" },
+  { name: "Tennis", imageName: "Tennis" },
+  { name: "Volleyball", imageName: "Volleyball" },
+  { name: "Playground", imageName: "Playground" },
+];
+
 const MapViewer = ({ mode }) => {
-  const [testText, setTestText] = useState("");
+  
   const {
     unityProvider,
-    loadingProgression,
     isLoaded,
     sendMessage,
     addEventListener,
@@ -17,24 +24,27 @@ const MapViewer = ({ mode }) => {
     codeUrl: "/map-editor/build/map-editor.wasm",
   });
 
-  function UpdateText() {
-    let date = new Date();
-
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-
-    sendMessage("GameController", "UpdateTextField", `${day}-${month}-${year}`);
-  }
-
-  const handleTest = useCallback((name) => {
-    setTestText(name);
+  const handleTest = useCallback(() => {
+    console.log("initialized");
   }, []);
 
   useEffect(() => {
-    addEventListener("Test", handleTest);
+    if (isLoaded) {
+      sendMessage(
+        "DataController",
+        "InitializeData",
+        mode,
+        {},
+        {},
+        availableBuildings
+      );
+    }
+  }, [isLoaded]);
+
+  useEffect(() => {
+    addEventListener("UnityInitialized", handleTest);
     return () => {
-      removeEventListener("Test", handleTest);
+      removeEventListener("UnityInitialized", handleTest);
     };
   }, [addEventListener, removeEventListener, handleTest]);
 
@@ -45,7 +55,7 @@ const MapViewer = ({ mode }) => {
           <div className="bar"></div>
         </div>
       )}
-      <div className="map" onClick={UpdateText}>
+      <div className="map">
         <Unity
           unityProvider={unityProvider}
           style={{

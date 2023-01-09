@@ -36,7 +36,7 @@ const LevelSelector = ({
       reward: 150,
       complete: true,
       to: "/map",
-      mode: "build",
+      mode: "Build",
       custom: true,
     });
 
@@ -46,7 +46,7 @@ const LevelSelector = ({
       reward: 55,
       complete: true,
       to: "/map",
-      mode: "rate",
+      mode: "Rate",
       custom: true,
     });
 

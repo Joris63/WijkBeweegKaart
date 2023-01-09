@@ -21,7 +21,7 @@ import "./styles/survey.scss";
 
 function App() {
   const [survey, setSurvey] = useState([]);
-  const [mapMode, setMapMode] = useState();
+  const [mapMode, setMapMode] = useState("Build");
   const [pageNumber, setPageNumber] = useState(0);
 
   const navigate = useNavigate();
@@ -111,7 +111,7 @@ function App() {
                     />
                   }
                 />
-                <Route path="/map" element={<MapViewerPage />} />
+                <Route path="/map" element={<MapViewerPage mode={mapMode} />} />
               </Route>
             </Routes>
           </div>
