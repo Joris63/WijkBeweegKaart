@@ -14,9 +14,7 @@ const Login = () => {
     let loginJson = { username: username, password: password };
     login(loginJson)
       .then((res) => {
-        console.log(res);
-
-        const token = res.data.jwt;
+        const token = res.data;
         localStorage.setItem("token", token);
 
         setAuth({ user: loginJson });
@@ -58,7 +56,9 @@ const Login = () => {
             Inloggen
           </button>
         </div>
-        <a className="auth_mode_switch" href="/survey">Nog geen account?</a>
+        <a className="auth_mode_switch" href="/survey">
+          Nog geen account?
+        </a>
       </div>
     </div>
   );

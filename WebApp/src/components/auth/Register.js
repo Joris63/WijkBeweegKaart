@@ -22,7 +22,7 @@ const Register = () => {
       let registerJson = { username: username, password: password };
       register(registerJson)
         .then((res) => {
-          console.log(res);
+          localStorage.setItem("token", res.data);
 
           setAuth({ user: registerJson });
           routeChange();
@@ -74,7 +74,9 @@ const Register = () => {
             Registreer nu
           </button>
         </div>
-        <a className="auth_mode_switch" href="/login">Al een account?</a>
+        <a className="auth_mode_switch" href="/login">
+          Al een account?
+        </a>
       </div>
     </div>
   );
