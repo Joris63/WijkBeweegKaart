@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import LevelButton from "./LevelButton";
 
 const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
@@ -8,6 +9,7 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+  const { auth } = useAuth();
 
   function FormatLevels() {
     // get all survey levels
@@ -58,7 +60,9 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
   return (
     <div className="level_selector">
       <div className="level_selector_header">
-        <div className="level_selector_header_welcome">Welkom Joris</div>
+        <div className="level_selector_header_welcome">
+          Welkom {auth?.user?.username}
+        </div>
         <div className="level_selector_header_points">
           100<i className="fa-duotone fa-coins"></i>
         </div>
