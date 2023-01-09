@@ -1,22 +1,29 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PolygonTriangulator))]
 public class RegionLoader : MonoBehaviour
 {
-    private void Start()
+    PolygonTriangulator polygonTriangulator;
+    DataController dataController;
+
+    private void Awake()
     {
-        PolygonTriangulator polygonTriangulator = FindObjectOfType<PolygonTriangulator>();
+        polygonTriangulator = GetComponent<PolygonTriangulator>();
+        dataController = FindObjectOfType<DataController>();
+        if (dataController) OnDataRetrieved();
+    }
 
-        if (RegionSaver.main && polygonTriangulator)
+    private void OnDataRetrieved()
+    {
+        foreach (Vector3[] vertices in dataController.SavedRegions)
         {
-            foreach (Vector3[] vertices in RegionSaver.main.savedRegions)
-            {
-                bool success = polygonTriangulator.CreateTriangles(vertices, out int[] triangles);
+            bool success = polygonTriangulator.CreateTriangles(vertices, out int[] triangles);
 
-                if (success)
-                {
-                    GameObject plane = polygonTriangulator.CreatePlane(vertices, triangles);
-                    plane.transform.parent = transform;
-                }
+            if (success)
+            {
+                GameObject plane = polygonTriangulator.CreatePlane(vertices, triangles);
+                plane.layer = LayerMask.NameToLayer("Buildable");
+                plane.transform.parent = transform;
             }
         }
     }

@@ -35,12 +35,17 @@ public class PolygonTriangulator : MonoBehaviour
         if (vertices.Length < 3) { Debug.LogWarning("Polygon must contain at least 3 vertices."); return false; }
         else if (vertices.Length > maxVertices) { Debug.LogWarning("Polygon contains too many vertices, maximum vertices is set to" + maxVertices + "."); return false; }
 
+        bool isReversed = false;
+
         // Create a list of numbers, referencing a vertice
         List<int> indexList = new List<int>();
+        List<int> reversedList = new List<int>();
         for (int i = 0; i < vertices.Length; i++)
         {
             indexList.Add(i);
+            reversedList.Add(i);
         }
+        indexList.Reverse(1, indexList.Count - 1);
 
         triangles = new int[(vertices.Length - 2) * 3];
         int triangleIndexCount = 0;
@@ -62,8 +67,22 @@ public class PolygonTriangulator : MonoBehaviour
                     if (i == indexList.Count - 1)
                     {
                         // Polygon is possibly counterclockwise
-                        Debug.LogError("Cannot create triangles, polygon is possibly counterclockwise.");
-                        return false;
+                        if (!isReversed)
+                        {
+                            //Debug.LogWarning("Polygon is possibly counterclockwise, reversing vertices...");
+
+                            indexList = reversedList;
+                            triangles = new int[(vertices.Length - 2) * 3];
+                            triangleIndexCount = 0;
+
+                            isReversed = true;
+                            break;
+                        }
+                        else
+                        {
+                            Debug.LogError("Something went wrong while trying to create triangles. (1)");
+                            return false;
+                        }
                     }
 
                     // Vertice is a concave
@@ -105,7 +124,7 @@ public class PolygonTriangulator : MonoBehaviour
                 else if (!isEar && i == indexList.Count - 1)
                 {
                     // Something unknown went wrong
-                    Debug.LogError("Something went wrong while trying to create triangles.");
+                    Debug.LogError("Something went wrong while trying to create triangles. (2)");
                     return false;
                 }
             }

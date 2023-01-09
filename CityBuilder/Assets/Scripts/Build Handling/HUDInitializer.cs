@@ -2,33 +2,43 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static DataController;
 
 public class HUDInitializer : MonoBehaviour
 {
-    [System.Serializable]
-    private class Building
-    {
-        public string name;
-        public GameObject prefab;
-    }
-
-    [SerializeField] private RectTransform buttonsContainer;
     [SerializeField] private GameObject buildingButtonPrefab;
-    [SerializeField] private List<Building> buildings = new List<Building>();
+    [SerializeField] private RectTransform buttonsContainer;
 
     private BuildController buildController;
+    private DataController dataController;
 
     private void Awake()
     {
         buildController = FindObjectOfType<BuildController>();
-        if (!buildController) return;
+        dataController = FindObjectOfType<DataController>();
+        if (buildController && dataController) InitializeHUD();
+    }
 
-        foreach (Building building in buildings)
+    private void InitializeHUD()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        List<AvailableBuilding> buildings = dataController.AvailableBuildings;
+#else
+        // Debugging
+        List<AvailableBuilding> buildings = new List<AvailableBuilding>() {
+            new AvailableBuilding() { name = "Football", imageName = "Football" },
+            new AvailableBuilding() { name = "Basketball", imageName = "Basketball" },
+            new AvailableBuilding() { name = "Tennis", imageName = "Tennis" },
+            new AvailableBuilding() { name = "Volleyball", imageName = "Volleyball" }
+        };
+#endif
+
+        foreach (AvailableBuilding building in buildings)
         {
             GameObject buttonClone = Instantiate(buildingButtonPrefab, buttonsContainer);
             buttonClone.GetComponent<RectTransform>().GetChild(0).GetComponent<TextMeshProUGUI>().text = building.name;
 
-            buttonClone.GetComponent<Button>().onClick.AddListener(delegate { buildController.StartBuilding(building.prefab); });
+            buttonClone.GetComponent<Button>().onClick.AddListener(delegate { buildController.StartBuilding(building.imageName); });
         }
 
         GridLayoutGroup grid = buttonsContainer.GetComponent<GridLayoutGroup>();
