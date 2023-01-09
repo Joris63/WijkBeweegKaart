@@ -19,7 +19,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public IActionResult GetLevelBySurveyId(int Id)
+        public IActionResult GetLevelBySurveyId(string Id)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Backend.Controllers
             try
             {
                 _userLevelLogic.SaveUserLevel(level);
-                return RedirectToAction("GetLevels", level.UserId);
+                return RedirectToAction("GetLevels", new { userId = level.UserId });
             }
             catch (DbUpdateException ex)
             {

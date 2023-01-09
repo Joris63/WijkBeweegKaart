@@ -14,14 +14,14 @@ namespace Backend.Repositories
         }
         public MapDTO GetMapById(int id)
         {
-            return _context.Maps.Where(m => m.Id == id).Include("PlacedBuildings.Donations").Include("Regions.Points").FirstOrDefault();
+            return _context.Maps.Where(m => m.Id == id).Include("PlacedBuildings.Donations").Include("Location.Regions.Points").FirstOrDefault();
         }
 
         public List<MapDTO> GetMapsFromUser(int userId)
         {
             return _context.Maps.Where(m => m.UserId == userId)
                 .Include("PlacedBuildings.Donations")
-                .Include("Regions.Points").ToList();
+                .Include("Location.Regions.Points").ToList();
         }
 
         public List<BuildingDTO> GetBuildings()

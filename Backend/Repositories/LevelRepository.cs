@@ -13,7 +13,7 @@ namespace Backend.Repositories
             _context = context;
         }
 
-        public LevelDTO GetLevelBySurveyId(int surveyId)
+        public LevelDTO GetLevelBySurveyId(string surveyId)
         {
             return _context.Levels.Where(l => l.SurveyId == surveyId).FirstOrDefault();
         }
@@ -33,6 +33,7 @@ namespace Backend.Repositories
             LevelDTO newLevel = new LevelDTO()
             {
                 SurveyId = level.SurveyId,
+                SurveyPage = level.SurveyPage,
                 SurveyName = level.SurveyName,
                 PreviousLevelId = level.PreviousLevelId
             };
