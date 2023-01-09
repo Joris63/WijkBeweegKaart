@@ -4,7 +4,11 @@ import { Navigate, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import LevelButton from "./LevelButton";
 
-const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
+const LevelSelector = ({
+  survey,
+  loadSurvey = () => {},
+  setMapMode = () => {},
+}) => {
   const [levels, setLevels] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,8 +29,6 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
         custom: false,
       }));
 
-    console.log(survey);
-
     // add custom levels
     allLevels.push({
       id: "create-park",
@@ -34,6 +36,7 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
       reward: 150,
       complete: true,
       to: "/map",
+      mode: "build",
       custom: true,
     });
 
@@ -42,7 +45,8 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
       title: "Beoordeel park",
       reward: 55,
       complete: true,
-      to: "/rate",
+      to: "/map",
+      mode: "rate",
       custom: true,
     });
 
@@ -80,7 +84,10 @@ const LevelSelector = ({ survey, loadSurvey = () => {} }) => {
                 <LevelButton
                   key={`lvl-button-${lvl.id}`}
                   title={lvl.title}
-                  onClick={() => navigate(lvl.to)}
+                  onClick={() => {
+                    setMapMode(lvl.mode);
+                    navigate(lvl.to);
+                  }}
                 />
               ))}
           </div>

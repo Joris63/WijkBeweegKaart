@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 
-const MapViewer = () => {
+const MapViewer = ({ mode }) => {
   const [testText, setTestText] = useState("");
   const {
     unityProvider,
@@ -11,10 +11,10 @@ const MapViewer = () => {
     addEventListener,
     removeEventListener,
   } = useUnityContext({
-    loaderUrl: "/build/map-editor.loader.js",
-    dataUrl: "/build/map-editor.data",
-    frameworkUrl: "/build/map-editor.framework.js",
-    codeUrl: "/build/map-editor.wasm",
+    loaderUrl: "/map-editor/build/map-editor.loader.js",
+    dataUrl: "/map-editor/build/map-editor.data",
+    frameworkUrl: "/map-editor/build/map-editor.framework.js",
+    codeUrl: "/map-editor/build/map-editor.wasm",
   });
 
   function UpdateText() {
@@ -54,15 +54,6 @@ const MapViewer = () => {
             height: 297,
           }}
         />
-      </div>
-      <div
-        style={{
-          position: "fixed",
-          left: "50%",
-          transform: "translateX(-50%)",
-        }}
-      >
-        {testText}
       </div>
     </>
   );

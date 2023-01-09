@@ -21,6 +21,7 @@ import "./styles/survey.scss";
 
 function App() {
   const [survey, setSurvey] = useState([]);
+  const [mapMode, setMapMode] = useState();
   const [pageNumber, setPageNumber] = useState(0);
 
   const navigate = useNavigate();
@@ -106,6 +107,7 @@ function App() {
                     <LevelSelectorPage
                       survey={survey}
                       loadSurvey={LoadSurvey}
+                      setMapMode={setMapMode}
                     />
                   }
                 />
