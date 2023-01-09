@@ -19,7 +19,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public IActionResult GetLevelBySurveyId(int Id)
+        public IActionResult GetLevelBySurveyId(string Id)
         {
             try
             {

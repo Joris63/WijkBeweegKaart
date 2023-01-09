@@ -17,7 +17,7 @@ namespace Backend.Logic
             _mapper = mapper;
         }
 
-        public LevelViewModel GetLevelBySurveyId(int id)
+        public LevelViewModel GetLevelBySurveyId(string id)
         {
             Level level = _mapper.Map<Level>(_repo.GetLevelBySurveyId(id));
 
@@ -52,7 +52,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (level.SurveyId == 0)
+            if (level.SurveyId == "0")
             {
                 throw new InvalidOperationException();
             }
