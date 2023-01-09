@@ -1,6 +1,6 @@
 import { Navigate, Routes, Route, useNavigate } from "react-router-dom";
 import RequireAuth from "./components/auth/RequireAuth";
-import { setAuthToken } from "./api/axios"
+import { setAuthToken } from "./api/axios";
 import { getSurvey } from "./api/survey";
 import { useState, useEffect } from "react";
 
@@ -27,7 +27,7 @@ function App() {
 
   const token = localStorage.getItem("token");
   if (token) {
-      setAuthToken(token);
+    setAuthToken(token);
   }
 
   function FormatSurvey(data) {
@@ -91,11 +91,11 @@ function App() {
           </div>
           <div className="iphone__content__wrapper">
             <Routes>
+              <Route path="/" element={<LoginRegisterPage />} />
               <Route
-                path="/"
+                path="/survey"
                 element={<SurveyPage survey={survey} pageNumber={pageNumber} />}
               />
-              <Route path="/" element={<LoginRegisterPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />

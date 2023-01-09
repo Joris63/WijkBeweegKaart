@@ -1,7 +1,7 @@
 
 const LoginRegister = () => {
   return (
-    <div style={{ marginTop: 70 + "%" }}>
+    <div style={{ marginTop: '60%', padding: 24 }}>
       <div className="action">
         <button id="btn" className="btn" onClick={event =>  window.location.href='/login'}>
           Inloggen

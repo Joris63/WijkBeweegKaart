@@ -58,6 +58,7 @@ const Login = () => {
             Inloggen
           </button>
         </div>
+        <a className="auth_mode_switch" href="/survey">Nog geen account?</a>
       </div>
     </div>
   );

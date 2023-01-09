@@ -74,6 +74,7 @@ const Register = () => {
             Registreer nu
           </button>
         </div>
+        <a className="auth_mode_switch" href="/login">Al een account?</a>
       </div>
     </div>
   );
