@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -36,6 +37,8 @@ public class RatingController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 200f) && hit.transform.parent == transform)
             {
+                if (currentSelected == hit.transform.gameObject) return;
+
                 if (currentSelected) currentSelected.transform.localScale = Vector3.one * buildingSizeMultiplier;
                 currentSelected = hit.transform.gameObject;
                 currentSelected.transform.localScale = scaleOnSelected;
@@ -43,6 +46,8 @@ public class RatingController : MonoBehaviour
                 ratingMenu.transform.position = currentSelected.transform.position;
                 infoText.text = "<b>" + currentSelected.name.ToLower() + "</b>\npoints: " + buildingPoints[currentSelected];
                 ratingMenu.SetActive(true);
+                StopCoroutine("MenuEffect");
+                StartCoroutine("MenuEffect");
             }
             else if (currentSelected)
             {
@@ -96,5 +101,18 @@ public class RatingController : MonoBehaviour
             buildingPoints[currentSelected]++;
             infoText.text = "<b>" + currentSelected.name.ToLower() + "</b>\npoints: " + buildingPoints[currentSelected];
         }
+    }
+
+    private IEnumerator MenuEffect()
+    {
+        ratingMenu.transform.localScale = Vector3.zero;
+
+        for (float i = 0f; i < 1; i+=(Time.deltaTime*10f))
+        {
+            ratingMenu.transform.localScale = new Vector3(i, i, i);
+            yield return null;
+        }
+
+        ratingMenu.transform.localScale = Vector3.one;
     }
 }
