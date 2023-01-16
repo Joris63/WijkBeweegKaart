@@ -9,6 +9,8 @@ public class MapLoader : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         DataController dataController = FindObjectOfType<DataController>();
         if (dataController) InitializeMap();
     }
