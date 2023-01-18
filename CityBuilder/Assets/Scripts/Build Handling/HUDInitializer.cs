@@ -29,7 +29,8 @@ public class HUDInitializer : MonoBehaviour
             new AvailableBuilding() { name = "Football", imageName = "Football" },
             new AvailableBuilding() { name = "Basketball", imageName = "Basketball" },
             new AvailableBuilding() { name = "Tennis", imageName = "Tennis" },
-            new AvailableBuilding() { name = "Volleyball", imageName = "Volleyball" }
+            new AvailableBuilding() { name = "Volleyball", imageName = "Volleyball" },
+            new AvailableBuilding() { name = "Playground", imageName = "Playground" }
         };
 #endif
 
