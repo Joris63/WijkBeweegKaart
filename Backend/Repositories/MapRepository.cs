@@ -14,15 +14,17 @@ namespace Backend.Repositories
         }
         public MapDTO GetMapById(int id)
         {
-            return _context.Maps.Where(m => m.Id == id).Include(m => m.PlacedBuildings).FirstOrDefault();
+            return _context.Maps.Where(m => m.Id == id).Include("PlacedBuildings.Donations").Include("Location.Regions.Points").FirstOrDefault();
         }
 
         public List<MapDTO> GetMapsFromUser(int userId)
         {
-            return _context.Maps.Where(m => m.UserId == userId).ToList();
+            return _context.Maps.Where(m => m.UserId == userId)
+                .Include("PlacedBuildings.Donations")
+                .Include("Location.Regions.Points").ToList();
         }
 
-        public List<BuildingDTO> GetBuildings() 
+        public List<BuildingDTO> GetBuildings()
         {
             return _context.Buildings.ToList();
         }
@@ -31,10 +33,9 @@ namespace Backend.Repositories
         {
             MapDTO newMap = new MapDTO()
             {
-                Latitude = map.Latitude,
-                Longitude = map.Longitude,
+                Location = _context.Locations.FirstOrDefault(l => l.Id == map.LocationId),
                 PlacedBuildings = map.PlacedBuildings,
-                UserId = map.UserId,
+                MapCreator = _context.Users.FirstOrDefault(u => u.Id == map.UserId),
                 Name = map.Name
             };
 

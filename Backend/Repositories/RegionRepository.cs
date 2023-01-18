@@ -16,7 +16,7 @@ namespace Backend.Repositories
         {
             RegionDTO RegionToSave = new RegionDTO
             {
-                MapId = region.MapId,
+                LocationId = region.LocationId,
                 Points = region.Points
             };
 

@@ -46,35 +46,14 @@ namespace Backend.Controllers
                 return BadRequest(new { userId, ex });
             }
         }
-        [HttpGet]
-        [Route("Regions")]
-        public IActionResult GetRegions()
-        {
-            List<PointViewModel[]> points = new();
-
-            for(int i = 0; i < 5; i++)
-            {
-                PointViewModel[] coords = new PointViewModel[10];
-
-                for(int j = 1; j <= i + 3; j++)
-                {
-                    PointViewModel coord = new PointViewModel();
-                    coords[j - 1] = coord;
-                }
-
-                points.Add(coords);
-            }
-
-            return Ok(points);
-        }
 
         [HttpPost]
         [Route("Save")]
-        public IActionResult SaveMap(MapViewModel map)
+        public IActionResult SaveMap(SaveMapViewModel map)
         {
             try
             {
-                map = _logic.SaveMap(map);
+                MapViewModel newMap = _logic.SaveMap(map);
             }
             catch (DbUpdateException ex)
             {

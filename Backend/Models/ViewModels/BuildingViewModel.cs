@@ -10,6 +10,7 @@
         public int CoinAmount { get; set; }
         public int Level { get; set; }
         public string Name { get; set; }
+        public ICollection<DonationViewModel>? Donations { get; set; }
 
         public BuildingViewModel()
         {

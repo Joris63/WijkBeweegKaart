@@ -26,7 +26,7 @@ namespace Backend.Logic
 
         public List<MapViewModel> GetMapsFromUser(int userId)
         {
-            if(userId !> 0)
+            if(!(userId > 0))
             {
                 throw new ArgumentException();
             }
@@ -53,7 +53,7 @@ namespace Backend.Logic
             return _mapper.Map<MapViewModel>(map);
         }
 
-        public MapViewModel SaveMap(MapViewModel mapViewModel)
+        public MapViewModel SaveMap(SaveMapViewModel mapViewModel)
         {
             Map map = _mapper.Map<Map>(mapViewModel);
 
@@ -62,7 +62,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (map.Longitude == 0 || map.Latitude == 0 || map.PlacedBuildings.Count == 0)
+            if (map.Location.Id == 0 || map.PlacedBuildings.Count == 0)
             {
                 throw new InvalidOperationException();
             }

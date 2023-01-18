@@ -68,6 +68,9 @@ builder.Services.AddScoped<LevelLogic>();
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<RegionLogic>();
 
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<LocationLogic>();
+
 builder.Services.AddScoped<JwtService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

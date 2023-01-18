@@ -7,6 +7,6 @@ namespace Backend.Repositories.Interfaces
         public LevelDTO SaveLevel(LevelDTO levelDTO);
         public List<LevelDTO> GetLevels();
         public List<UserLevelDTO> GetCompletedLevels(int userId);
-        public LevelDTO GetLevelBySurveyId(int surveyId);
+        public LevelDTO GetLevelBySurveyId(string surveyId);
     }
 }

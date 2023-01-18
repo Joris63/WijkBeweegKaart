@@ -2,12 +2,11 @@
 using Backend.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Numerics;
 
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("Reviews")]
+    [Route("Donations")]
     public class DonationController : Controller
     {
         private readonly DonationLogic _logic;

@@ -82,14 +82,13 @@ const Survey = ({ survey = null, pageNumber = 0 }) => {
             text: question.answer,
           });
       }
-    });
-
-    navigate("/levels");
-    // postSurvey(surveyJson)
-    // .then(res => {
-    //   console.log(res)
-    //   handleNextPage();
-    // }).catch((error) => {console.log(error)});
+    })  
+    handleNextPage();
+    postSurvey(surveyJson)
+    .then(res => {
+      console.log(res)
+      handleNextPage();
+    }).catch((error) => {console.log(error)});
   }
 
   return (

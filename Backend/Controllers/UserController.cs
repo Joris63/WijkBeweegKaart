@@ -85,7 +85,39 @@ namespace Backend.Controllers
                 HttpOnly = true
             });
 
-            return Ok(jwt);
+            return Ok(new { jwt });
+        }
+
+        [HttpPost]
+        [Route("Email")]
+        public IActionResult SaveEmail(EmailViewModel vm)
+        {
+            try
+            {
+                UserViewModel user = _logic.SaveUserEmail(vm);
+
+                return Ok(user);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("Coins")]
+        public IActionResult EditUserCoins(CoinViewModel vm)
+        {
+            try
+            {
+                UserViewModel user = _logic.EditUserCoins(vm);
+
+                return Ok(user);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
     }

@@ -27,7 +27,7 @@ namespace Backend.Logic
                 throw new ArgumentNullException();
             }
 
-            if (region.MapId == 0 || region.Points.IsNullOrEmpty())
+            if (region.LocationId == 0 || region.Points.IsNullOrEmpty())
             {
                 throw new InvalidOperationException();
             }
@@ -45,15 +45,15 @@ namespace Backend.Logic
         {
             List<Region> regions = _mapper.Map<List<Region>>(regionsViewModel.Regions);
 
-            for (int i = regions.Count -1; i >= 0; i--)
+            for (int i = regions.Count - 1; i >= 0; i--)
             {
-                regions[i].MapId = regionsViewModel.MapId;
+                regions[i].LocationId = regionsViewModel.MapId;
                 if (regions[i] == null)
                 {
                     throw new ArgumentNullException();
                 }
 
-                if (regions[i].MapId == 0 || regions[i].Points.IsNullOrEmpty())
+                if (regions[i].LocationId == 0 || regions[i].Points.IsNullOrEmpty())
                 {
                     throw new InvalidOperationException();
                 }

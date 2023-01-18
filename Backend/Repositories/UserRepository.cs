@@ -36,17 +36,52 @@ namespace Backend.Repositories
             _context.Users.Add(newUser);
             _context.SaveChanges();
 
+            UserLevelDTO newUserLevel = new UserLevelDTO()
+            {
+                userId = newUser.Id,
+                levelId = _context.Levels.SingleOrDefault(l => l.SurveyId == 509691265).Id
+            };
+
+            _context.UserLevels.Add(newUserLevel);
+
+            _context.SaveChanges();
+
             return newUser;
         }
 
         public UserDTO SaveUserEmail(int id, string email)
         {
-            throw new NotImplementedException();
+            var result = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (result == null)
+            {
+                throw new ArgumentException();
+            }
+
+            result.Email = email;
+            _context.SaveChanges();
+            return result;
         }
 
         public UserDTO GetUserByUsername(string username)
         {
-            return _context.Users.FirstOrDefault(u => u.Username == username);
+            var result = _context.Users.FirstOrDefault(u => u.Username == username);
+
+            return result;
+        }
+
+        public UserDTO CoinChange(int id, int coinAmount)
+        {
+            var result = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (result == null)
+            {
+                throw new ArgumentException();
+            }
+
+            result.Coins += coinAmount;
+            _context.SaveChanges();
+            return result;
         }
     }
 }
